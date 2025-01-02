@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Light Theme -->
+    <style name="Theme.App.Light" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryVariant">#E0E0E0</item>
+        <item name="colorOnPrimary">#000000</item>
+    </style>
+
+    <!-- Base Dark Theme -->
+    <style name="Theme.App.Dark" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">#121212</item>
+        <item name="colorPrimaryVariant">#1E1E1E</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+    </style>
+
+    <!-- Custom Theme -->
+    <style name="Theme.App.Custom" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#008080</item>
+        <item name="colorPrimaryVariant">#004D4D</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+    </style>
+
+    <style name="AlertDialogSlideAnim" parent="@android:style/Theme.Dialog">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+    </style>
+</resources>
