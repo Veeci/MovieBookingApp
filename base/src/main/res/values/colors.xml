@@ -3,6 +3,6 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="customDialogBorder">#8EB486</color>
-    <color name="customDialogTheme">#FDF7F4</color>
+    <color name="ThemePrimary">#8EB486</color>
+    <color name="ThemeSecondary">#FDF7F4</color>
 </resources>

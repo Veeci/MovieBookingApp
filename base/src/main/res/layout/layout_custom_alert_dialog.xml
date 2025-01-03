@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/customDialogBorder"
+        android:background="@color/ThemePrimary"
         android:fontFamily="@font/montserrat_bold"
         android:textSize="@dimen/textSize_title"
         android:textAlignment="center"
