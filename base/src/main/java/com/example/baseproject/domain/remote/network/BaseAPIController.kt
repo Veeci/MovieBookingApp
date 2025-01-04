@@ -21,6 +21,7 @@ abstract class BaseApiController<T : Any> {
         allowVpn: Boolean = true,
         accessToken: String? = null,
         apiKey: String? = null,
+        clientId: String? = null,
         additionalHeaders: Map<String, String> = emptyMap(),
     ): T {
         val builder =
@@ -37,6 +38,19 @@ abstract class BaseApiController<T : Any> {
         apiKey?.let { builder.addInterceptor(ApiKeyInterceptor(it)) }
 
         accessToken?.let { builder.addInterceptor(AuthInterceptor(it)) }
+
+        // customized for this project
+        clientId?.let {
+            builder.addInterceptor(
+                Interceptor { chain ->
+                    val request =
+                        chain.request().newBuilder()
+                            .addHeader("x-client-id", it)
+                            .build()
+                    chain.proceed(request)
+                },
+            )
+        }
 
         if (additionalHeaders.isNotEmpty()) {
             builder.addInterceptor(HeadersInterceptor(additionalHeaders))
