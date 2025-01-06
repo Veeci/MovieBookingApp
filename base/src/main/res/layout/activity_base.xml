@@ -44,10 +44,11 @@
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             <FrameLayout
+                android:id="@+id/preventClickingFilter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#348FE775"
-                android:visibility="@{preventClicking?View.VISIBLE:View.GONE}"/>
+                android:visibility="@{preventClicking?View.GONE:View.VISIBLE}"/>
 
 
             <com.airbnb.lottie.LottieAnimationView
@@ -60,7 +61,7 @@
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/base_loading_lottie"
-                android:visibility="@{isLoading?View.VISIBLE:View.GONE}"/>
+                android:visibility="@{isLoading?View.GONE:View.VISIBLE}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
