@@ -1,7 +1,7 @@
-package com.example.moviebooking.domain
+package com.example.moviebooking.domain.common
 
 object Const {
-    const val tmdbUrl = "https://api.themoviedb.org/3"
+    const val tmdbUrl = "https://api.themoviedb.org/3/"
     const val vietqrUrl = ""
 
     const val tmdbAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTdkOWJhZTJkM2YwMDZlYzk5NjQzZTlkMjAwZmI2MyIsIm5iZiI6MTczMDgxOTQ1NS4xMzQsInN1YiI6IjY3MmEzNTdmNTBlMTVlOGY1YTU4MjNiMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.C2wN9iCbXG_UEtx_JuuCowPDtV1cRqtDg6czr5Gv2ts"

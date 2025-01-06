@@ -1,11 +1,11 @@
-package com.example.moviebooking.domain.common.di
+package com.example.moviebooking.domain.di
 
 import com.example.moviebooking.data.remote.services.ServiceFactory
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import com.example.moviebooking.data.remote.services.tmdb.TMDBServiceController
 import com.example.moviebooking.data.remote.services.vietqr.VietQRService
 import com.example.moviebooking.data.remote.services.vietqr.VietQRServiceController
-import com.example.moviebooking.domain.Const
+import com.example.moviebooking.domain.common.Const
 import org.koin.dsl.module
 
 object ServiceModule {

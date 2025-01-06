@@ -18,15 +18,17 @@ open class BaseNavigator : BaseViewModel(), BaseRouter {
 
     override fun onNextScreen(
         action: Int,
-        extras: Bundle,
+        extras: Bundle?,
         isFinished: Boolean?,
     ) {
         launchCoroutine {
             navigation.send(
                 NextScreen(
                     action,
-                    extras.apply {
-                        putBoolean("isFinished", isFinished ?: false)
+                    extras?.let {
+                        it.apply { putBoolean("isFinished", isFinished ?: false) }
+                    } ?: run {
+                        Bundle().apply { putBoolean("isFinished", isFinished ?: false) }
                     },
                 ),
             )

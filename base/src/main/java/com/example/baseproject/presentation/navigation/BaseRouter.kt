@@ -5,7 +5,7 @@ import android.os.Bundle
 interface BaseRouter {
     fun onNextScreen(
         action: Int,
-        extras: Bundle = Bundle(),
+        extras: Bundle? = Bundle(),
         isFinished: Boolean?,
     )
 

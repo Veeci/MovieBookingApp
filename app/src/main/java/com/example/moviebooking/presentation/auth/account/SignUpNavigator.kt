@@ -1,12 +1,12 @@
-package com.example.moviebooking.presentation.auth.splash
+package com.example.moviebooking.presentation.auth.account
 
 import com.example.baseproject.presentation.navigation.BaseNavigator
 import com.example.moviebooking.R
 
-class SplashNavigator: BaseNavigator() {
-    fun goToLoginScreen() {
+class SignUpNavigator: BaseNavigator() {
+    fun goToAuthScreen() {
         onNextScreen(
-            action = R.id.action_splashScreen_to_authScreen,
+            action = R.id.action_signUpScreen_to_authScreen,
             extras = null,
             isFinished = null
         )

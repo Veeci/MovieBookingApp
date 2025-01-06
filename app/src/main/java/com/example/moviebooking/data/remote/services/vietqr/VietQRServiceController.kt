@@ -1,7 +1,7 @@
 package com.example.moviebooking.data.remote.services.vietqr
 
 import com.example.baseproject.domain.remote.network.BaseApiController
-import com.example.moviebooking.domain.Const
+import com.example.moviebooking.domain.common.Const
 
 object VietQRServiceController: BaseApiController<VietQRService>() {
     override fun getBaseUrl() = Const.vietqrUrl

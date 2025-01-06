@@ -5,6 +5,7 @@ import com.example.baseproject.domain.utils.EncryptedSharedPreferences
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.baseproject.presentation.navigation.BaseNavigator
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidFileProperties
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
@@ -15,13 +16,14 @@ abstract class BaseApplication : Application() {
         startKoin {
             androidContext(this@BaseApplication)
             modules(appModule())
+            androidFileProperties()
         }
     }
 
     open fun appModule() =
         module {
             factory<BaseNavigator> { BaseNavigator() }
-            factory<BaseViewModel> { BaseViewModel() }
+            factory { BaseViewModel() }
             factory<EncryptedSharedPreferences> { EncryptedSharedPreferences(get()) }
         }
 }

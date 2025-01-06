@@ -15,11 +15,6 @@
             app:destination="@id/authScreen"
             app:popUpTo="@id/splashScreen"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_splashScreen_to_signUpScreen"
-            app:destination="@id/signUpScreen"
-            app:popUpTo="@id/splashScreen"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/authScreen"
@@ -29,6 +24,11 @@
         <action
             android:id="@+id/action_authScreen_to_signUpScreen"
             app:destination="@id/signUpScreen" />
+        <action
+            android:id="@+id/action_authScreen_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/authScreen"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signUpScreen"
@@ -41,4 +41,9 @@
             app:popUpTo="@id/signUpScreen"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.moviebooking.presentation.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
 </navigation>

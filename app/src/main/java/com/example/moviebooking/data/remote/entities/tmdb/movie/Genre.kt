@@ -1,4 +1,4 @@
-package com.example.moviebooking.data.remote.entities.tmdb
+package com.example.moviebooking.data.remote.entities.tmdb.movie
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
