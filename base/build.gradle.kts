@@ -77,13 +77,13 @@ dependencies {
     api("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14")
 
     // Navigation
-    api("androidx.navigation:navigation-fragment-ktx:2.8.4")
-    api("androidx.navigation:navigation-ui-ktx:2.8.4")
+    api("androidx.navigation:navigation-fragment-ktx:2.8.5")
+    api("androidx.navigation:navigation-ui-ktx:2.8.5")
 
     // ExoPlayer
-    api("androidx.media3:media3-exoplayer:1.5.0")
-    api("androidx.media3:media3-exoplayer-dash:1.5.0")
-    api("androidx.media3:media3-ui:1.5.0")
+    api("androidx.media3:media3-exoplayer:1.5.1")
+    api("androidx.media3:media3-exoplayer-dash:1.5.1")
+    api("androidx.media3:media3-ui:1.5.1")
 
     // Coil
     api("io.coil-kt:coil:2.7.0")

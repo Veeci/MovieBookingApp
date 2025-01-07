@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 object ViewModelModule {
     fun init() = module {
-        screenViewModel { MovieViewModel(get()) }
+        screenViewModel { MovieViewModel(get(), get(), get(), get()) }
     }
 }

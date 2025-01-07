@@ -1,4 +1,4 @@
-package com.example.moviebooking.presentation.auth.account
+package com.example.moviebooking.presentation.auth
 
 import com.example.baseproject.presentation.navigation.BaseNavigator
 import com.example.moviebooking.R

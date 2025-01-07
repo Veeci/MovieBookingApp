@@ -48,8 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#348FE775"
-                android:visibility="@{preventClicking?View.GONE:View.VISIBLE}"/>
-
+                android:visibility="@{preventClicking?View.VISIBLE:View.GONE}"/>
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/loading"
@@ -61,7 +60,7 @@
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/base_loading_lottie"
-                android:visibility="@{isLoading?View.GONE:View.VISIBLE}"/>
+                android:visibility="@{isLoading?View.VISIBLE:View.GONE}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

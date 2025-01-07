@@ -1,4 +1,4 @@
-package com.example.moviebooking.domain.usecases.movies
+package com.example.moviebooking.domain.usecases.movies.nowPlayingList
 
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
@@ -29,16 +29,16 @@ class FetchNowPlayingMoviesUseCaseImpl(
                     )
                 )
             }
-        }.onStart { this.emit(ResponseStatus.Loading) }
-            .catch { e ->
-                this.emit(
-                    ResponseStatus.Error(
-                        message = e.message ?: "Something went wrong",
-                        errorCode = 500
-                    )
+        }.onStart {
+            this.emit(ResponseStatus.Loading)
+        }.catch { e ->
+            this.emit(
+                ResponseStatus.Error(
+                    message = e.message ?: "Something went wrong",
+                    errorCode = 500
                 )
-            }
-            .flowOn(Dispatchers.IO)
+            )
+        }.flowOn(Dispatchers.IO)
     }
 }
 
