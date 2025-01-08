@@ -21,14 +21,12 @@ import com.example.baseproject.presentation.navigation.PermissionResultEvent
 import com.example.moviebooking.databinding.ActivityMainBinding
 import com.example.moviebooking.domain.usecases.movies.MovieViewModel
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(
+class MainActivity : BaseActivity<ActivityMainBinding, MainRouter, MainNavigator>(
     R.layout.activity_main
 ) {
     override val navigator: MainNavigator by viewModels()
 
     override fun initView(savedInstanceState: Bundle?, binding: ActivityMainBinding) {
-        binding.root.postDelayed({
-            navigator.sendEvent(PermissionResultEvent(0, arrayOf(""), intArrayOf(), 0))
-        }, 3000)
+        enableNavigationDrawable(false)
     }
 }

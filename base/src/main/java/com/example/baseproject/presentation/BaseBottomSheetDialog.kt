@@ -18,7 +18,7 @@ abstract class BaseBottomSheetDialog<V : ViewBinding, N : BaseNavigator>(
 ) : BottomSheetDialogFragment() {
     protected lateinit var binding: V
     abstract val navigator: N
-    protected lateinit var activity: BaseActivity<*, *>
+    protected lateinit var activity: BaseActivity<*, *, *>
 
     open var style: Int? = null
     open var enterAnimation: Int? = null
@@ -47,7 +47,7 @@ abstract class BaseBottomSheetDialog<V : ViewBinding, N : BaseNavigator>(
         savedInstanceState: Bundle?,
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, layoutId, container, false)
-        activity = requireActivity() as BaseActivity<*, *>
+        activity = requireActivity() as BaseActivity<*, *, *>
         return binding.root
     }
 

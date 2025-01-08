@@ -18,7 +18,7 @@ abstract class BaseDialog<V : ViewBinding, N : BaseNavigator>(
     private val layoutId: Int = 0,
 ) : DialogFragment() {
     protected lateinit var binding: V
-    protected lateinit var activity: BaseActivity<*, *>
+    protected lateinit var activity: BaseActivity<*, *, *>
     abstract val navigator: N
 
     open var gravity = Gravity.CENTER
@@ -57,7 +57,7 @@ abstract class BaseDialog<V : ViewBinding, N : BaseNavigator>(
         savedInstanceState: Bundle?,
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, layoutId, container, false)
-        activity = requireActivity() as BaseActivity<*, *>
+        activity = requireActivity() as BaseActivity<*, *, *>
         return binding.root
     }
 

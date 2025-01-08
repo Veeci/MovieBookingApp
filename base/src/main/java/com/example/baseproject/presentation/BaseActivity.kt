@@ -28,6 +28,7 @@ import com.example.baseproject.domain.utils.ThemeMode
 import com.example.baseproject.domain.utils.toastShort
 import com.example.baseproject.presentation.navigation.BackToHome
 import com.example.baseproject.presentation.navigation.BaseNavigator
+import com.example.baseproject.presentation.navigation.BaseRouter
 import com.example.baseproject.presentation.navigation.ComingSoon
 import com.example.baseproject.presentation.navigation.InvalidLocalTime
 import com.example.baseproject.presentation.navigation.NavigateWithDeeplink
@@ -44,13 +45,14 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-abstract class BaseActivity<V : ViewBinding, N : BaseNavigator>(private val layoutId: Int) :
+@Suppress("UNCHECKED_CAST")
+abstract class BaseActivity<V : ViewBinding, Router : BaseRouter, N : BaseNavigator>(private val layoutId: Int) :
     AppCompatActivity() {
     var navController: NavController? = null
     abstract val navigator: N
-
     private lateinit var rootView: ActivityBaseBinding
     lateinit var binding: V
+    protected var router: Router? = null
 
     private var isDrawerEnabled = false
     private var drawerLayout: DrawerLayout? = null
@@ -65,22 +67,28 @@ abstract class BaseActivity<V : ViewBinding, N : BaseNavigator>(private val layo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         rootView = DataBindingUtil.inflate(layoutInflater, R.layout.activity_base, null, false)
-        binding = DataBindingUtil.inflate(layoutInflater, layoutId, null, false)
+        binding = DataBindingUtil.inflate(layoutInflater, layoutId, rootView.mainView, true)
+        setContentView(rootView.root)
 
         val navHostFragment =
             supportFragmentManager
-                .findFragmentById(R.id.container) as NavHostFragment?
+                .findFragmentById(R.id.mainView) as NavHostFragment?
         navController = navHostFragment?.navController
-        setContentView(rootView.root)
+        try {
+            (navigator as? Router?)?.let {
+                router = it
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         checkNetwork()
         onNavigationEvent()
-
         if (isDrawerEnabled) {
             setupNavigationDrawer()
         }
-
         handleBackPress()
 
         initView(savedInstanceState = savedInstanceState, binding = binding)

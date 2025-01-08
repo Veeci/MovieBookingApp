@@ -12,13 +12,16 @@ import com.example.baseproject.domain.utils.screenViewModel
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.baseproject.domain.viewmodel.ErrorState
 import com.example.baseproject.presentation.navigation.BaseNavigator
+import com.example.baseproject.presentation.navigation.BaseRouter
 
-abstract class BaseFragment<V : ViewBinding, N : BaseNavigator>(
+@Suppress("UNCHECKED_CAST")
+abstract class BaseFragment<V : ViewBinding, R : BaseRouter, out N : BaseNavigator>(
     private val layoutId: Int = 0,
 ) : Fragment() {
     protected lateinit var binding: V
     abstract val navigator: N
-    protected lateinit var activity: BaseActivity<*, *>
+    protected var router: R? = null
+    protected lateinit var activity: BaseActivity<*, *, *>
 
     open val viewModel: BaseViewModel by screenViewModel()
 
@@ -28,7 +31,7 @@ abstract class BaseFragment<V : ViewBinding, N : BaseNavigator>(
         savedInstanceState: Bundle?,
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, layoutId, container, false)
-        activity = requireActivity() as BaseActivity<*, *>
+        activity = requireActivity() as BaseActivity<*, *, *>
 
         return binding.root
     }
@@ -39,6 +42,13 @@ abstract class BaseFragment<V : ViewBinding, N : BaseNavigator>(
     ) {
         super.onViewCreated(view, savedInstanceState)
 
+        try {
+            (navigator as? R?)?.let {
+                router = it
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         initView(savedInstanceState = savedInstanceState, binding = binding)
         backPressHandle()
         errorObserver()
