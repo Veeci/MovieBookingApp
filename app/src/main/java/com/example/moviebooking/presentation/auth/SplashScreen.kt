@@ -6,6 +6,7 @@ import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.safeClick
 import com.example.baseproject.domain.utils.screenViewModel
+import com.example.baseproject.domain.utils.toastShort
 import com.example.baseproject.presentation.BaseFragment
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
@@ -40,7 +41,7 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
                     showLoading(isLoading = false)
                 is ResponseStatus.Success -> {
                     showLoading(isLoading = false)
-                    router?.goToLoginScreen()
+//                    router?.goToLoginScreen()
                 }
             }
         }

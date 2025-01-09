@@ -20,11 +20,12 @@ import com.example.baseproject.presentation.BaseActivity
 import com.example.baseproject.presentation.navigation.PermissionResultEvent
 import com.example.moviebooking.databinding.ActivityMainBinding
 import com.example.moviebooking.domain.usecases.movies.MovieViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainRouter, MainNavigator>(
     R.layout.activity_main
 ) {
-    override val navigator: MainNavigator by viewModels()
+    override val navigator: MainNavigator by viewModel()
 
     override fun initView(savedInstanceState: Bundle?, binding: ActivityMainBinding) {
         enableNavigationDrawable(false)

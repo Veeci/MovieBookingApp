@@ -46,7 +46,9 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 
 @Suppress("UNCHECKED_CAST")
-abstract class BaseActivity<V : ViewBinding, Router : BaseRouter, N : BaseNavigator>(private val layoutId: Int) :
+abstract class BaseActivity<V : ViewBinding, Router : BaseRouter, N : BaseNavigator>(
+    private val layoutId: Int,
+) :
     AppCompatActivity() {
     var navController: NavController? = null
     abstract val navigator: N
@@ -81,17 +83,15 @@ abstract class BaseActivity<V : ViewBinding, Router : BaseRouter, N : BaseNaviga
                 router = it
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            throw e
         }
+
+        initView(savedInstanceState = savedInstanceState, binding = binding)
 
         checkNetwork()
         onNavigationEvent()
-        if (isDrawerEnabled) {
-            setupNavigationDrawer()
-        }
+        if (isDrawerEnabled) setupNavigationDrawer()
         handleBackPress()
-
-        initView(savedInstanceState = savedInstanceState, binding = binding)
     }
 
     private fun onNavigationEvent() {

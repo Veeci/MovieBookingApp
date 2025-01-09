@@ -13,6 +13,5 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
     override val navigator: MainNavigator by navigatorViewModel()
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentAuthBinding) {
-        TODO("Not yet implemented")
     }
 }

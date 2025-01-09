@@ -1,6 +1,6 @@
 package com.example.baseproject.presentation.navigation
 
-import androidx.core.bundle.Bundle
+import android.os.Bundle
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel

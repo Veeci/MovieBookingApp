@@ -61,7 +61,11 @@ dependencies {
     androidTestApi("androidx.test.espresso:espresso-core:3.6.1")
 
     // Koin DI
-    api("io.insert-koin:koin-android:4.0.0")
+    api(platform("io.insert-koin:koin-bom:3.5.4"))
+    api("io.insert-koin:koin-core")
+    api("io.insert-koin:koin-android")
+    api("io.insert-koin:koin-androidx-navigation")
+    api("io.insert-koin:koin-android-compat")
 
     // Room Local Database
     api("androidx.room:room-runtime:2.6.1")
