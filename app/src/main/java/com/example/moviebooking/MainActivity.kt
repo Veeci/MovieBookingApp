@@ -27,6 +27,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainRouter, MainNavigator
 ) {
     override val navigator: MainNavigator by viewModel()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Base_Theme_MovieBooking)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun initView(savedInstanceState: Bundle?, binding: ActivityMainBinding) {
         enableNavigationDrawable(false)
     }

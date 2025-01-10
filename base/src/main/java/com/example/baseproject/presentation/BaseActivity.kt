@@ -16,7 +16,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import androidx.viewbinding.ViewBinding
 import com.example.baseproject.R
@@ -74,10 +73,6 @@ abstract class BaseActivity<V : ViewBinding, Router : BaseRouter, N : BaseNaviga
         binding = DataBindingUtil.inflate(layoutInflater, layoutId, rootView.mainView, true)
         setContentView(rootView.root)
 
-        val navHostFragment =
-            supportFragmentManager
-                .findFragmentById(R.id.mainView) as NavHostFragment?
-        navController = navHostFragment?.navController
         try {
             (navigator as? Router?)?.let {
                 router = it
@@ -86,12 +81,12 @@ abstract class BaseActivity<V : ViewBinding, Router : BaseRouter, N : BaseNaviga
             throw e
         }
 
-        initView(savedInstanceState = savedInstanceState, binding = binding)
-
         checkNetwork()
         onNavigationEvent()
         if (isDrawerEnabled) setupNavigationDrawer()
         handleBackPress()
+
+        initView(savedInstanceState = savedInstanceState, binding = binding)
     }
 
     private fun onNavigationEvent() {
