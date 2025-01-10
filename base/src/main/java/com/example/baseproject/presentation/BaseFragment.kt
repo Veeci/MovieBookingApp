@@ -72,18 +72,16 @@ abstract class BaseFragment<V : ViewBinding, Router : BaseRouter, out N : BaseNa
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-        initView(savedInstanceState = savedInstanceState, binding = binding)
-
         val navHostFragment =
             childFragmentManager
                 .findFragmentById(R.id.mainView) as NavHostFragment?
         navController = navHostFragment?.navController
         onNavigationEvent()
-
         backPressHandle()
         errorObserver()
         permissionRegister()
+
+        initView(savedInstanceState = savedInstanceState, binding = binding)
     }
 
     abstract fun initView(

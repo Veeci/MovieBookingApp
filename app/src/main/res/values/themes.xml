@@ -1,12 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MovieBooking" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.MovieBooking" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/ThemePrimary</item>
+        <item name="colorSecondary">@color/ThemeSecondary</item>
     </style>
 
     <style name="Theme.App.StartingTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#86A788</item>
+        <item name="windowSplashScreenBackground">@color/ThemePrimary</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.MovieBooking</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/animated_logo</item>
     </style>

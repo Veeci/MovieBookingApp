@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginScreen"
-        android:name="com.example.moviebooking.presentation.auth.LoginScreen"
+        android:name="com.example.moviebooking.presentation.auth.login.LoginScreen"
         android:label="LoginScreen" >
         <action
             android:id="@+id/action_loginScreen_to_mainFragment"
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpScreen"
-        android:name="com.example.moviebooking.presentation.auth.SignUpScreen"
+        android:name="com.example.moviebooking.presentation.auth.signup.SignUpScreen"
         android:label="SignUpScreen" >
         <action
             android:id="@+id/action_signUpScreen_to_loginScreen"

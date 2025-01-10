@@ -1,4 +1,4 @@
-package com.example.moviebooking.presentation.auth
+package com.example.moviebooking.presentation.auth.signup
 
 import android.os.Bundle
 import com.example.baseproject.domain.utils.navigatorViewModel

@@ -1,8 +1,19 @@
 <resources>
     <string name="app_name">MovieBooking</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="default_web_client_id">434610274928-idanoroiale7ogqpfekfpa4tg0q14n40.apps.googleusercontent.com</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="error">Error</string>
     <string name="startup_error">There\'s some errors occurred when starting the app. Please try again!</string>
     <string name="ok">Ok</string>
+    <string name="movie_booking">Movie Booking</string>
+    <string name="login_to_enjoy_the_app">Login to enjoy the app</string>
+    <string name="username_placeholder">Username...</string>
+    <string name="password_placeholder">And password...</string>
+    <string name="log_in">Log in</string>
+    <string name="or">Or</string>
+    <string name="log_in_with_google">Log in with Google</string>
+    <string name="log_in_with_facebook">Log in with Facebook</string>
+    <string name="not_have_an_account_yet">Not have an account yet?</string>
+    <string name="sign_up">Sign up</string>
 </resources>

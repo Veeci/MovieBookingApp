@@ -1,4 +1,4 @@
-package com.example.moviebooking.domain.usecases.movies
+package com.example.moviebooking.domain.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

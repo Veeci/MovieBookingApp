@@ -48,5 +48,6 @@ dependencies {
     implementation(libs.firebase.bom)
 
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("com.github.smarteist:Android-Image-Slider:1.4.0")
 }
 

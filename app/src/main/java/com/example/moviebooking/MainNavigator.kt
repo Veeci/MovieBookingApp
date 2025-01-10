@@ -1,8 +1,8 @@
 package com.example.moviebooking
 
 import com.example.baseproject.presentation.navigation.BaseNavigator
-import com.example.moviebooking.presentation.auth.LoginRouter
-import com.example.moviebooking.presentation.auth.SignUpRouter
+import com.example.moviebooking.presentation.auth.login.LoginRouter
+import com.example.moviebooking.presentation.auth.signup.SignUpRouter
 import com.example.moviebooking.presentation.auth.SplashRouter
 
 class MainNavigator :
@@ -10,7 +10,7 @@ class MainNavigator :
     MainRouter,
     SplashRouter,
     LoginRouter,
-    SignUpRouter{
+    SignUpRouter {
     override fun goToLoginScreen() {
         onNextScreen(
             action = R.id.action_splashFragment_to_loginScreen,

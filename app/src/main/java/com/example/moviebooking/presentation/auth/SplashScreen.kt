@@ -17,7 +17,7 @@ import com.example.baseproject.presentation.BaseFragment
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
 import com.example.moviebooking.databinding.FragmentSplashBinding
-import com.example.moviebooking.domain.usecases.movies.MovieViewModel
+import com.example.moviebooking.domain.viewmodels.MovieViewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavigator>(

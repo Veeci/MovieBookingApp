@@ -41,9 +41,9 @@ class EncryptedSharedPreferences(context: Context) {
 
     fun getData(
         key: String,
-        value: Any?,
+        defaultValue: Any?,
     ): Any? {
-        return when (value) {
+        return when (defaultValue) {
             is String -> pref.getString(key, null)
             is Int -> pref.getInt(key, 0)
             is Boolean -> pref.getBoolean(key, false)
