@@ -8,7 +8,7 @@
     <string name="ok">Ok</string>
     <string name="movie_booking">Movie Booking</string>
     <string name="login_to_enjoy_the_app">Login to enjoy the app</string>
-    <string name="username_placeholder">Username...</string>
+    <string name="email_placeholder">Email...</string>
     <string name="password_placeholder">And password...</string>
     <string name="log_in">Log in</string>
     <string name="or">Or</string>
@@ -16,4 +16,13 @@
     <string name="log_in_with_facebook">Log in with Facebook</string>
     <string name="not_have_an_account_yet">Not have an account yet?</string>
     <string name="sign_up">Sign up</string>
+    <string name="remember_me">Remember me?</string>
+    <string name="receive_our_latest_information">Receive our latest information</string>
+    <string name="password_must_match">Password must match*</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="password_validator_error">Password must have at least 1 uppercase, 1 lowercase, 1 number and 1 special character*</string>
+    <string name="password">Password</string>
+    <string name="invalid_email_error">Email must be valid*</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="can_we_know_your_name">Can we know your name?</string>
 </resources>

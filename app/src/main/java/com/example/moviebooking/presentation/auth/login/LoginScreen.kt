@@ -63,7 +63,7 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
 
         with(binding) {
             loginBtn.safeClick {
-                emailPasswordSignIn(binding.usernameInput.text.toString(), binding.passwordInput.text.toString())
+                emailPasswordSignIn(binding.emailInput.text.toString(), binding.passwordInput.text.toString())
             }
             googleLoginBtn.safeClick {
 
