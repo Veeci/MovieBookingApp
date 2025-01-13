@@ -126,16 +126,18 @@ class SignUpScreen : BaseFragment<FragmentSignUpScreenBinding, SignUpRouter, Mai
         encryptedSharedPreferences?.setData("user_email", email)
         encryptedSharedPreferences?.setData("user_password", password)
 
-        Firebase.firestore.collection(auth.currentUser?.uid.toString())
-            .add(
+        Firebase.firestore
+            .collection("users")
+            .document(auth.currentUser?.uid.toString())
+            .set(
                 hashMapOf(
                     "name" to name,
                     "email" to email,
                     "password" to password
                 )
             )
-            .addOnSuccessListener { documentReference ->
-                LogUtils.log("CloudUserInfo", "DocumentSnapshot added with ID: ${documentReference.id}")
+            .addOnSuccessListener {
+                LogUtils.log("CloudUserInfo", "DocumentSnapshot added with ID: ${auth.currentUser?.uid.toString()}")
             }
             .addOnFailureListener { e ->
                 LogUtils.log("CloudUserInfo", "Error adding document: $e")

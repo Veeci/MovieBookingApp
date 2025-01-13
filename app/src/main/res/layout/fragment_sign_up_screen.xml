@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/back"
-            android:padding="10dp"/>
+            android:padding="@dimen/_10sdp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/signupTV"
@@ -40,12 +40,12 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameInputLayout"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/signupTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@null"
             android:hint="@string/can_we_know_your_name"
             app:startIconDrawable="@drawable/account"
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
-                android:paddingStart="40dp"
+                android:paddingStart="@dimen/_35sdp"
                 tools:ignore="LabelFor,RtlSymmetry"
                 android:inputType="textPersonName"
                 android:autofillHints="name" />
@@ -65,7 +65,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@id/emailInputLayout"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/nameInputLayout"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
-                android:paddingStart="40dp"
+                android:paddingStart="@dimen/_35sdp"
                 tools:ignore="LabelFor,RtlSymmetry"
                 android:inputType="textEmailAddress"
                 android:autofillHints="name" />
@@ -90,7 +90,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/emailFormatError"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/emailInputLayout"
             app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
@@ -102,7 +102,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@id/passwordInputLayout"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
-                android:paddingStart="40dp"
+                android:paddingStart="@dimen/_35sdp"
                 tools:ignore="LabelFor,RtlSymmetry"
                 android:inputType="textPassword"
                 android:autofillHints="password" />
@@ -127,7 +127,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/passwordValidatorError"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/passwordInputLayout"
             app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
@@ -139,7 +139,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPasswordInputLayout"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
             app:layout_constraintStart_toStartOf="parent"
@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
-                android:paddingStart="40dp"
+                android:paddingStart="@dimen/_35sdp"
                 tools:ignore="LabelFor,RtlSymmetry"
                 android:inputType="textPassword"
                 android:autofillHints="name" />
@@ -164,7 +164,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/confirmPasswordError"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/confirmPasswordInputLayout"
             app:layout_constraintTop_toBottomOf="@id/confirmPasswordInputLayout"
@@ -176,7 +176,7 @@
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/_35sdp"
             android:id="@+id/receiveNewsCheckBox"
             app:layout_constraintEnd_toEndOf="@id/confirmPasswordInputLayout"
             app:layout_constraintTop_toBottomOf="@id/confirmPasswordInputLayout"

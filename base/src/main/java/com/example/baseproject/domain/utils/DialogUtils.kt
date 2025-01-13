@@ -44,7 +44,7 @@ fun Dialog.positiveAction(
     name: String? = null,
     click: () -> Unit,
 ) {
-    this.findViewById<Button>(R.id.positiveOption).apply {
+    this.findViewById<AppCompatTextView>(R.id.positiveOption).apply {
         name?.let { vl -> text = vl }
         setOnClickListener {
             click.invoke()
@@ -66,7 +66,7 @@ fun Dialog.negativeAction(
     name: String? = null,
     click: () -> Unit,
 ) {
-    this.findViewById<Button>(R.id.negativeOption).apply {
+    this.findViewById<AppCompatTextView>(R.id.negativeOption).apply {
         name?.let { vl ->
             visibility = View.VISIBLE
             text = vl

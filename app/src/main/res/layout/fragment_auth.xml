@@ -13,7 +13,7 @@
             android:id="@+id/tvHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/movie_booking"
             android:textColor="@color/white"
@@ -25,11 +25,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/sliderView"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:layout_margin="16dp"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_margin="@dimen/_10sdp"
             android:layout_marginTop="20dp"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvHeader">
@@ -51,7 +51,7 @@
             android:id="@+id/loginText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/login_to_enjoy_the_app"
             android:textColor="@color/white"
@@ -63,7 +63,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailInputLayout"
-            android:layout_width="350dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@null"
@@ -82,14 +82,14 @@
                 android:layout_height="match_parent"
                 android:autofillHints="name"
                 android:inputType="textEmailAddress"
-                android:paddingStart="40dp"
+                android:paddingStart="@dimen/_35sdp"
                 android:textColor="@color/white"
                 tools:ignore="LabelFor,RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordInputLayout"
-            android:layout_width="350dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@null"
@@ -108,7 +108,7 @@
                 android:layout_height="match_parent"
                 android:autofillHints="password"
                 android:inputType="textPassword"
-                android:paddingStart="40dp"
+                android:paddingStart="@dimen/_35sdp"
                 android:textColor="@color/white"
                 tools:ignore="LabelFor,RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -125,7 +125,7 @@
             android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="@dimen/_35sdp"
             android:background="@drawable/rounded_corners_bgr"
             android:text="@string/log_in"
             android:textColor="@color/ThemePrimary"
@@ -137,11 +137,11 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
+            android:paddingStart="@dimen/_38sdp"
+            android:paddingEnd="@dimen/_38sdp"
             android:weightSum="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -169,13 +169,13 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/googleLoginBtn"
-            android:layout_width="200dp"
+            android:layout_width="@dimen/_150sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/rounded_corners_bgr"
             android:drawableEnd="@drawable/google"
-            android:padding="5dp"
             android:text="@string/log_in_with_google"
+            android:padding="@dimen/_5sdp"
             android:textColor="@color/ThemePrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -183,13 +183,13 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/facebookLoginBtn"
-            android:layout_width="200dp"
+            android:layout_width="@dimen/_150sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corners_bgr"
             android:drawableEnd="@drawable/facebook"
-            android:padding="5dp"
             android:text="@string/log_in_with_facebook"
+            android:padding="@dimen/_5sdp"
             android:textColor="@color/ThemePrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -198,7 +198,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -213,7 +213,7 @@
                 android:id="@+id/toSignUpBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:text="@string/sign_up"
                 android:textStyle="bold" />
 

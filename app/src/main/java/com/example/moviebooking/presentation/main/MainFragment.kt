@@ -13,7 +13,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainRouter, MainNavigator
     override val navigator: MainNavigator by navigatorViewModel()
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentMainBinding) {
-        TODO("Not yet implemented")
+
     }
 
 }

@@ -21,7 +21,8 @@
             app:destination="@id/mainFragment" />
         <action
             android:id="@+id/action_loginScreen_to_signUpScreen"
-            app:destination="@id/signUpScreen" />
+            app:destination="@id/signUpScreen"
+            app:popUpTo="@id/loginScreen" />
     </fragment>
     <fragment
         android:id="@+id/signUpScreen"

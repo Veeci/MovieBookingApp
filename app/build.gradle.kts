@@ -46,9 +46,10 @@ dependencies {
     implementation(project(":base"))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.bom)
+    implementation(libs.firebase.firestore)
 
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.github.smarteist:Android-Image-Slider:1.4.0")
-    implementation(libs.firebase.firestore)
+    implementation("com.intuit.sdp:sdp-android:1.1.1")
 }
 
