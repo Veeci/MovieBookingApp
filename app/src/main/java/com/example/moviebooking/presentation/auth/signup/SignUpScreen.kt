@@ -2,6 +2,9 @@ package com.example.moviebooking.presentation.auth.signup
 
 import android.os.Bundle
 import android.util.Patterns
+import com.example.baseproject.domain.utils.CacheManager
+import com.example.baseproject.domain.utils.EncryptedSharedPreferences
+import com.example.baseproject.domain.utils.LogUtils
 import com.example.baseproject.domain.utils.message
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.negativeAction
@@ -14,10 +17,12 @@ import com.example.baseproject.domain.utils.visible
 import com.example.baseproject.presentation.BaseFragment
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
+import com.example.moviebooking.data.local.UserInformation
 import com.example.moviebooking.databinding.FragmentSignUpScreenBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 
 class SignUpScreen : BaseFragment<FragmentSignUpScreenBinding, SignUpRouter, MainNavigator>(
     R.layout.fragment_sign_up_screen
@@ -63,8 +68,7 @@ class SignUpScreen : BaseFragment<FragmentSignUpScreenBinding, SignUpRouter, Mai
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity) { task ->
                     if (task.isSuccessful) {
-                        val user = auth.currentUser
-                        //todo: save user's cache
+                        saveUserCache(name, email, password)
                         activity.simpleAlert {
                             title("Sign Up Successfully")
                             message("You are successfully signed up. Log in to have some fun!")
@@ -112,7 +116,29 @@ class SignUpScreen : BaseFragment<FragmentSignUpScreenBinding, SignUpRouter, Mai
         return true
     }
 
-    private fun saveUserCache() {
+    private fun saveUserCache(
+        name: String,
+        email: String,
+        password: String
+    ) {
+        val encryptedSharedPreferences = context?.let { EncryptedSharedPreferences(it) }
+        encryptedSharedPreferences?.setData("user_name", name)
+        encryptedSharedPreferences?.setData("user_email", email)
+        encryptedSharedPreferences?.setData("user_password", password)
 
+        Firebase.firestore.collection(auth.currentUser?.uid.toString())
+            .add(
+                hashMapOf(
+                    "name" to name,
+                    "email" to email,
+                    "password" to password
+                )
+            )
+            .addOnSuccessListener { documentReference ->
+                LogUtils.log("CloudUserInfo", "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                LogUtils.log("CloudUserInfo", "Error adding document: $e")
+            }
     }
 }

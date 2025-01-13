@@ -2,33 +2,19 @@ package com.example.baseproject.domain.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
-import com.example.baseproject.R
+import kotlin.collections.remove
 
-class EncryptedSharedPreferences(context: Context) {
+class SharedPreferencesHelper(context: Context) {
     private val pref: SharedPreferences
 
     init {
-        val masterKey =
-            MasterKey.Builder(context)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .build()
-
-        pref =
-            EncryptedSharedPreferences.create(
-                context,
-                "secret_" + context.resources.getString(R.string.base_project),
-                masterKey,
-                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
-            )
+        pref = context.getSharedPreferences(
+            "app_preferences",
+            Context.MODE_PRIVATE
+        )
     }
 
-    fun setData(
-        key: String,
-        value: Any?,
-    ) {
+    fun setData(key: String, value: Any?) {
         when (value) {
             is String -> pref.edit().putString(key, value).apply()
             is Int -> pref.edit().putInt(key, value).apply()
@@ -39,10 +25,7 @@ class EncryptedSharedPreferences(context: Context) {
         }
     }
 
-    fun getData(
-        key: String,
-        defaultValue: Any?,
-    ): Any? {
+    fun getData(key: String, defaultValue: Any?): Any? {
         return when (defaultValue) {
             is String -> pref.getString(key, null)
             is Int -> pref.getInt(key, 0)
@@ -53,9 +36,7 @@ class EncryptedSharedPreferences(context: Context) {
         }
     }
 
-    fun removeData(
-        key: String,
-    ) {
+    fun removeData(key: String) {
         pref.edit().remove(key).apply()
     }
 }
