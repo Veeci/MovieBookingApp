@@ -1,49 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.auth.login.LoginScreen"
-        android:background="@color/ThemePrimary">
+        android:background="@color/ThemePrimary"
+        tools:context=".presentation.auth.login.LoginScreen">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat"
             android:text="@string/movie_booking"
             android:textColor="@color/white"
-            android:fontFamily="@font/montserrat"
-            android:textStyle="bold"
             android:textSize="@dimen/textSize_title"
-            android:layout_marginTop="10dp"/>
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/sliderView"
             android:layout_width="350dp"
             android:layout_height="350dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvHeader"
-            android:layout_marginTop="20dp"
             android:layout_margin="16dp"
-            app:cardCornerRadius="10dp">
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvHeader">
 
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:sliderAnimationDuration="600"
-                app:sliderIndicatorAnimationDuration="600"
-                app:sliderStartAutoCycle="true"
                 app:sliderAutoCycleDirection="back_and_forth"
-                app:sliderScrollTimeInSec="1"/>
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderScrollTimeInSec="1"
+                app:sliderStartAutoCycle="true" />
 
         </androidx.cardview.widget.CardView>
 
@@ -53,27 +52,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sliderView"
+            android:fontFamily="@font/montserrat"
             android:text="@string/login_to_enjoy_the_app"
             android:textColor="@color/white"
-            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/textSize_header"
             android:textStyle="bold"
-            android:textSize="@dimen/textSize_header"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sliderView" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailInputLayout"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginText"
             android:background="@null"
-            android:textColorHint="@color/white"
             android:hint="@string/email_placeholder"
+            android:textColorHint="@color/white"
             app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginText"
             app:startIconDrawable="@drawable/mail"
             app:startIconTint="@color/white">
 
@@ -81,11 +80,11 @@
                 android:id="@+id/emailInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:paddingStart="40dp"
-                tools:ignore="LabelFor,RtlSymmetry"
+                android:autofillHints="name"
                 android:inputType="textEmailAddress"
-                android:autofillHints="name" />
+                android:paddingStart="40dp"
+                android:textColor="@color/white"
+                tools:ignore="LabelFor,RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -93,13 +92,13 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
             android:background="@null"
-            android:textColorHint="@color/white"
             android:hint="@string/password_placeholder"
+            android:textColorHint="@color/white"
             app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
             app:startIconDrawable="@drawable/password"
             app:startIconTint="@color/white">
 
@@ -107,108 +106,108 @@
                 android:id="@+id/passwordInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:paddingStart="40dp"
-                tools:ignore="LabelFor,RtlSymmetry"
+                android:autofillHints="password"
                 android:inputType="textPassword"
-                android:autofillHints="password" />
+                android:paddingStart="40dp"
+                android:textColor="@color/white"
+                tools:ignore="LabelFor,RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/rememberMeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/remember_me"
             app:layout_constraintEnd_toEndOf="@id/passwordInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
-            android:text="@string/remember_me"/>
+            app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
             android:layout_marginTop="40dp"
             android:background="@drawable/rounded_corners_bgr"
+            android:text="@string/log_in"
             android:textColor="@color/ThemePrimary"
-            android:text="@string/log_in"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
 
         <LinearLayout
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginBtn"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="30dp"
-            android:paddingEnd="30dp">
+            android:paddingEnd="30dp"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginBtn">
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1.4"
-                android:background="@color/white"/>
+                android:background="@color/white" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
-                android:layout_weight="0.2"
                 android:layout_height="wrap_content"
-                android:text="@string/or"
-                android:gravity="center"/>
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:text="@string/or" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1.4"
-                android:background="@color/white"/>
+                android:background="@color/white" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:padding="5dp"
             android:id="@+id/googleLoginBtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corners_bgr"
-            android:textColor="@color/ThemePrimary"
+            android:drawableEnd="@drawable/google"
+            android:padding="5dp"
             android:text="@string/log_in_with_google"
-            android:drawableEnd="@drawable/google"/>
+            android:textColor="@color/ThemePrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/facebookLoginBtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/googleLoginBtn"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corners_bgr"
-            android:textColor="@color/ThemePrimary"
+            android:drawableEnd="@drawable/facebook"
+            android:padding="5dp"
             android:text="@string/log_in_with_facebook"
-            android:drawableEnd="@drawable/facebook"/>
+            android:textColor="@color/ThemePrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/googleLoginBtn" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="5dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/not_have_an_account_yet"/>
+                android:text="@string/not_have_an_account_yet" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/toSignUpBtn"
@@ -216,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="@string/sign_up"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
