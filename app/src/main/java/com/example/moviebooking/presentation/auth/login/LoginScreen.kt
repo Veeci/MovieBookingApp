@@ -1,6 +1,9 @@
 package com.example.moviebooking.presentation.auth.login
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.baseproject.domain.utils.LogUtils
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.safeClick
@@ -11,8 +14,13 @@ import com.example.moviebooking.R
 import com.example.moviebooking.databinding.FragmentAuthBinding
 import com.example.moviebooking.presentation.auth.login.adapter.SliderAdapter
 import com.example.moviebooking.presentation.auth.login.adapter.SliderItem
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
@@ -24,9 +32,27 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
     override val navigator: MainNavigator by navigatorViewModel()
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
+    private val googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if(result.resultCode == Activity.RESULT_OK) {
+            try {
+                val account = GoogleSignIn.getSignedInAccountFromIntent(result.data).getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                LogUtils.log("Auth", "Google sign in failed: $e")
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) } ?: GoogleSignIn.getClient(activity, gso)
 
         auth = Firebase.auth
     }
@@ -66,7 +92,7 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
                 emailPasswordSignIn(binding.emailInput.text.toString(), binding.passwordInput.text.toString())
             }
             googleLoginBtn.safeClick {
-
+                googleSignIn()
             }
             facebookLoginBtn.safeClick {
 
@@ -91,6 +117,25 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
                 } else {
                     activity.toastShort("Invalid email or password. Please try again!")
                     LogUtils.log("Auth", "Email password sign in error: ${task.exception}")
+                }
+            }
+    }
+
+    private fun googleSignIn() {
+        googleSignInLauncher.launch(googleSignInClient.signInIntent)
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(activity) { task ->
+                if(task.isSuccessful) {
+                    val user = auth.currentUser
+                    //todo: save user's cache
+                    router?.goToMainScreen()
+                } else {
+                    activity.toastShort("Google sign in failed. Please try again!")
+                    LogUtils.log("Auth", "Google sign in error: ${task.exception}")
                 }
             }
     }
