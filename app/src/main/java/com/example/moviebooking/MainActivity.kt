@@ -1,6 +1,9 @@
 package com.example.moviebooking
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowInsets
 import com.example.baseproject.presentation.BaseActivity
 import com.example.moviebooking.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -13,6 +16,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainRouter, MainNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Base_Theme_MovieBooking)
+
+        @Suppress("DEPRECATION")
+        window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                )
+
         super.onCreate(savedInstanceState)
     }
 

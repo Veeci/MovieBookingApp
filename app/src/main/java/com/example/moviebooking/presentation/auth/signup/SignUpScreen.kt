@@ -43,7 +43,7 @@ class SignUpScreen : BaseFragment<FragmentSignUpScreenBinding, SignUpRouter, Mai
 
     private fun setup() {
         with(binding) {
-            backBtn.safeClick { router?.onPopScreen() }
+            backBtn.safeClick { router?.goToAuthScreen() }
 
             signupBtn.safeClick {
                 signUp(

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_item_home"
+        android:icon="@drawable/item_home"
+        android:title="Home"
+        android:iconTint="@color/ThemePrimary"
+        android:checked="true"/>
+
+    <item
+        android:id="@+id/menu_item_movies"
+        android:icon="@drawable/item_movies"
+        android:iconTint="@color/ThemePrimary"
+        android:title="Movies"/>
+
+    <item
+        android:id="@+id/menu_item_ticket"
+        android:icon="@drawable/item_ticket"
+        android:iconTint="@color/ThemePrimary"
+        android:title="Tickets"/>
+
+    <item
+        android:id="@+id/menu_item_profile"
+        android:icon="@drawable/item_profile"
+        android:iconTint="@color/ThemePrimary"
+        android:title="Profile"/>
+</menu>
