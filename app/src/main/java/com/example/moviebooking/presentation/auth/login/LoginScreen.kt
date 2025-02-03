@@ -14,11 +14,18 @@ import com.example.moviebooking.R
 import com.example.moviebooking.databinding.FragmentAuthBinding
 import com.example.moviebooking.presentation.auth.login.adapter.SliderAdapter
 import com.example.moviebooking.presentation.auth.login.adapter.SliderItem
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
@@ -33,6 +40,8 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var callbackManager: CallbackManager
+
     private val googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if(result.resultCode == Activity.RESULT_OK) {
             try {
@@ -44,8 +53,19 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
         }
     }
 
+    private val facebookSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if(result.resultCode == Activity.RESULT_OK) {
+            try {
+                callbackManager.onActivityResult(result.resultCode, result.resultCode, result.data)
+            } catch (e: ApiException) {
+                LogUtils.log("Auth", "Facebook sign in failed: $e")
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        auth = Firebase.auth
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -54,7 +74,8 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
 
         googleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) } ?: GoogleSignIn.getClient(activity, gso)
 
-        auth = Firebase.auth
+        callbackManager = CallbackManager.Factory.create()
+
     }
 
     override fun onStart() {
@@ -95,7 +116,7 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
                 googleSignIn()
             }
             facebookLoginBtn.safeClick {
-
+                facebookSignIn()
             }
             toSignUpBtn.safeClick {
                 router?.goToSignUpScreen()
@@ -136,6 +157,42 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
                 } else {
                     activity.toastShort("Google sign in failed. Please try again!")
                     LogUtils.log("Auth", "Google sign in error: ${task.exception}")
+                }
+            }
+    }
+
+    private fun facebookSignIn() {
+        LoginManager.getInstance().logInWithReadPermissions(activity, listOf("email", "public_profile"))
+        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult?) {
+                result?.let {
+                    handleFacebookAccessToken(it.accessToken)
+                } ?: run {
+                    activity.toastShort("Facebook sign in failed. Please try again!")
+                }
+            }
+
+            override fun onCancel() {
+                TODO("Not yet implemented")
+            }
+
+            override fun onError(error: FacebookException?) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun handleFacebookAccessToken(token: AccessToken) {
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(activity) { task ->
+                if(task.isSuccessful) {
+                    val user = auth.currentUser
+                    //todo: save user's cache
+                    router?.goToMainScreen()
+                } else {
+                    activity.toastShort("Facebook sign in failed. Please try again!")
                 }
             }
     }

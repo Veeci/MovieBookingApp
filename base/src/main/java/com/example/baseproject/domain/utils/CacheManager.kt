@@ -1,6 +1,5 @@
 package com.example.baseproject.domain.utils
 
-
 object CacheManager {
     private val cacheData = mutableMapOf<String, Any>()
 
@@ -8,7 +7,10 @@ object CacheManager {
         return cacheData[key]
     }
 
-    fun addToCache(key: String, value: Any) {
+    fun addToCache(
+        key: String,
+        value: Any,
+    ) {
         cacheData[key] = value
     }
 

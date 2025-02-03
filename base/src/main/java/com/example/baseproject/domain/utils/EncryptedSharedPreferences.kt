@@ -53,9 +53,7 @@ class EncryptedSharedPreferences(context: Context) {
         }
     }
 
-    fun removeData(
-        key: String,
-    ) {
+    fun removeData(key: String) {
         pref.edit().remove(key).apply()
     }
 }

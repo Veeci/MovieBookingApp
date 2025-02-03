@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.firebase.bom)
     implementation(libs.firebase.firestore)
     implementation("com.google.android.gms:play-services-auth:12.0.1")
+    implementation("com.facebook.android:facebook-android-sdk:[8,9)")
 
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.github.smarteist:Android-Image-Slider:1.4.0")

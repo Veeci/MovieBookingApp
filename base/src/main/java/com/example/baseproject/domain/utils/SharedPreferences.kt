@@ -8,13 +8,17 @@ class SharedPreferencesHelper(context: Context) {
     private val pref: SharedPreferences
 
     init {
-        pref = context.getSharedPreferences(
-            "app_preferences",
-            Context.MODE_PRIVATE
-        )
+        pref =
+            context.getSharedPreferences(
+                "app_preferences",
+                Context.MODE_PRIVATE,
+            )
     }
 
-    fun setData(key: String, value: Any?) {
+    fun setData(
+        key: String,
+        value: Any?,
+    ) {
         when (value) {
             is String -> pref.edit().putString(key, value).apply()
             is Int -> pref.edit().putInt(key, value).apply()
@@ -25,7 +29,10 @@ class SharedPreferencesHelper(context: Context) {
         }
     }
 
-    fun getData(key: String, defaultValue: Any?): Any? {
+    fun getData(
+        key: String,
+        defaultValue: Any?,
+    ): Any? {
         return when (defaultValue) {
             is String -> pref.getString(key, null)
             is Int -> pref.getInt(key, 0)
