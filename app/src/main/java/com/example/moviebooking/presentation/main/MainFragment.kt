@@ -12,8 +12,45 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainRouter, MainNavigator
 ) {
     override val navigator: MainNavigator by navigatorViewModel()
 
-    override fun initView(savedInstanceState: Bundle?, binding: FragmentMainBinding) {
+    private lateinit var adapter: MainVPAdapter
 
+    override fun initView(savedInstanceState: Bundle?, binding: FragmentMainBinding) {
+        setupPages()
+        setupBottomBar()
     }
 
+    private fun setupPages() {
+        adapter = MainVPAdapter(activity)
+        binding.mainViewPager.adapter = adapter
+        binding.mainViewPager.isUserInputEnabled = false
+        binding.mainViewPager.offscreenPageLimit = 4
+    }
+
+    private fun setupBottomBar() {
+        binding.bottomNavigationBar.setOnItemSelectedListener { tab ->
+            when (tab.itemId) {
+                R.id.menu_item_home -> {
+                    binding.mainViewPager.currentItem = 0
+                    true
+                }
+
+                R.id.menu_item_explore -> {
+                    binding.mainViewPager.currentItem = 1
+                    true
+                }
+
+                R.id.menu_item_ticket -> {
+                    binding.mainViewPager.currentItem = 2
+                    true
+                }
+
+                R.id.menu_item_profile -> {
+                    binding.mainViewPager.currentItem = 3
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
 }

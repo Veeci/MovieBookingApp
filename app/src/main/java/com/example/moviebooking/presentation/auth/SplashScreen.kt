@@ -7,6 +7,7 @@ import android.view.animation.OvershootInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.baseproject.domain.utils.ResponseStatus
+import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.message
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.positiveAction
@@ -24,7 +25,7 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
     R.layout.fragment_splash
 ) {
     override val navigator: MainNavigator by navigatorViewModel()
-    override val viewModel: MovieViewModel by screenViewModel()
+    override val viewModel: MovieViewModel by journeyViewModel()
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentSplashBinding) {
         fetchData()
