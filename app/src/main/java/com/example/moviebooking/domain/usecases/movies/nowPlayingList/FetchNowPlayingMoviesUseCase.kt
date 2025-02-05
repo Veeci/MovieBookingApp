@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface FetchNowPlayingMoviesUseCase {
     fun execute(): Flow<ResponseStatus<MovieItem>>
+
+    fun getFromLocal(): Flow<ResponseStatus<MovieItem>>
 }

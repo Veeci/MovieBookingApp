@@ -4,15 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/*
+    Entity represents the database-level data.
+ */
 @Entity
 open class BaseEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    var id: String? = null,
+    open var id: String,
 )
-
-fun BaseEntity.mapToModel(): BaseModel {
-    return BaseModel(id = this.id)
-}
-
-fun List<BaseEntity>.mapToModels() = map { it.mapToModel() }

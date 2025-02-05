@@ -1,6 +1,8 @@
 package com.example.moviebooking.data.remote.entities.tmdb.movie
 
 import android.os.Parcelable
+import com.example.baseproject.data.BaseDTO
+import com.example.moviebooking.data.local.entities.MovieItemEntity
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -16,7 +18,11 @@ data class MovieItem(
 	val totalPages: Int? = null,
 	@SerializedName("total_results")
 	val totalResults: Int? = null
-) : Parcelable
+) : Parcelable, BaseDTO(){
+	fun toMovieItemEntities(): List<MovieItemEntity> {
+		return results?.mapNotNull { it?.toEntity() } ?: emptyList()
+	}
+}
 
 @Parcelize
 data class Results(
@@ -48,7 +54,25 @@ data class Results(
 	val voteAverage: Double? = null,
 	@SerializedName("vote_count")
 	val voteCount: Int? = null
-) : Parcelable
+) : Parcelable {
+	fun toEntity(): MovieItemEntity {
+		return MovieItemEntity(
+			id = this.id?.toString() ?: "",
+			adult = this.adult,
+			backdropPath = this.backdropPath,
+			originalLanguage = this.originalLanguage,
+			originalTitle = this.originalTitle,
+			overview = this.overview,
+			popularity = this.popularity,
+			posterPath = this.posterPath,
+			releaseDate = this.releaseDate,
+			title = this.title,
+			video = this.video,
+			voteAverage = this.voteAverage,
+			voteCount = this.voteCount
+		)
+	}
+}
 
 @Parcelize
 data class Dates(

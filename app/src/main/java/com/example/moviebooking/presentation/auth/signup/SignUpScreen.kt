@@ -2,7 +2,6 @@ package com.example.moviebooking.presentation.auth.signup
 
 import android.os.Bundle
 import android.util.Patterns
-import com.example.baseproject.domain.utils.CacheManager
 import com.example.baseproject.domain.utils.EncryptedSharedPreferences
 import com.example.baseproject.domain.utils.LogUtils
 import com.example.baseproject.domain.utils.message
@@ -17,7 +16,6 @@ import com.example.baseproject.domain.utils.visible
 import com.example.baseproject.presentation.BaseFragment
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
-import com.example.moviebooking.data.local.UserInformation
 import com.example.moviebooking.databinding.FragmentSignUpScreenBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth

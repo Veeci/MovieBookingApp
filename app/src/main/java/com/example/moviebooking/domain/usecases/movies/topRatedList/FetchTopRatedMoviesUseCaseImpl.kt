@@ -3,7 +3,6 @@ package com.example.moviebooking.domain.usecases.movies.topRatedList
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
-import com.example.moviebooking.domain.usecases.movies.popularList.FetchPopularMoviesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

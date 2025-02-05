@@ -3,6 +3,8 @@ package com.example.moviebooking.data.remote.entities.tmdb.movie
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
+import com.example.baseproject.data.BaseDTO
+import com.example.moviebooking.data.local.entities.MovieEntity
 
 @Parcelize
 data class Movie(
@@ -19,7 +21,7 @@ data class Movie(
     @SerializedName("homepage")
     val homepage: String? = null,
     @SerializedName("id")
-    val id: Int? = null,
+    override val id: String? = null,
     @SerializedName("imdb_id")
     val imdbId: String? = null,
     @SerializedName("original_language")
@@ -56,7 +58,32 @@ data class Movie(
     val voteAverage: Double? = null,
     @SerializedName("vote_count")
     val voteCount: Int? = null
-) : Parcelable
+) : Parcelable, BaseDTO(id) {
+    fun toEntity(): MovieEntity {
+        return MovieEntity(
+            id ?: "",
+            adult,
+            backdropPath,
+            budget,
+            homepage,
+            imdbId,
+            originalLanguage,
+            originalTitle,
+            overview,
+            popularity,
+            posterPath,
+            releaseDate,
+            revenue,
+            runtime,
+            status,
+            tagline,
+            title,
+            video,
+            voteAverage,
+            voteCount
+        )
+    }
+}
 
 @Parcelize
 data class SpokenLanguagesItem(
