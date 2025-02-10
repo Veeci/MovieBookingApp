@@ -1,7 +1,7 @@
 package com.example.moviebooking.data.remote.services
 
 import android.content.Context
-import com.example.baseproject.domain.remote.network.BaseApiController
+import com.example.baseproject.domain.remote.BaseApiController
 
 object ServiceFactory {
     fun <T: Any> getService(

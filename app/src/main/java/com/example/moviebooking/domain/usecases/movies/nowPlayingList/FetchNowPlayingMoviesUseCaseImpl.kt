@@ -1,7 +1,9 @@
 package com.example.moviebooking.domain.usecases.movies.nowPlayingList
 
+import com.example.baseproject.domain.utils.LogUtils
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.moviebooking.data.local.dao.MovieItemDao
+import com.example.moviebooking.data.local.entities.MovieItemEntity
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +24,8 @@ class FetchNowPlayingMoviesUseCaseImpl(
                     this.data?.let { response ->
                         emit(ResponseStatus.Success(response))
                         movieItemDao.insertAll(response.toMovieItemEntities())
+                        val test = movieItemDao.getAll()
+                        LogUtils.log("Test", test.toString())
                         return@with
                     }
                 }
@@ -44,11 +48,12 @@ class FetchNowPlayingMoviesUseCaseImpl(
         }.flowOn(Dispatchers.IO)
     }
 
-    override fun getFromLocal(): Flow<ResponseStatus<MovieItem>> {
+    override fun getFromLocal(): Flow<List<MovieItemEntity>> {
         return flow {
-            val movieItems = movieItemDao.getAll()
-            if (movieItems.isNotEmpty()) {
-
+            movieItemDao.getAll().takeIf { it.isNotEmpty() }?.let { items ->
+                this.emit(items)
+            } ?: run {
+                this.emit(emptyList())
             }
         }
     }

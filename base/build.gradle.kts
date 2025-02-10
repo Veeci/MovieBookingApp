@@ -67,11 +67,6 @@ dependencies {
     api("io.insert-koin:koin-androidx-navigation")
     api("io.insert-koin:koin-android-compat")
 
-    // Room Local Database
-    api("androidx.room:room-runtime:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
-    api("androidx.room:room-ktx:2.6.1")
-
     // Encrypted shared preferences
     api("androidx.security:security-crypto:1.1.0-alpha06")
 

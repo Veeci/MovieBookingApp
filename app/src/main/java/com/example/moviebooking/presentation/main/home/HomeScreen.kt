@@ -20,7 +20,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
     R.layout.fragment_home_screen
 ) {
     override val navigator: MainNavigator by navigatorViewModel()
-    override val viewModel: MovieViewModel by journeyViewModel()
+    override val viewModel: MovieViewModel by screenViewModel()
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentHomeScreenBinding) {
 

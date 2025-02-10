@@ -47,6 +47,12 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.bom)
     implementation(libs.firebase.firestore)
+
+    // Room Local Database
+    api("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    api("androidx.room:room-ktx:2.6.1")
+
     implementation("com.google.android.gms:play-services-auth:12.0.1")
     implementation("com.facebook.android:facebook-android-sdk:[8,9)")
 

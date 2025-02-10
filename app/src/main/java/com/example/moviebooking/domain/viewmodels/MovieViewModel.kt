@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.viewmodel.BaseViewModel
+import com.example.moviebooking.data.local.entities.MovieItemEntity
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
 import com.example.moviebooking.domain.usecases.movies.nowPlayingList.FetchNowPlayingMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.popularList.FetchPopularMoviesUseCase
@@ -19,6 +20,9 @@ class MovieViewModel(
 ): BaseViewModel() {
     private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
     val nowPLayingList: LiveData<ResponseStatus<MovieItem>> = _nowPLayingList
+
+    private val _localNowPlayingList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
+    val localNowPlayingList: LiveData<List<MovieItemEntity>> = _localNowPlayingList
 
     private val _popularList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
     val popularList: LiveData<ResponseStatus<MovieItem>> = _popularList
@@ -104,6 +108,14 @@ class MovieViewModel(
 
                 _allMoviesFetchState.postValue(ResponseStatus.Error(e.message ?: "Error fetching all movies"))
 
+            }
+        }
+    }
+
+    fun retrieveLocalData() {
+        launchCoroutine {
+            fetchNowPLayingMovies.getFromLocal().collect {
+                _localNowPlayingList.postValue(it)
             }
         }
     }

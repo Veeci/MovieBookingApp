@@ -1,10 +1,10 @@
-package com.example.baseproject.domain.remote.network
+package com.example.baseproject.domain.remote
 
 import android.content.Context
-import com.example.baseproject.domain.remote.network.interceptors.ApiKeyInterceptor
-import com.example.baseproject.domain.remote.network.interceptors.AuthInterceptor
-import com.example.baseproject.domain.remote.network.interceptors.HeadersInterceptor
-import com.example.baseproject.domain.remote.network.interceptors.NetworkConnectionInterceptor
+import com.example.baseproject.domain.remote.interceptors.ApiKeyInterceptor
+import com.example.baseproject.domain.remote.interceptors.AuthInterceptor
+import com.example.baseproject.domain.remote.interceptors.HeadersInterceptor
+import com.example.baseproject.domain.remote.interceptors.NetworkConnectionInterceptor
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

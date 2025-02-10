@@ -3,13 +3,12 @@ package com.example.moviebooking.data.local.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.baseproject.data.BaseEntity
 
 @Entity(tableName = "MovieItems")
 data class MovieItemEntity (
     @PrimaryKey
     @ColumnInfo(name = "id")
-    override var id: String,
+    val id: String,
 
     @ColumnInfo(name = "adult")
     val adult: Boolean? = null,
@@ -46,4 +45,4 @@ data class MovieItemEntity (
 
     @ColumnInfo(name = "voteCount")
     val voteCount: Int? = null
-): BaseEntity(id)
+)

@@ -25,7 +25,7 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
     R.layout.fragment_splash
 ) {
     override val navigator: MainNavigator by navigatorViewModel()
-    override val viewModel: MovieViewModel by journeyViewModel()
+    override val viewModel: MovieViewModel by screenViewModel()
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentSplashBinding) {
         fetchData()
@@ -88,7 +88,8 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
                 }
                 is ResponseStatus.Success -> {
                     showLoading(isLoading = false)
-                    router?.goToLoginScreen()
+                    viewModel.retrieveLocalData()
+//                    router?.goToLoginScreen()
                 }
             }
         }

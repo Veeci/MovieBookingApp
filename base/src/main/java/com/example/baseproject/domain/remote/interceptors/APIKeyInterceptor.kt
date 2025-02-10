@@ -1,4 +1,4 @@
-package com.example.baseproject.domain.remote.network.interceptors
+package com.example.baseproject.domain.remote.interceptors
 
 import okhttp3.Interceptor
 import okhttp3.Response
