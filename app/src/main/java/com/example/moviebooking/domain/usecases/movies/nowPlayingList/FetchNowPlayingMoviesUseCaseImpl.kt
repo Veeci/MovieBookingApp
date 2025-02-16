@@ -17,15 +17,12 @@ class FetchNowPlayingMoviesUseCaseImpl(
     private val apiService: TMDBService,
     private val movieItemDao: MovieItemDao
 ) : FetchNowPlayingMoviesUseCase {
-    override fun execute(): Flow<ResponseStatus<MovieItem>> {
+    override fun fetchData(): Flow<ResponseStatus<MovieItem>> {
         return flow {
             with(apiService.getNowPlayingMovies()) {
                 if (this.isSuccess()) {
                     this.data?.let { response ->
                         emit(ResponseStatus.Success(response))
-                        movieItemDao.insertAll(response.toMovieItemEntities())
-                        val test = movieItemDao.getAll()
-                        LogUtils.log("Test", test.toString())
                         return@with
                     }
                 }
@@ -46,6 +43,15 @@ class FetchNowPlayingMoviesUseCaseImpl(
                 )
             )
         }.flowOn(Dispatchers.IO)
+    }
+
+    override fun saveData(list: List<MovieItemEntity>): Flow<Boolean> {
+        return flow {
+            for (item in list) {
+                movieItemDao.insert(item)
+            }
+            this.emit(true)
+        }
     }
 
     override fun getFromLocal(): Flow<List<MovieItemEntity>> {

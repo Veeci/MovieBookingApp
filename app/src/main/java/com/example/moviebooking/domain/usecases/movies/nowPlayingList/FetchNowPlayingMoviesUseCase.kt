@@ -6,7 +6,9 @@ import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
 import kotlinx.coroutines.flow.Flow
 
 interface FetchNowPlayingMoviesUseCase {
-    fun execute(): Flow<ResponseStatus<MovieItem>>
+    fun fetchData(): Flow<ResponseStatus<MovieItem>>
+
+    fun saveData(list: List<MovieItemEntity>): Flow<Boolean>
 
     fun getFromLocal(): Flow<List<MovieItemEntity>>
 }

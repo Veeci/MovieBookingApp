@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.screenViewModel
+import com.example.baseproject.domain.utils.toastShort
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.baseproject.presentation.BaseFragment
 import com.example.moviebooking.MainNavigator
@@ -20,10 +21,27 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
     R.layout.fragment_home_screen
 ) {
     override val navigator: MainNavigator by navigatorViewModel()
-    override val viewModel: MovieViewModel by screenViewModel()
+    private val movieViewModel: MovieViewModel by journeyViewModel()
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentHomeScreenBinding) {
+        initialize()
+        setup()
+        observe()
+    }
+
+    private fun initialize() {
+        movieViewModel.retrieveLocalData()
+    }
+
+    private fun setup() {
 
     }
 
+    private fun observe() {
+        movieViewModel.localNowPlayingList.observe(this) {
+            it.forEach {
+                activity.toastShort(it.title ?: "Error")
+            }
+        }
+    }
 }

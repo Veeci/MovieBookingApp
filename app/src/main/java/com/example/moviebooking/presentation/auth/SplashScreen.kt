@@ -14,6 +14,7 @@ import com.example.baseproject.domain.utils.positiveAction
 import com.example.baseproject.domain.utils.screenViewModel
 import com.example.baseproject.domain.utils.simpleAlert
 import com.example.baseproject.domain.utils.title
+import com.example.baseproject.domain.utils.toastShort
 import com.example.baseproject.presentation.BaseFragment
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
@@ -25,7 +26,7 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
     R.layout.fragment_splash
 ) {
     override val navigator: MainNavigator by navigatorViewModel()
-    override val viewModel: MovieViewModel by screenViewModel()
+    override val viewModel: MovieViewModel by journeyViewModel()
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentSplashBinding) {
         fetchData()
@@ -34,7 +35,8 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
     }
 
     private fun fetchData() {
-        viewModel.fetchAllMovies()
+//        viewModel.fetchAllMovies()
+        viewModel.getNowPlayingMovies()
     }
 
     private fun setup() {
@@ -73,8 +75,29 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
     }
 
     private fun observe() {
-        viewModel.allMoviesFetchState.observe(this) { status ->
-            when (status) {
+//        viewModel.allMoviesFetchState.observe(this) { status ->
+//            when (status) {
+//                is ResponseStatus.Loading -> showLoading(isLoading = true, preventClicking = true)
+//                is ResponseStatus.Error -> {
+//                    showLoading(isLoading = false)
+//                    activity.simpleAlert {
+//                        title(getString(R.string.error))
+//                        message(getString(R.string.startup_error))
+//                        positiveAction(name = getString(R.string.ok)) {
+//                            activity.finish()
+//                        }
+//                    }
+//                }
+//                is ResponseStatus.Success -> {
+//                    showLoading(isLoading = false)
+//                    viewModel.saveNowPlayingMovies()
+////                    router?.goToLoginScreen()
+//                }
+//            }
+//        }
+
+        viewModel.nowPLayingList.observe(this) { status ->
+            when(status) {
                 is ResponseStatus.Loading -> showLoading(isLoading = true, preventClicking = true)
                 is ResponseStatus.Error -> {
                     showLoading(isLoading = false)
@@ -86,11 +109,22 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
                         }
                     }
                 }
+
                 is ResponseStatus.Success -> {
                     showLoading(isLoading = false)
-                    viewModel.retrieveLocalData()
-//                    router?.goToLoginScreen()
+                    activity.toastShort("Fetched successfully! Saving data")
+                    viewModel.saveNowPlayingMovies(status.data.toMovieItemEntities())
                 }
+            }
+        }
+
+        viewModel.nowPlayingSavingResult.observe(this) { status ->
+            if(status == true) {
+                activity.toastShort("Data saved successfully")
+                router?.goToLoginScreen()
+//                viewModel.retrieveLocalData()
+            } else {
+                activity.toastShort("Error saving now playing movies")
             }
         }
     }

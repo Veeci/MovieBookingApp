@@ -21,6 +21,9 @@ class MovieViewModel(
     private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
     val nowPLayingList: LiveData<ResponseStatus<MovieItem>> = _nowPLayingList
 
+    private val _nowPlayingSavingResult = MutableLiveData<Boolean>()
+    val nowPlayingSavingResult: LiveData<Boolean> = _nowPlayingSavingResult
+
     private val _localNowPlayingList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localNowPlayingList: LiveData<List<MovieItemEntity>> = _localNowPlayingList
 
@@ -38,8 +41,16 @@ class MovieViewModel(
 
     fun getNowPlayingMovies() {
         launchCoroutine {
-            fetchNowPLayingMovies.execute().collect {
+            fetchNowPLayingMovies.fetchData().collect {
                 _nowPLayingList.postValue(it)
+            }
+        }
+    }
+
+    fun saveNowPlayingMovies(list: List<MovieItemEntity>) {
+        launchCoroutine {
+            fetchNowPLayingMovies.saveData(list).collect {
+                _nowPlayingSavingResult.postValue(it)
             }
         }
     }
@@ -107,7 +118,6 @@ class MovieViewModel(
                 _topRatedList.postValue(ResponseStatus.Error(e.message ?: "Error fetching top-rated movies"))
 
                 _allMoviesFetchState.postValue(ResponseStatus.Error(e.message ?: "Error fetching all movies"))
-
             }
         }
     }

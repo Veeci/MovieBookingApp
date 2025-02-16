@@ -16,9 +16,9 @@ class MainApplication: BaseApplication() {
             super.appModule(),
             DatabaseModule.init(),
             ServiceModule.init(),
+            NavigatorModule.init(),
             UseCaseModule.init(),
             ViewModelModule.init(),
-            NavigatorModule.init(),
         )
     }
 

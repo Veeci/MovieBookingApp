@@ -21,11 +21,12 @@ class FetchPopularMoviesUseCaseImpl(
                         emit(ResponseStatus.Success(response))
                         return@with
                     }
+                } else {
+                    emit(ResponseStatus.Error(
+                        message = this.message ?: "Unknown Error",
+                        errorCode = this.errorCode ?: 500
+                    ))
                 }
-                emit(ResponseStatus.Error(
-                    message = this.message ?: "Unknown Error",
-                    errorCode = this.errorCode ?: 500
-                ))
             }
         }.onStart {
             emit(ResponseStatus.Loading)
