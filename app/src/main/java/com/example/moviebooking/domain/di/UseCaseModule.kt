@@ -13,8 +13,8 @@ import org.koin.dsl.module
 object UseCaseModule {
     fun init() = module{
         factory<FetchNowPlayingMoviesUseCase> { FetchNowPlayingMoviesUseCaseImpl(get(), get()) }
-        factory<FetchPopularMoviesUseCase> { FetchPopularMoviesUseCaseImpl(get()) }
-        factory<FetchUpcomingMoviesUseCase> { FetchUpcomingMoviesUseCaseImpl(get()) }
-        factory<FetchTopRatedMoviesUseCase> { FetchTopRatedMoviesUseCaseImpl(get()) }
+        factory<FetchPopularMoviesUseCase> { FetchPopularMoviesUseCaseImpl(get(), get()) }
+        factory<FetchUpcomingMoviesUseCase> { FetchUpcomingMoviesUseCaseImpl(get(), get()) }
+        factory<FetchTopRatedMoviesUseCase> { FetchTopRatedMoviesUseCaseImpl(get(), get()) }
     }
 }

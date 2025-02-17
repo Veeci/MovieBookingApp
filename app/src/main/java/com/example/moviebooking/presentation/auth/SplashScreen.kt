@@ -87,47 +87,15 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
                         positiveAction(name = getString(R.string.ok)) {
                             activity.finish()
                         }
-                    }
-                }
-                is ResponseStatus.Success -> {
-                    showLoading(isLoading = false)
-                    viewModel.saveNowPlayingMovies()
-//                    router?.goToLoginScreen()
-                }
-            }
-        }
-
-        viewModel.nowPLayingList.observe(viewLifecycleOwner) { status ->
-            when(status) {
-                is ResponseStatus.Loading -> showLoading(isLoading = true, preventClicking = true)
-                is ResponseStatus.Error -> {
-                    showLoading(isLoading = false)
-                    activity.simpleAlert {
-                        title(getString(R.string.error))
-                        message(getString(R.string.startup_error))
-                        positiveAction(name = getString(R.string.ok)) {
-                            activity.finish()
-                        }
                         negativeAction(name = getString(R.string.cancel)) {
                             dismiss()
                         }
                     }
                 }
-
                 is ResponseStatus.Success -> {
                     showLoading(isLoading = false)
-                    viewModel.saveNowPlayingMovies(status.data.toMovieItemEntities())
+                    router?.goToLoginScreen()
                 }
-            }
-        }
-
-        viewModel.nowPlayingSavingResult.observe(this) { status ->
-            if(status == true) {
-                activity.toastShort("Data saved successfully")
-                router?.goToLoginScreen()
-//                viewModel.retrieveLocalData()
-            } else {
-                activity.toastShort("Error saving now playing movies")
             }
         }
     }

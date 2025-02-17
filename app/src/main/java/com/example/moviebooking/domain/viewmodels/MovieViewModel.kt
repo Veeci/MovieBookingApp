@@ -17,12 +17,9 @@ class MovieViewModel(
     private val fetchPopularMovies: FetchPopularMoviesUseCase,
     private val fetchUpcomingMovies: FetchUpcomingMoviesUseCase,
     private val fetchTopRatedMovies: FetchTopRatedMoviesUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
     private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
     val nowPLayingList: LiveData<ResponseStatus<MovieItem>> = _nowPLayingList
-
-    private val _nowPlayingSavingResult = MutableLiveData<Boolean>()
-    val nowPlayingSavingResult: LiveData<Boolean> = _nowPlayingSavingResult
 
     private val _localNowPlayingList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localNowPlayingList: LiveData<List<MovieItemEntity>> = _localNowPlayingList
@@ -30,102 +27,88 @@ class MovieViewModel(
     private val _popularList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
     val popularList: LiveData<ResponseStatus<MovieItem>> = _popularList
 
+    private val _localPopularList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
+    val localPopularList: LiveData<List<MovieItemEntity>> = _localPopularList
+
     private val _upcomingList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
     val upcomingList: LiveData<ResponseStatus<MovieItem>> = _upcomingList
+
+    private val _localUpcomingList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
+    val localUpcomingList: LiveData<List<MovieItemEntity>> = _localUpcomingList
 
     private val _topRatedList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
     val topRatedList: LiveData<ResponseStatus<MovieItem>> = _topRatedList
 
+    private val _localTopRatedList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
+    val localTopRatedList: LiveData<List<MovieItemEntity>> = _localTopRatedList
+
     private val _allMoviesFetchState: MutableLiveData<ResponseStatus<Unit>> = MutableLiveData()
     val allMoviesFetchState: LiveData<ResponseStatus<Unit>> = _allMoviesFetchState
-
-    fun getNowPlayingMovies() {
-        launchCoroutine {
-            fetchNowPLayingMovies.fetchData().collect {
-                _nowPLayingList.postValue(it)
-            }
-        }
-    }
-
-    fun saveNowPlayingMovies(list: List<MovieItemEntity>) {
-        launchCoroutine {
-            fetchNowPLayingMovies.saveData(list).collect {
-                _nowPlayingSavingResult.postValue(it)
-            }
-        }
-    }
-
-    fun getPopularMovies() {
-        launchCoroutine {
-            fetchPopularMovies.execute().collect{
-                _popularList.postValue(it)
-            }
-        }
-    }
-
-    fun getUpcomingMovies() {
-        launchCoroutine {
-            fetchUpcomingMovies.execute().collect{
-                _upcomingList.postValue(it)
-            }
-        }
-    }
-
-    fun getTopRatedMovies() {
-        launchCoroutine {
-            fetchTopRatedMovies.execute().collect{
-                _topRatedList.postValue(it)
-            }
-        }
-    }
 
     fun fetchAllMovies() {
         launchCoroutine {
             _allMoviesFetchState.postValue(ResponseStatus.Loading)
 
             try {
-                val nowPlayingDeferred = async { fetchUpcomingMovies.execute() }
-                val popularDeferred = async { fetchPopularMovies.execute() }
-                val upcomingDeferred = async { fetchUpcomingMovies.execute() }
-                val topRatedDeferred = async { fetchTopRatedMovies.execute() }
+                val nowPlayingResult = async { fetchNowPLayingMovies.fetchData() }
+                val popularResult = async { fetchPopularMovies.fetchData() }
+                val upcomingResult = async { fetchUpcomingMovies.fetchData() }
+                val topRatedResult = async { fetchTopRatedMovies.fetchData() }
 
-                val nowPlayingResult = nowPlayingDeferred.await()
-                val popularResult = popularDeferred.await()
-                val upcomingResult = upcomingDeferred.await()
-                val topRatedResult = topRatedDeferred.await()
+                val nowPlayingResponse = nowPlayingResult.await()
+                val popularResponse = popularResult.await()
+                val upcomingResponse = upcomingResult.await()
+                val topRatedResponse = topRatedResult.await()
 
-                nowPlayingResult.collect{
-                    _nowPLayingList.postValue(it)
+                nowPlayingResponse.collect { response ->
+                    _nowPLayingList.postValue(response)
+                    if (response is ResponseStatus.Success) {
+                        fetchNowPLayingMovies.saveData(response.data.toMovieItemEntities())
+                    }
                 }
 
-                popularResult.collect{
-                    _popularList.postValue(it)
+                popularResponse.collect { response ->
+                    _popularList.postValue(response)
+                    if (response is ResponseStatus.Success) {
+                        fetchPopularMovies.saveData(response.data.toMovieItemEntities())
+                    }
                 }
 
-                upcomingResult.collect{
-                    _upcomingList.postValue(it)
+                upcomingResponse.collect { response ->
+                    _upcomingList.postValue(response)
+                    if (response is ResponseStatus.Success) {
+                        fetchUpcomingMovies.saveData(response.data.toMovieItemEntities())
+                    }
                 }
 
-                topRatedResult.collect{
-                    _topRatedList.postValue(it)
+                topRatedResponse.collect { response ->
+                    _topRatedList.postValue(response)
+                    if (response is ResponseStatus.Success) {
+                        fetchTopRatedMovies.saveData(response.data.toMovieItemEntities())
+                    }
                 }
 
                 _allMoviesFetchState.postValue(ResponseStatus.Success(Unit))
-            } catch (e: Exception) {
-                _nowPLayingList.postValue(ResponseStatus.Error(e.message ?: "Error fetching now playing movies"))
-                _popularList.postValue(ResponseStatus.Error(e.message ?: "Error fetching popular movies"))
-                _upcomingList.postValue(ResponseStatus.Error(e.message ?: "Error fetching upcoming movies"))
-                _topRatedList.postValue(ResponseStatus.Error(e.message ?: "Error fetching top-rated movies"))
 
-                _allMoviesFetchState.postValue(ResponseStatus.Error(e.message ?: "Error fetching all movies"))
+            } catch (e: Exception) {
+                _allMoviesFetchState.postValue(ResponseStatus.Error(e.message ?: "Unknown error occurred"))
             }
         }
     }
 
-    fun retrieveLocalData() {
+    fun getLocalData() {
         launchCoroutine {
             fetchNowPLayingMovies.getFromLocal().collect {
                 _localNowPlayingList.postValue(it)
+            }
+            fetchPopularMovies.getFromLocal().collect {
+                _localPopularList.postValue(it)
+            }
+            fetchUpcomingMovies.getFromLocal().collect {
+                _localUpcomingList.postValue(it)
+                }
+            fetchTopRatedMovies.getFromLocal().collect {
+                _localTopRatedList.postValue(it)
             }
         }
     }

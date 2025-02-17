@@ -30,7 +30,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
     }
 
     private fun initialize() {
-        movieViewModel.retrieveLocalData()
+
     }
 
     private fun setup() {
@@ -38,10 +38,5 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
     }
 
     private fun observe() {
-        movieViewModel.localNowPlayingList.observe(this) {
-            it.forEach {
-                activity.toastShort(it.title ?: "Error")
-            }
-        }
     }
 }
