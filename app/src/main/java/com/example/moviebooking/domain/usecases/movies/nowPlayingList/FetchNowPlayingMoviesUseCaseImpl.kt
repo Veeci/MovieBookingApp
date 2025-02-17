@@ -1,5 +1,6 @@
 package com.example.moviebooking.domain.usecases.movies.nowPlayingList
 
+import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.LogUtils
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.moviebooking.data.local.dao.MovieItemDao
@@ -16,23 +17,10 @@ import kotlinx.coroutines.flow.onStart
 class FetchNowPlayingMoviesUseCaseImpl(
     private val apiService: TMDBService,
     private val movieItemDao: MovieItemDao
-) : FetchNowPlayingMoviesUseCase {
+) : FetchNowPlayingMoviesUseCase, ApiHandler {
     override fun fetchData(): Flow<ResponseStatus<MovieItem>> {
         return flow {
-            with(apiService.getNowPlayingMovies()) {
-                if (this.isSuccess()) {
-                    this.data?.let { response ->
-                        emit(ResponseStatus.Success(response))
-                        return@with
-                    }
-                }
-                emit(
-                    ResponseStatus.Error(
-                        message = this.message ?: "Something went wrong",
-                        errorCode = this.errorCode ?: 500
-                    )
-                )
-            }
+            emit(handleApi { apiService.getNowPlayingMovies() })
         }.onStart {
             this.emit(ResponseStatus.Loading)
         }.catch { e ->
@@ -51,17 +39,17 @@ class FetchNowPlayingMoviesUseCaseImpl(
                 movieItemDao.insert(item)
             }
             this.emit(true)
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getFromLocal(): Flow<List<MovieItemEntity>> {
-        return flow {
+        return flow<List<MovieItemEntity>> {
             movieItemDao.getAll().takeIf { it.isNotEmpty() }?.let { items ->
                 this.emit(items)
             } ?: run {
                 this.emit(emptyList())
             }
-        }
+        }.flowOn(Dispatchers.IO)
     }
 }
 
