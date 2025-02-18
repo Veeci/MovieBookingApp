@@ -1,11 +1,10 @@
 package com.example.moviebooking.domain.usecases.movies.nowPlayingList
 
 import com.example.baseproject.domain.utils.ApiHandler
-import com.example.baseproject.domain.utils.LogUtils
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.moviebooking.data.local.dao.MovieItemDao
 import com.example.moviebooking.data.local.entities.MovieItemEntity
-import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
+import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +17,7 @@ class FetchNowPlayingMoviesUseCaseImpl(
     private val apiService: TMDBService,
     private val movieItemDao: MovieItemDao
 ) : FetchNowPlayingMoviesUseCase, ApiHandler {
-    override fun fetchData(): Flow<ResponseStatus<MovieItem>> {
+    override fun fetchData(): Flow<ResponseStatus<MovieList>> {
         return flow {
             emit(handleApi { apiService.getNowPlayingMovies() })
         }.onStart {

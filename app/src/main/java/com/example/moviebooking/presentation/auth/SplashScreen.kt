@@ -76,7 +76,7 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
     }
 
     private fun observe() {
-        viewModel.allMoviesFetchState.observe(this) { status ->
+        viewModel.allMoviesFetchState.observe(viewLifecycleOwner) { status ->
             when (status) {
                 is ResponseStatus.Loading -> showLoading(isLoading = true, preventClicking = true)
                 is ResponseStatus.Error -> {

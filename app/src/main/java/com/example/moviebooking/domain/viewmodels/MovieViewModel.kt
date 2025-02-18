@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.moviebooking.data.local.entities.MovieItemEntity
-import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
+import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
 import com.example.moviebooking.domain.usecases.movies.nowPlayingList.FetchNowPlayingMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.popularList.FetchPopularMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.topRatedList.FetchTopRatedMoviesUseCase
@@ -18,26 +18,26 @@ class MovieViewModel(
     private val fetchUpcomingMovies: FetchUpcomingMoviesUseCase,
     private val fetchTopRatedMovies: FetchTopRatedMoviesUseCase
 ) : BaseViewModel() {
-    private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
-    val nowPLayingList: LiveData<ResponseStatus<MovieItem>> = _nowPLayingList
+    private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
+    val nowPLayingList: LiveData<ResponseStatus<MovieList>> = _nowPLayingList
 
     private val _localNowPlayingList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localNowPlayingList: LiveData<List<MovieItemEntity>> = _localNowPlayingList
 
-    private val _popularList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
-    val popularList: LiveData<ResponseStatus<MovieItem>> = _popularList
+    private val _popularList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
+    val popularList: LiveData<ResponseStatus<MovieList>> = _popularList
 
     private val _localPopularList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localPopularList: LiveData<List<MovieItemEntity>> = _localPopularList
 
-    private val _upcomingList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
-    val upcomingList: LiveData<ResponseStatus<MovieItem>> = _upcomingList
+    private val _upcomingList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
+    val upcomingList: LiveData<ResponseStatus<MovieList>> = _upcomingList
 
     private val _localUpcomingList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localUpcomingList: LiveData<List<MovieItemEntity>> = _localUpcomingList
 
-    private val _topRatedList: MutableLiveData<ResponseStatus<MovieItem>> = MutableLiveData()
-    val topRatedList: LiveData<ResponseStatus<MovieItem>> = _topRatedList
+    private val _topRatedList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
+    val topRatedList: LiveData<ResponseStatus<MovieList>> = _topRatedList
 
     private val _localTopRatedList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localTopRatedList: LiveData<List<MovieItemEntity>> = _localTopRatedList

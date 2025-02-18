@@ -5,15 +5,5 @@
         android:id="@+id/splashScreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.auth.SplashScreen">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test"
-            android:layout_gravity="center"
-            android:id="@+id/testBtn"/>
-
-    </FrameLayout>
-
+        tools:context=".presentation.auth.SplashScreen"/>
 </layout>
