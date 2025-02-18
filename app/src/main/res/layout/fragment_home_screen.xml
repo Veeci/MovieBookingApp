@@ -4,54 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.main.home.HomeScreen">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/ThemePrimary"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/_5sdp">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/welcomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_welcome"
-            android:textSize="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/nowPlayingTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Now Playing"
-            android:textSize="@dimen/_15sdp"
-            android:fontFamily="@font/montserrat_bold"
-            android:drawableStart="@drawable/ic_nowplaying"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcomeText"
-            android:layout_marginTop="@dimen/_15sdp"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/seeAllNowPlaying"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcomeText"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:padding="@dimen/_5sdp"
-            android:text="See all"
-            android:fontFamily="@font/montserrat"
-            android:drawableEnd="@drawable/ic_goto"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/nowPlayingCarousel"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/ThemePrimary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_2sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nowPlayingTV" />
+            android:layout_height="match_parent"
+            android:padding="@dimen/_5sdp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_20sdp"
+                android:fontFamily="@font/montserrat_bold"
+                android:drawableEnd="@drawable/ic_welcome"
+                android:drawablePadding="@dimen/_5sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nowPlayingTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Now Playing"
+                android:textSize="@dimen/_15sdp"
+                android:fontFamily="@font/montserrat_bold"
+                android:drawableStart="@drawable/ic_nowplaying"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/welcomeText"
+                android:layout_marginTop="@dimen/_15sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/seeAllNowPlaying"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="?attr/selectableItemBackground"
+                app:layout_constraintTop_toBottomOf="@id/welcomeText"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:padding="@dimen/_4sdp"
+                android:text="See all"
+                android:fontFamily="@font/montserrat"
+                android:drawableEnd="@drawable/ic_goto"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/nowPlayingCarousel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:padding="@dimen/_2sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nowPlayingTV" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/upcomingTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upcoming"
+                android:textSize="@dimen/_15sdp"
+                android:fontFamily="@font/montserrat_bold"
+                android:drawableStart="@drawable/ic_upcoming"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nowPlayingCarousel"
+                android:layout_marginTop="@dimen/_20sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/seeAllUpcoming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nowPlayingCarousel"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:padding="@dimen/_4sdp"
+                android:text="See all"
+                android:background="?attr/selectableItemBackground"
+                android:fontFamily="@font/montserrat"
+                android:drawableEnd="@drawable/ic_goto"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/upcomingRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcomingTV"
+                android:padding="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/chatbotBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/chatbot"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_chatbot"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_20sdp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

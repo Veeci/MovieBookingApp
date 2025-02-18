@@ -26,4 +26,19 @@
     <string name="enter_your_email">Enter your email</string>
     <string name="can_we_know_your_name">Can we know your name?</string>
     <string name="cancel">Cancel</string>
+    <string name="chatbot">Chatbot</string>
+
+    <array name="welcome_messages">
+        <item>Welcome back!</item>
+        <item>Nice to see you again!</item>
+        <item>Hello there!</item>
+        <item>Glad you\'re here!</item>
+        <item>Welcome, friend!</item>
+        <item>It\'s great to have you back!</item>
+        <item>Hey, you made it!</item>
+        <item>Good to see you!</item>
+        <item>Welcome aboard!</item>
+        <item>Howdy!</item>
+    </array>
+
 </resources>

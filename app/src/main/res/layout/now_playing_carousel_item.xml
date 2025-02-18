@@ -3,59 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.carousel.MaskableFrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_200sdp"
         android:layout_margin="@dimen/_5sdp"
         android:background="@color/ThemePrimary"
         app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="10">
+            app:cardCornerRadius="@dimen/_8sdp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/backdrop"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="9"
-                android:scaleType="centerCrop" />
+                android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/backdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/originalTitle"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/ThemePrimary"
-                    android:textSize="@dimen/_15sdp" />
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/voteAverage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:drawableStart="@drawable/ic_vote"
-                    android:drawablePadding="-10dp"
-                    android:fontFamily="@font/montserrat"
-                    android:gravity="center"
-                    android:textAlignment="center"
-                    android:textColor="@color/ThemePrimary"
-                    android:textSize="@dimen/_12sdp" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/originalTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:gravity="center"
+                        android:textColor="@color/ThemePrimary"
+                        android:textSize="@dimen/_13sdp" />
 
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/voteAverage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:drawableStart="@drawable/ic_vote"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/ThemePrimary"
+                        android:textSize="@dimen/_10sdp" />
 
-        </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </com.google.android.material.carousel.MaskableFrameLayout>
 
