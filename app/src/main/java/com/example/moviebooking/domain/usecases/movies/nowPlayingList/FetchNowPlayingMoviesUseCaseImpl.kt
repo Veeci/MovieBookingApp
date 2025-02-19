@@ -17,9 +17,9 @@ class FetchNowPlayingMoviesUseCaseImpl(
     private val apiService: TMDBService,
     private val movieItemDao: MovieItemDao
 ) : FetchNowPlayingMoviesUseCase, ApiHandler {
-    override fun fetchData(): Flow<ResponseStatus<MovieList>> {
+    override fun fetchData(page: Int?): Flow<ResponseStatus<MovieList>> {
         return flow {
-            emit(handleApi { apiService.getNowPlayingMovies() })
+            emit(handleApi { apiService.getNowPlayingMovies(page = page) })
         }.onStart {
             this.emit(ResponseStatus.Loading)
         }.catch { e ->

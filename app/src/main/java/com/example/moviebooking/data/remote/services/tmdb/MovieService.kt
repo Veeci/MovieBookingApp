@@ -5,19 +5,32 @@ import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieService {
     @GET("movie/now_playing")
-    suspend fun getNowPlayingMovies(): Response<MovieList>
+    suspend fun getNowPlayingMovies(
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1
+    ): Response<MovieList>
 
     @GET("movie/popular")
-    suspend fun getPopularMovies(): Response<MovieList>
+    suspend fun getPopularMovies(
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1
+    ): Response<MovieList>
 
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(): Response<MovieList>
+    suspend fun getTopRatedMovies(
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1
+    ): Response<MovieList>
 
     @GET("movie/upcoming")
-    suspend fun getUpcomingMovies(): Response<MovieList>
+    suspend fun getUpcomingMovies(
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1
+    ): Response<MovieList>
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(

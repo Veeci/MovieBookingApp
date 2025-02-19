@@ -12,7 +12,7 @@
         android:id="@+id/menu_item_explore"
         android:icon="@drawable/item_movies"
         android:iconTint="@color/ThemePrimary"
-        android:title="Movies"/>
+        android:title="Explore"/>
 
     <item
         android:id="@+id/menu_item_ticket"

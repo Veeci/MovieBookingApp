@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.moviebooking.data.local.entities.MovieItemEntity
+import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
 import com.example.moviebooking.domain.usecases.movies.nowPlayingList.FetchNowPlayingMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.popularList.FetchPopularMoviesUseCase
@@ -24,11 +25,19 @@ class MovieViewModel(
     private val _localNowPlayingList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localNowPlayingList: LiveData<List<MovieItemEntity>> = _localNowPlayingList
 
+    private val _isLoadingNowPLaying: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoadingNowPLaying: LiveData<Boolean> = _isLoadingNowPLaying
+
+
     private val _popularList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
     val popularList: LiveData<ResponseStatus<MovieList>> = _popularList
 
     private val _localPopularList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localPopularList: LiveData<List<MovieItemEntity>> = _localPopularList
+
+    private val _isLoadingPopular: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoadingPopular: LiveData<Boolean> = _isLoadingPopular
+
 
     private val _upcomingList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
     val upcomingList: LiveData<ResponseStatus<MovieList>> = _upcomingList
@@ -36,11 +45,19 @@ class MovieViewModel(
     private val _localUpcomingList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localUpcomingList: LiveData<List<MovieItemEntity>> = _localUpcomingList
 
+    private val _isLoadingUpcoming: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoadingUpcoming: LiveData<Boolean> = _isLoadingUpcoming
+
+
     private val _topRatedList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
     val topRatedList: LiveData<ResponseStatus<MovieList>> = _topRatedList
 
     private val _localTopRatedList: MutableLiveData<List<MovieItemEntity>> = MutableLiveData()
     val localTopRatedList: LiveData<List<MovieItemEntity>> = _localTopRatedList
+
+    private val _isLoadingTopRated: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoadingTopRated: LiveData<Boolean> = _isLoadingTopRated
+
 
     private val _allMoviesFetchState: MutableLiveData<ResponseStatus<Unit>> = MutableLiveData()
     val allMoviesFetchState: LiveData<ResponseStatus<Unit>> = _allMoviesFetchState
@@ -50,10 +67,10 @@ class MovieViewModel(
             _allMoviesFetchState.postValue(ResponseStatus.Loading)
 
             try {
-                val nowPlayingResult = async { fetchNowPLayingMovies.fetchData() }
-                val popularResult = async { fetchPopularMovies.fetchData() }
-                val upcomingResult = async { fetchUpcomingMovies.fetchData() }
-                val topRatedResult = async { fetchTopRatedMovies.fetchData() }
+                val nowPlayingResult = async { fetchNowPLayingMovies.fetchData(1) }
+                val popularResult = async { fetchPopularMovies.fetchData(1) }
+                val upcomingResult = async { fetchUpcomingMovies.fetchData(1) }
+                val topRatedResult = async { fetchTopRatedMovies.fetchData(1) }
 
                 val nowPlayingResponse = nowPlayingResult.await()
                 val popularResponse = popularResult.await()
@@ -91,7 +108,11 @@ class MovieViewModel(
                 _allMoviesFetchState.postValue(ResponseStatus.Success(Unit))
 
             } catch (e: Exception) {
-                _allMoviesFetchState.postValue(ResponseStatus.Error(e.message ?: "Unknown error occurred"))
+                _allMoviesFetchState.postValue(
+                    ResponseStatus.Error(
+                        e.message ?: "Unknown error occurred"
+                    )
+                )
             }
         }
     }
@@ -106,9 +127,64 @@ class MovieViewModel(
             }
             fetchUpcomingMovies.getFromLocal().collect {
                 _localUpcomingList.postValue(it)
-                }
+            }
             fetchTopRatedMovies.getFromLocal().collect {
                 _localTopRatedList.postValue(it)
+            }
+        }
+    }
+
+    fun fetchNowPlayingMovies(pageIndex: Int) {
+        launchCoroutine {
+            fetchNowPLayingMovies.fetchData(pageIndex).collect {
+                _nowPLayingList.postValue(it)
+            }
+        }
+    }
+
+    fun fetchPopularMovies(pageIndex: Int) {
+        launchCoroutine {
+            fetchPopularMovies.fetchData(pageIndex).collect {
+                _popularList.postValue(it)
+            }
+        }
+    }
+
+    fun fetchUpcomingMovies(pageIndex: Int) {
+        if (_isLoadingUpcoming.value == true) return
+
+        launchCoroutine {
+            _isLoadingUpcoming.postValue(true)
+
+            try {
+                fetchUpcomingMovies.fetchData(pageIndex).collect { response ->
+                    if (response is ResponseStatus.Success) {
+                        val currentList = (_upcomingList.value as? ResponseStatus.Success<MovieList>)?.data?.results ?: emptyList()
+
+                        _upcomingList.postValue(
+                            ResponseStatus.Success(
+                                response.data.copy(
+                                    results = currentList + (response.data.results?.toList() ?: emptyList())
+                                )
+                            )
+                        )
+                        fetchUpcomingMovies.saveData(response.data.toMovieItemEntities())
+                    } else {
+                        _upcomingList.postValue(response)
+                    }
+                }
+            } catch (e: Exception) {
+                _upcomingList.postValue(ResponseStatus.Error(e.message ?: "Unknown error occurred"))
+            } finally {
+                _isLoadingUpcoming.postValue(false)
+            }
+        }
+    }
+
+    fun fetchTopRatedMovies(pageIndex: Int) {
+        launchCoroutine {
+            fetchTopRatedMovies.fetchData(pageIndex).collect {
+                _topRatedList.postValue(it)
             }
         }
     }

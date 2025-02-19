@@ -17,9 +17,9 @@ class FetchTopRatedMoviesUseCaseImpl(
     private val apiService: TMDBService,
     private val movieItemDao: MovieItemDao
 ): FetchTopRatedMoviesUseCase, ApiHandler {
-    override fun fetchData(): Flow<ResponseStatus<MovieList>> {
+    override fun fetchData(page: Int?): Flow<ResponseStatus<MovieList>> {
         return flow {
-            emit(handleApi { apiService.getTopRatedMovies() })
+            emit(handleApi { apiService.getTopRatedMovies(page = page) })
         }.onStart {
             emit(ResponseStatus.Loading)
         }.catch {

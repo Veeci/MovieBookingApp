@@ -15,15 +15,39 @@
             android:padding="@dimen/_5sdp">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/hiUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/montserrat"
+                android:drawableEnd="@drawable/ic_welcome"
+                android:drawablePadding="@dimen/_5sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/welcomeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_20sdp"
                 android:fontFamily="@font/montserrat_bold"
-                android:drawableEnd="@drawable/ic_welcome"
                 android:drawablePadding="@dimen/_5sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/hiUser" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                app:cardCornerRadius="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hiUser">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/avatar"/>
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/nowPlayingTV"
@@ -103,7 +127,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_chatbot"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="@dimen/_20sdp"/>
+                android:layout_marginBottom="@dimen/_40sdp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
