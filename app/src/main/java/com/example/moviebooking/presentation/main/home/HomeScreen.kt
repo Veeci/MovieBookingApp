@@ -1,8 +1,12 @@
 package com.example.moviebooking.presentation.main.home
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.DragEvent
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.domain.utils.EndlessOnScrollListener
 import com.example.baseproject.domain.utils.ResponseStatus
@@ -22,6 +26,9 @@ import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
+import com.smarteist.autoimageslider.SliderAnimations
+import com.smarteist.autoimageslider.SliderView
 
 
 class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavigator>(
