@@ -1,25 +1,24 @@
 package com.example.moviebooking.presentation.main.home
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
-import android.view.DragEvent
-import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.baseproject.domain.utils.EndlessOnScrollListener
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.navigatorViewModel
-import com.example.baseproject.domain.utils.safeClick
 import com.example.baseproject.presentation.BaseFragment
 import com.example.baseproject.utils.MediaUtil.loadImage
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
+import com.example.moviebooking.data.local.Banner
 import com.example.moviebooking.databinding.FragmentHomeScreenBinding
+import com.example.moviebooking.domain.common.Const
+import com.example.moviebooking.domain.common.RecyclerSnapItemListener
 import com.example.moviebooking.domain.viewmodels.MovieViewModel
+import com.example.moviebooking.presentation.main.home.adapters.BannerAdapter
 import com.example.moviebooking.presentation.main.home.adapters.NowPlayingAdapter
+import com.example.moviebooking.presentation.main.home.adapters.TopRatedAdapter
 import com.example.moviebooking.presentation.main.home.adapters.UpcomingAdapter
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
@@ -28,7 +27,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
-import com.smarteist.autoimageslider.SliderView
 
 
 class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavigator>(
@@ -39,11 +37,9 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
 
     private lateinit var auth: FirebaseAuth
 
-    private var dX: Float = 0.0f
-    private var dY: Float = 0.0f
-
     private val nowPlayingAdapter = NowPlayingAdapter()
     private val upcomingAdapter = UpcomingAdapter()
+    private val topRatedAdapter= TopRatedAdapter()
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentHomeScreenBinding) {
         auth = Firebase.auth
@@ -71,8 +67,26 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                 defaultImage = R.drawable.img_default_placeholder
             )
 
+            searchView.clearFocus()
+
+            val banners = listOf(
+                Banner(R.drawable.banner1),
+                Banner(R.drawable.banner2),
+                Banner(R.drawable.banner3)
+            )
+
+            val bannerAdapter = BannerAdapter(banners)
+
+            slider.apply {
+                setSliderAdapter(bannerAdapter)
+                setIndicatorAnimation(IndicatorAnimationType.SCALE)
+                setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
+            }
+
+
             nowPlayingCarousel.apply {
                 setHasFixedSize(true)
+                setItemViewCacheSize(20)
                 layoutManager = CarouselLayoutManager()
                 adapter = nowPlayingAdapter
                 CarouselSnapHelper().attachToRecyclerView(nowPlayingCarousel)
@@ -80,6 +94,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
 
             upcomingRV.apply {
                 setHasFixedSize(true)
+                setItemViewCacheSize(20)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = upcomingAdapter
                 addOnScrollListener(object: EndlessOnScrollListener(layoutManager as LinearLayoutManager) {
@@ -88,15 +103,31 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                     }
                 })
             }
-        }
 
-        setupMovableFab()
+            topRatedRV.apply {
+                setHasFixedSize(true)
+                setItemViewCacheSize(20)
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = topRatedAdapter
+                addOnScrollListener(object: EndlessOnScrollListener(layoutManager as LinearLayoutManager) {
+                    override fun loadMoreItems(page: Int, totalItemsCount: Int) {
+                        movieViewModel.fetchTopRatedMovies(page)
+                    }
+                })
+                val snapHelper = com.example.moviebooking.domain.common.PagerSnapHelper(
+                    object : RecyclerSnapItemListener {
+                        override fun onItemSnap(position: Int) {
+                            overlayLayout.updateCurrentBackground(Const.tmdbImageUrlW500 + topRatedAdapter.currentList[position].posterPath)
+                        }
+                    }
+                )
+                snapHelper.attachToRecyclerView(this)
+            }
+        }
     }
 
     private fun onClickListener() {
-        binding.chatbotBtn.safeClick {
 
-        }
     }
 
     private fun observe() {
@@ -128,35 +159,24 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
             }
         }
 
+        movieViewModel.topRatedList.observe(viewLifecycleOwner) { status ->
+            when(status) {
+                is ResponseStatus.Loading -> showLoading(isLoading = true)
+                is ResponseStatus.Error -> {
+                    //TODO
+                }
+                is ResponseStatus.Success -> {
+                    topRatedAdapter.submitList(status.data.results)
+                    showLoading(isLoading = false)
+                }
+            }
+        }
+
         movieViewModel.isLoadingNowPLaying.observe(viewLifecycleOwner) { status ->
             when(status) {
                 true -> showLoading(isLoading = true)
                 false -> showLoading(isLoading = false)
             }
-        }
-    }
-
-    private fun setupMovableFab() {
-        binding.root.setOnDragListener { v, event ->
-            when(event.action) {
-                DragEvent.ACTION_DRAG_LOCATION -> {
-                    dX = event.x
-                    dY = event.y
-                }
-
-                DragEvent.ACTION_DRAG_ENDED -> {
-                    binding.chatbotBtn.x = dX - binding.chatbotBtn.width / 2
-                    binding.chatbotBtn.y = dY - binding.chatbotBtn.height / 2
-                }
-            }
-
-            true
-        }
-
-        binding.chatbotBtn.setOnLongClickListener { v ->
-            val shadow = View.DragShadowBuilder(binding.chatbotBtn)
-            v.startDragAndDrop(null, shadow, null, View.DRAG_FLAG_GLOBAL)
-            true
         }
     }
 }

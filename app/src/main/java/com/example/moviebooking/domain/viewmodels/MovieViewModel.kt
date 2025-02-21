@@ -135,17 +135,71 @@ class MovieViewModel(
     }
 
     fun fetchNowPlayingMovies(pageIndex: Int) {
+        if (_isLoadingNowPLaying.value == true) return
+
         launchCoroutine {
-            fetchNowPLayingMovies.fetchData(pageIndex).collect {
-                _nowPLayingList.postValue(it)
+            _isLoadingNowPLaying.postValue(true)
+
+            try {
+                fetchNowPLayingMovies.fetchData(pageIndex).collect { response ->
+                    if (response is ResponseStatus.Success) {
+                        val currentList =
+                            (_nowPLayingList.value as? ResponseStatus.Success<MovieList>)?.data?.results
+                                ?: emptyList()
+
+                        _nowPLayingList.postValue(
+                            ResponseStatus.Success(
+                                response.data.copy(
+                                    results = currentList + (response.data.results?.toList()
+                                        ?: emptyList())
+                                )
+                            )
+                        )
+
+                        fetchNowPLayingMovies.saveData(response.data.toMovieItemEntities())
+                    } else {
+                        _nowPLayingList.postValue(response)
+                    }
+
+                }
+            } catch(e: Exception) {
+                _nowPLayingList.postValue(ResponseStatus.Error(e.message ?: "Unknown error occurred"))
+            } finally {
+                _isLoadingNowPLaying.postValue(false)
             }
         }
     }
 
     fun fetchPopularMovies(pageIndex: Int) {
+        if (_isLoadingPopular.value == true) return
+
         launchCoroutine {
-            fetchPopularMovies.fetchData(pageIndex).collect {
-                _popularList.postValue(it)
+            _isLoadingPopular.postValue(true)
+
+            try {
+                fetchPopularMovies.fetchData(pageIndex).collect { response ->
+                    if (response is ResponseStatus.Success) {
+                        val currentList =
+                            (_popularList.value as? ResponseStatus.Success<MovieList>)?.data?.results
+                                ?: emptyList()
+
+                        _popularList.postValue(
+                            ResponseStatus.Success(
+                                response.data.copy(
+                                    results = currentList + (response.data.results?.toList()
+                                        ?: emptyList())
+                                )
+                            )
+                        )
+                        fetchPopularMovies.saveData(response.data.toMovieItemEntities())
+                    } else {
+                        _popularList.postValue(response)
+                    }
+                }
+            } catch (e: Exception) {
+                _popularList.postValue(ResponseStatus.Error(e.message ?: "Unknown error occurred"))
+            } finally {
+                _isLoadingPopular.postValue(false)
             }
         }
     }
@@ -159,12 +213,15 @@ class MovieViewModel(
             try {
                 fetchUpcomingMovies.fetchData(pageIndex).collect { response ->
                     if (response is ResponseStatus.Success) {
-                        val currentList = (_upcomingList.value as? ResponseStatus.Success<MovieList>)?.data?.results ?: emptyList()
+                        val currentList =
+                            (_upcomingList.value as? ResponseStatus.Success<MovieList>)?.data?.results
+                                ?: emptyList()
 
                         _upcomingList.postValue(
                             ResponseStatus.Success(
                                 response.data.copy(
-                                    results = currentList + (response.data.results?.toList() ?: emptyList())
+                                    results = currentList + (response.data.results?.toList()
+                                        ?: emptyList())
                                 )
                             )
                         )
@@ -182,9 +239,35 @@ class MovieViewModel(
     }
 
     fun fetchTopRatedMovies(pageIndex: Int) {
+        if (_isLoadingTopRated.value == true) return
+
         launchCoroutine {
-            fetchTopRatedMovies.fetchData(pageIndex).collect {
-                _topRatedList.postValue(it)
+            _isLoadingTopRated.postValue(true)
+
+            try {
+                fetchTopRatedMovies.fetchData(pageIndex).collect { response ->
+                    if (response is ResponseStatus.Success) {
+                        val currentList =
+                            (_topRatedList.value as? ResponseStatus.Success<MovieList>)?.data?.results
+                                ?: emptyList()
+
+                        _topRatedList.postValue(
+                            ResponseStatus.Success(
+                                response.data.copy(
+                                    results = currentList + (response.data.results?.toList()
+                                        ?: emptyList())
+                                )
+                            )
+                        )
+                        fetchTopRatedMovies.saveData(response.data.toMovieItemEntities())
+                    } else {
+                        _topRatedList.postValue(response)
+                    }
+                }
+            } catch (e: Exception) {
+                _topRatedList.postValue(ResponseStatus.Error(e.message ?: "Unknown error occurred"))
+            } finally {
+                _isLoadingTopRated.postValue(false)
             }
         }
     }

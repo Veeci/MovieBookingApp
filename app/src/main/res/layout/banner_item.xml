@@ -4,9 +4,9 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bannerUrl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:id="@+id/image"/>
+        android:scaleType="centerCrop"/>
 
 </FrameLayout>

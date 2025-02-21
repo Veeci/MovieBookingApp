@@ -6,6 +6,8 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
 import android.service.chooser.ChooserAction
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -362,6 +364,16 @@ abstract class BaseActivity<V : ViewBinding, Router : BaseRouter, N : BaseNaviga
     ) {
         rootView.isLoading = isLoading
         rootView.preventClicking = preventClicking
+    }
+
+    fun showKeyboard(view: EditText) {
+        val imm = getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    fun closeKeyBoard() {
+        val imm = getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(this.window.decorView.windowToken, 0)
     }
 
     abstract fun initView(

@@ -6,22 +6,24 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_100sdp"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@color/ThemePrimary"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/ThemePrimary"
             android:padding="@dimen/_5sdp">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/hiUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_13sdp"
-                android:fontFamily="@font/montserrat"
                 android:drawableEnd="@drawable/ic_welcome"
                 android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/_13sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,9 +31,9 @@
                 android:id="@+id/welcomeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_20sdp"
-                android:fontFamily="@font/montserrat_bold"
                 android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="@dimen/_20sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/hiUser" />
 
@@ -44,52 +46,69 @@
                 app:layout_constraintTop_toBottomOf="@id/hiUser">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/avatar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/avatar"/>
+                    android:layout_height="match_parent" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bannerSlider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                app:cardCornerRadius="@dimen/_40sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avatarHolder"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchview"
+                android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/avatarHolder"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/rounded_corners_bgr"
+                android:theme="@style/SearchViewTheme"
                 app:iconifiedByDefault="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bannerSlider"
                 app:queryBackground="@null"
                 app:queryHint="@string/search_hint"
                 app:searchIcon="@drawable/ic_menu"
                 app:submitBackground="@null" />
 
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/nowPlayingTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:drawableStart="@drawable/ic_nowplaying"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="Now Playing"
                 android:textSize="@dimen/_15sdp"
-                android:fontFamily="@font/montserrat_bold"
-                android:drawableStart="@drawable/ic_nowplaying"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/searchview"
-                android:layout_marginTop="@dimen/_15sdp"/>
+                app:layout_constraintTop_toBottomOf="@id/searchView" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/seeAllNowPlaying"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:background="?attr/selectableItemBackground"
-                app:layout_constraintTop_toBottomOf="@id/searchview"
                 android:layout_marginTop="@dimen/_15sdp"
+                android:background="?attr/selectableItemBackground"
+                android:drawableEnd="@drawable/ic_goto"
+                android:fontFamily="@font/montserrat"
                 android:padding="@dimen/_4sdp"
                 android:text="See all"
-                android:fontFamily="@font/montserrat"
-                android:drawableEnd="@drawable/ic_goto"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/searchView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/nowPlayingCarousel"
@@ -97,54 +116,93 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:padding="@dimen/_2sdp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nowPlayingTV" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/upcomingTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:drawableStart="@drawable/ic_upcoming"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="Upcoming"
                 android:textSize="@dimen/_15sdp"
-                android:fontFamily="@font/montserrat_bold"
-                android:drawableStart="@drawable/ic_upcoming"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/nowPlayingCarousel"
-                android:layout_marginTop="@dimen/_20sdp"/>
+                app:layout_constraintTop_toBottomOf="@id/nowPlayingCarousel" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/seeAllUpcoming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/nowPlayingCarousel"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:background="?attr/selectableItemBackground"
+                android:drawableEnd="@drawable/ic_goto"
+                android:fontFamily="@font/montserrat"
                 android:padding="@dimen/_4sdp"
                 android:text="See all"
-                android:background="?attr/selectableItemBackground"
-                android:fontFamily="@font/montserrat"
-                android:drawableEnd="@drawable/ic_goto"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nowPlayingCarousel" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/upcomingRV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/upcomingTV"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:padding="@dimen/_2sdp"
-                android:layout_marginTop="@dimen/_2sdp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcomingTV" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/chatbotBtn"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/topRatedTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/chatbot"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:drawableEnd="@drawable/ic_toprated"
+                android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Top rated of all time"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcomingRV" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/seeAllTopRated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="?attr/selectableItemBackground"
+                android:drawableEnd="@drawable/ic_goto"
+                android:fontFamily="@font/montserrat"
+                android:padding="@dimen/_4sdp"
+                android:text="See all"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/ic_chatbot"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="@dimen/_40sdp"/>
+                app:layout_constraintTop_toBottomOf="@id/upcomingRV" />
+
+            <RelativeLayout
+                android:id="@+id/recyclerViewWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_500sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_100sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/topRatedTV">
+
+                <com.example.moviebooking.domain.common.BackgroundSwitcherView
+                    android:id="@+id/overlayLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/topRatedRV"
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_400sdp"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
