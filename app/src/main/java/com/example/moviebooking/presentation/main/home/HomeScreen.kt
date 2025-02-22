@@ -7,6 +7,7 @@ import com.example.baseproject.domain.utils.EndlessOnScrollListener
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.navigatorViewModel
+import com.example.baseproject.domain.utils.safeClick
 import com.example.baseproject.presentation.BaseFragment
 import com.example.baseproject.utils.MediaUtil.loadImage
 import com.example.moviebooking.MainNavigator
@@ -127,7 +128,13 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
     }
 
     private fun onClickListener() {
+        with(binding) {
+            seeAllNowPlaying.safeClick { router?.goToSeeAll() }
 
+            seeAllTopRated.safeClick { router?.goToSeeAll() }
+
+            seeAllUpcoming.safeClick { router?.goToSeeAll() }
+        }
     }
 
     private fun observe() {

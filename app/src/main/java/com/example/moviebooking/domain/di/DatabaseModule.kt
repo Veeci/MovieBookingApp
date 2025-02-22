@@ -16,6 +16,7 @@ object DatabaseModule {
             ).build()
         }
 
+        factory { get<MainDatabase>().movieGenreDao() }
         factory { get<MainDatabase>().movieDao() }
         factory { get<MainDatabase>().movieItemDao() }
         factory { get<MainDatabase>().userDao() }

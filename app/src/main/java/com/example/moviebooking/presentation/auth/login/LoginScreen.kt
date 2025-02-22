@@ -102,7 +102,7 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
         binding.slider.apply {
             setSliderAdapter(sliderAdapter)
             setIndicatorAnimation(IndicatorAnimationType.WORM)
-            setSliderTransformAnimation(SliderAnimations.ZOOMOUTTRANSFORMATION)
+            setSliderTransformAnimation(SliderAnimations.GATETRANSFORMATION)
             autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH
             scrollTimeInSec = 3
             startAutoCycle()

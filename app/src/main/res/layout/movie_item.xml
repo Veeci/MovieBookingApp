@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="@dimen/_5sdp"
+        android:background="@color/ThemeSecondary"
+        android:orientation="vertical"
+        android:id="@+id/movieItem">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/posterHolder"
+            app:cardCornerRadius="@dimen/_20sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@id/poster"
+                android:src="@drawable/img_default_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@id/title"
+            android:textColor="@color/ThemePrimary"
+            android:textAlignment="center"
+            android:textSize="@dimen/_15sdp"
+            android:text="test"
+            android:fontFamily="@font/montserrat_bold"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@id/voteAverage"
+            android:drawableStart="@drawable/ic_score"
+            android:drawablePadding="@dimen/_10sdp"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="@color/ThemePrimary"
+            android:fontFamily="@font/montserrat"
+            android:padding="@dimen/_5sdp"/>
+
+        <!--    <androidx.appcompat.widget.AppCompatTextView-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:id="@+id/genre"-->
+        <!--        android:drawableStart="@drawable/ic_genre"-->
+        <!--        android:drawablePadding="@dimen/_10sdp"-->
+        <!--        android:textAlignment="textStart"-->
+        <!--        android:textSize="@dimen/_13sdp"-->
+        <!--        android:textColor="@color/ThemePrimary"-->
+        <!--        android:fontFamily="@font/montserrat"-->
+        <!--        android:padding="@dimen/_5sdp"/>-->
+
+    </LinearLayout>
+</layout>

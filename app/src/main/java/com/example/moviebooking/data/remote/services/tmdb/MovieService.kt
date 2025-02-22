@@ -1,5 +1,6 @@
 package com.example.moviebooking.data.remote.services.tmdb
 
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
 import retrofit2.Response
@@ -36,4 +37,9 @@ interface MovieService {
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int
     ): Response<Movie>
+
+    @GET("genre/movie/list")
+    suspend fun getGenreList(
+        @Query("language") language: String? = "en"
+    ): Response<Genres>
 }

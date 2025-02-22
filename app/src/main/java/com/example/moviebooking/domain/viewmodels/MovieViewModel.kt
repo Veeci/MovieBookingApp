@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.moviebooking.data.local.entities.MovieItemEntity
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Genre
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
+import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCase
 import com.example.moviebooking.domain.usecases.movies.nowPlayingList.FetchNowPlayingMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.popularList.FetchPopularMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.topRatedList.FetchTopRatedMoviesUseCase
@@ -17,7 +20,8 @@ class MovieViewModel(
     private val fetchNowPLayingMovies: FetchNowPlayingMoviesUseCase,
     private val fetchPopularMovies: FetchPopularMoviesUseCase,
     private val fetchUpcomingMovies: FetchUpcomingMoviesUseCase,
-    private val fetchTopRatedMovies: FetchTopRatedMoviesUseCase
+    private val fetchTopRatedMovies: FetchTopRatedMoviesUseCase,
+    private val fetchGenreList: FetchGenreListUseCase
 ) : BaseViewModel() {
     private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
     val nowPLayingList: LiveData<ResponseStatus<MovieList>> = _nowPLayingList
@@ -61,6 +65,12 @@ class MovieViewModel(
 
     private val _allMoviesFetchState: MutableLiveData<ResponseStatus<Unit>> = MutableLiveData()
     val allMoviesFetchState: LiveData<ResponseStatus<Unit>> = _allMoviesFetchState
+
+    private val _genreList: MutableLiveData<ResponseStatus<Genres>> = MutableLiveData()
+    val genreList: LiveData<ResponseStatus<Genres>> = _genreList
+
+    private val _localGenreList: MutableLiveData<List<Genre>> = MutableLiveData()
+    val localGenreList: LiveData<List<Genre>> = _localGenreList
 
     fun fetchAllMovies() {
         launchCoroutine {
@@ -113,23 +123,6 @@ class MovieViewModel(
                         e.message ?: "Unknown error occurred"
                     )
                 )
-            }
-        }
-    }
-
-    fun getLocalData() {
-        launchCoroutine {
-            fetchNowPLayingMovies.getFromLocal().collect {
-                _localNowPlayingList.postValue(it)
-            }
-            fetchPopularMovies.getFromLocal().collect {
-                _localPopularList.postValue(it)
-            }
-            fetchUpcomingMovies.getFromLocal().collect {
-                _localUpcomingList.postValue(it)
-            }
-            fetchTopRatedMovies.getFromLocal().collect {
-                _localTopRatedList.postValue(it)
             }
         }
     }
@@ -268,6 +261,34 @@ class MovieViewModel(
                 _topRatedList.postValue(ResponseStatus.Error(e.message ?: "Unknown error occurred"))
             } finally {
                 _isLoadingTopRated.postValue(false)
+            }
+        }
+    }
+
+    fun fetchGenreList() {
+        launchCoroutine {
+            fetchGenreList.fetchData().collect { response ->
+                _genreList.postValue(response)
+                if (response is ResponseStatus.Success) {
+                    fetchGenreList.saveData(response.data.toGenreEntities())
+                }
+            }
+        }
+    }
+
+    fun getLocalData() {
+        launchCoroutine {
+            fetchNowPLayingMovies.getFromLocal().collect {
+                _localNowPlayingList.postValue(it)
+            }
+            fetchPopularMovies.getFromLocal().collect {
+                _localPopularList.postValue(it)
+            }
+            fetchUpcomingMovies.getFromLocal().collect {
+                _localUpcomingList.postValue(it)
+            }
+            fetchTopRatedMovies.getFromLocal().collect {
+                _localTopRatedList.postValue(it)
             }
         }
     }

@@ -38,6 +38,7 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
 
     private fun fetchData() {
         viewModel.fetchAllMovies()
+        viewModel.fetchGenreList()
     }
 
     private fun setup() {
