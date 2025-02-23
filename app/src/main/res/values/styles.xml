@@ -5,4 +5,10 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/gray</item>
     </style>
+
+    <style name="CustomRatingBar" parent="Widget.AppCompat.RatingBar" >
+        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <item name="minHeight">@dimen/_15sdp</item>
+        <item name="maxHeight">@dimen/_20sdp</item>
+    </style>
 </resources>

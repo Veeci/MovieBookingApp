@@ -17,7 +17,7 @@ data class Movie(
     @SerializedName("budget")
     val budget: Int? = null,
     @SerializedName("genres")
-    val genres: List<GenresItem?>? = null,
+    val genres: Genres? = null,
     @SerializedName("homepage")
     val homepage: String? = null,
     @SerializedName("id")
@@ -83,6 +83,12 @@ data class Movie(
             voteCount
         )
     }
+
+    fun durationFormat(): String {
+        val hours = runtime?.div(60)
+        val minutes = runtime?.rem(60)
+        return "${hours}h ${minutes}m"
+    }
 }
 
 @Parcelize
@@ -91,14 +97,6 @@ data class SpokenLanguagesItem(
     val englishName: String? = null,
     @SerializedName("iso_639_1")
     val iso6391: String? = null,
-    @SerializedName("name")
-    val name: String? = null
-) : Parcelable
-
-@Parcelize
-data class GenresItem(
-    @SerializedName("id")
-    val id: Int? = null,
     @SerializedName("name")
     val name: String? = null
 ) : Parcelable

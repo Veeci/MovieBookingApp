@@ -72,7 +72,7 @@ class SeeAllFragment : BaseFragment<FragmentSeeAllBinding, SeeAllRouter, MainNav
                             0 -> movieItemAdapter.submitList(nowPlayingList ?: emptyList())
                             1 -> movieItemAdapter.submitList(popularList ?: emptyList())
                             2 -> movieItemAdapter.submitList(topRatedList ?: emptyList())
-                            4 -> movieItemAdapter.submitList(upcomingList ?: emptyList())
+                            3 -> movieItemAdapter.submitList(upcomingList ?: emptyList())
                         }
                     }
 

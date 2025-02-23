@@ -23,10 +23,13 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieAnimation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_150sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/backBtn"  />
+            app:layout_constraintTop_toBottomOf="@id/backBtn"
+            app:lottie_rawRes="@raw/seeall_lottie"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"

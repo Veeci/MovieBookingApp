@@ -16,7 +16,7 @@ class MovieItemAdapter: BaseListAdapter<MovieItem, MovieItemBinding>() {
 
         with(binding) {
             poster.loadImage(
-                source = Const.tmdbImageUrlW500 + item.posterPath,
+                source = Const.tmdbImageUrlW500 + item.backdropPath,
                 defaultImage = R.drawable.img_default_placeholder
             )
 
