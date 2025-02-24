@@ -48,7 +48,7 @@ class SeeAllFragment : BaseFragment<FragmentSeeAllBinding, SeeAllRouter, MainNav
             action = object : BaseListAdapter.Action<MovieItem> {
                 override fun click(position: Int, data: MovieItem, code: Int) {
                     navigator.goToMovieDetailFromSeeAll(
-                        Bundle().apply {
+                        extras = Bundle().apply {
                             putString("movieID", data.id?.toString())
                         }
                     )

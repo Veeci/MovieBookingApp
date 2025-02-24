@@ -7,9 +7,10 @@ import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.moviebooking.data.local.entities.MovieItemEntity
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Genre
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
-import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
 import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCase
+import com.example.moviebooking.domain.usecases.movies.movieDetail.FetchMovieDetailUseCase
 import com.example.moviebooking.domain.usecases.movies.nowPlayingList.FetchNowPlayingMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.popularList.FetchPopularMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.topRatedList.FetchTopRatedMoviesUseCase
@@ -21,7 +22,8 @@ class MovieViewModel(
     private val fetchPopularMovies: FetchPopularMoviesUseCase,
     private val fetchUpcomingMovies: FetchUpcomingMoviesUseCase,
     private val fetchTopRatedMovies: FetchTopRatedMoviesUseCase,
-    private val fetchGenreList: FetchGenreListUseCase
+    private val fetchGenreList: FetchGenreListUseCase,
+    private val fetchMovieDetail: FetchMovieDetailUseCase
 ) : BaseViewModel() {
     private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
     val nowPLayingList: LiveData<ResponseStatus<MovieList>> = _nowPLayingList
@@ -65,6 +67,9 @@ class MovieViewModel(
 
     private val _allMoviesFetchState: MutableLiveData<ResponseStatus<Unit>> = MutableLiveData()
     val allMoviesFetchState: LiveData<ResponseStatus<Unit>> = _allMoviesFetchState
+
+    private val _movieDetail: MutableLiveData<ResponseStatus<Movie>> = MutableLiveData()
+    val movieDetail: LiveData<ResponseStatus<Movie>> = _movieDetail
 
     private val _genreList: MutableLiveData<ResponseStatus<Genres>> = MutableLiveData()
     val genreList: LiveData<ResponseStatus<Genres>> = _genreList
@@ -155,8 +160,12 @@ class MovieViewModel(
                     }
 
                 }
-            } catch(e: Exception) {
-                _nowPLayingList.postValue(ResponseStatus.Error(e.message ?: "Unknown error occurred"))
+            } catch (e: Exception) {
+                _nowPLayingList.postValue(
+                    ResponseStatus.Error(
+                        e.message ?: "Unknown error occurred"
+                    )
+                )
             } finally {
                 _isLoadingNowPLaying.postValue(false)
             }
@@ -261,6 +270,17 @@ class MovieViewModel(
                 _topRatedList.postValue(ResponseStatus.Error(e.message ?: "Unknown error occurred"))
             } finally {
                 _isLoadingTopRated.postValue(false)
+            }
+        }
+    }
+
+    fun fetchMovieDetail(movieID: String) {
+        launchCoroutine {
+            fetchMovieDetail.fetchData(movieID).collect { response ->
+                _movieDetail.postValue(response)
+                if (response is ResponseStatus.Success) {
+                    fetchMovieDetail.saveData(response.data.toEntity())
+                }
             }
         }
     }

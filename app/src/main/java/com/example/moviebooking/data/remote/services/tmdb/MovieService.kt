@@ -34,8 +34,8 @@ interface MovieService {
     ): Response<MovieList>
 
     @GET("movie/{movie_id}")
-    suspend fun getMovieDetails(
-        @Path("movie_id") movieId: Int
+    suspend fun getMovieDetail(
+        @Path("movie_id") movieId: String
     ): Response<Movie>
 
     @GET("genre/movie/list")

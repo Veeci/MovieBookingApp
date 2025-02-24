@@ -17,11 +17,11 @@ data class Movie(
     @SerializedName("budget")
     val budget: Int? = null,
     @SerializedName("genres")
-    val genres: Genres? = null,
+    val genres: List<Genre>?,
     @SerializedName("homepage")
     val homepage: String? = null,
     @SerializedName("id")
-    override val id: String? = null,
+    val id: String? = null,
     @SerializedName("imdb_id")
     val imdbId: String? = null,
     @SerializedName("original_language")
@@ -58,7 +58,7 @@ data class Movie(
     val voteAverage: Double? = null,
     @SerializedName("vote_count")
     val voteCount: Int? = null
-) : Parcelable, BaseDTO(id) {
+) : Parcelable {
     fun toEntity(): MovieEntity {
         return MovieEntity(
             id ?: "",

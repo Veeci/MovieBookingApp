@@ -2,6 +2,8 @@ package com.example.moviebooking.domain.di
 
 import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCase
 import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCaseImpl
+import com.example.moviebooking.domain.usecases.movies.movieDetail.FetchMovieDetailUseCase
+import com.example.moviebooking.domain.usecases.movies.movieDetail.FetchMovieDetailUseCaseImpl
 import com.example.moviebooking.domain.usecases.movies.nowPlayingList.FetchNowPlayingMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.nowPlayingList.FetchNowPlayingMoviesUseCaseImpl
 import com.example.moviebooking.domain.usecases.movies.popularList.FetchPopularMoviesUseCase
@@ -19,5 +21,6 @@ object UseCaseModule {
         factory<FetchUpcomingMoviesUseCase> { FetchUpcomingMoviesUseCaseImpl(get(), get()) }
         factory<FetchTopRatedMoviesUseCase> { FetchTopRatedMoviesUseCaseImpl(get(), get()) }
         factory<FetchGenreListUseCase> { FetchGenreListUseCaseImpl(get(), get()) }
+        factory<FetchMovieDetailUseCase> { FetchMovieDetailUseCaseImpl(get(), get()) }
     }
 }

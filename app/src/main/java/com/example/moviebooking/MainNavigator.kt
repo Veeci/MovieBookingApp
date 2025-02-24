@@ -72,7 +72,7 @@ SeeAllRouter{
     override fun goToMovieDetailFromSeeAll(extras: Bundle) {
         onNextScreen(
             action = R.id.action_seeAllFragment_to_movieDetailScreen,
-            extras = null,
+            extras = extras,
             isFinished = null
         )
     }
