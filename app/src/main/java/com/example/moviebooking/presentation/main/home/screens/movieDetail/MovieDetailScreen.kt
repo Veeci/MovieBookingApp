@@ -6,6 +6,7 @@ import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.message
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.positiveAction
+import com.example.baseproject.domain.utils.safeClick
 import com.example.baseproject.domain.utils.simpleAlert
 import com.example.baseproject.domain.utils.title
 import com.example.baseproject.presentation.BaseFragment
@@ -94,7 +95,9 @@ class MovieDetailScreen : BaseFragment<FragmentMovieDetailScreenBinding, MovieDe
     }
 
     private fun onClickListener() {
-
+        with(binding) {
+            backBtn.safeClick { navigator.onPopScreen() }
+        }
     }
 
     private fun displayMovieDetail(movie: Movie) {

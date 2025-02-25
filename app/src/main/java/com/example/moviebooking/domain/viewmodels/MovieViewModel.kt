@@ -5,11 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.moviebooking.data.local.entities.MovieItemEntity
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Credit
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Genre
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Keyword
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
+import com.example.moviebooking.domain.usecases.movies.castList.FetchCastListUseCase
 import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCase
+import com.example.moviebooking.domain.usecases.movies.getKeywords.FetchKeywordUseCase
 import com.example.moviebooking.domain.usecases.movies.movieDetail.FetchMovieDetailUseCase
 import com.example.moviebooking.domain.usecases.movies.nowPlayingList.FetchNowPlayingMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.popularList.FetchPopularMoviesUseCase
@@ -23,7 +27,9 @@ class MovieViewModel(
     private val fetchUpcomingMovies: FetchUpcomingMoviesUseCase,
     private val fetchTopRatedMovies: FetchTopRatedMoviesUseCase,
     private val fetchGenreList: FetchGenreListUseCase,
-    private val fetchMovieDetail: FetchMovieDetailUseCase
+    private val fetchMovieDetail: FetchMovieDetailUseCase,
+    private val fetchCastList: FetchCastListUseCase,
+    private val fetchKeywordList: FetchKeywordUseCase
 ) : BaseViewModel() {
     private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
     val nowPLayingList: LiveData<ResponseStatus<MovieList>> = _nowPLayingList
@@ -76,6 +82,12 @@ class MovieViewModel(
 
     private val _localGenreList: MutableLiveData<List<Genre>> = MutableLiveData()
     val localGenreList: LiveData<List<Genre>> = _localGenreList
+
+    private val _castList: MutableLiveData<ResponseStatus<Credit>> = MutableLiveData()
+    val castList: LiveData<ResponseStatus<Credit>> = _castList
+
+    private val _keywordList: MutableLiveData<ResponseStatus<Keyword>> = MutableLiveData()
+    val keywordList: LiveData<ResponseStatus<Keyword>> = _keywordList
 
     fun fetchAllMovies() {
         launchCoroutine {
@@ -292,6 +304,22 @@ class MovieViewModel(
                 if (response is ResponseStatus.Success) {
                     fetchGenreList.saveData(response.data.toGenreEntities())
                 }
+            }
+        }
+    }
+
+    fun fetchCastList(movieID: String) {
+        launchCoroutine {
+            fetchCastList.fetchData(movieID).collect { response ->
+                _castList.postValue(response)
+            }
+        }
+    }
+
+    fun fetchKeywordList(movieID: String) {
+        launchCoroutine {
+            fetchKeywordList.fetchData(movieID).collect { response ->
+                _keywordList.postValue(response)
             }
         }
     }

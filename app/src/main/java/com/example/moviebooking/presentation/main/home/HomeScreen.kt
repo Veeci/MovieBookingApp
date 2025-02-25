@@ -9,10 +9,12 @@ import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.safeClick
 import com.example.baseproject.presentation.BaseFragment
+import com.example.baseproject.presentation.widgets.BaseListAdapter
 import com.example.baseproject.utils.MediaUtil.loadImage
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
 import com.example.moviebooking.data.local.Banner
+import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieItem
 import com.example.moviebooking.databinding.FragmentHomeScreenBinding
 import com.example.moviebooking.domain.common.Const
 import com.example.moviebooking.domain.common.RecyclerSnapItemListener
@@ -38,9 +40,9 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
 
     private lateinit var auth: FirebaseAuth
 
-    private val nowPlayingAdapter = NowPlayingAdapter()
-    private val upcomingAdapter = UpcomingAdapter()
-    private val topRatedAdapter= TopRatedAdapter()
+    private lateinit var nowPlayingAdapter: NowPlayingAdapter
+    private lateinit var upcomingAdapter: UpcomingAdapter
+    private lateinit var topRatedAdapter: TopRatedAdapter
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentHomeScreenBinding) {
         auth = Firebase.auth
@@ -84,6 +86,18 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                 setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
             }
 
+            nowPlayingAdapter = NowPlayingAdapter().apply {
+                action = object : BaseListAdapter.Action<MovieItem> {
+                    override fun click(position: Int, data: MovieItem, code: Int) {
+                        navigator.goToMovieDetailFromSeeAll(
+                            extras = Bundle().apply {
+                                putString("movieID", data.id?.toString())
+                            }
+                        )
+                    }
+
+                }
+            }
 
             nowPlayingCarousel.apply {
                 setHasFixedSize(true)
@@ -91,6 +105,19 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                 layoutManager = CarouselLayoutManager()
                 adapter = nowPlayingAdapter
                 CarouselSnapHelper().attachToRecyclerView(nowPlayingCarousel)
+            }
+
+            upcomingAdapter = UpcomingAdapter().apply {
+                action = object : BaseListAdapter.Action<MovieItem> {
+                    override fun click(position: Int, data: MovieItem, code: Int) {
+                        navigator.goToMovieDetailFromSeeAll(
+                            extras = Bundle().apply {
+                                putString("movieID", data.id?.toString())
+                            }
+                        )
+                    }
+
+                }
             }
 
             upcomingRV.apply {
@@ -103,6 +130,19 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                         movieViewModel.fetchUpcomingMovies(page)
                     }
                 })
+            }
+
+            topRatedAdapter = TopRatedAdapter().apply {
+                action = object : BaseListAdapter.Action<MovieItem> {
+                    override fun click(position: Int, data: MovieItem, code: Int) {
+                        navigator.goToMovieDetailFromSeeAll(
+                            extras = Bundle().apply {
+                                putString("movieID", data.id?.toString())
+                            }
+                        )
+                    }
+
+                }
             }
 
             topRatedRV.apply {
