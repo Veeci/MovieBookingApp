@@ -6,13 +6,13 @@ import android.os.Parcelable
 
 @Parcelize
 data class SimilarMovie(
-	@SerializedName("page")
+    @SerializedName("page")
 	val page: Int? = null,
-	@SerializedName("results")
-	val results: List<ResultsItem?>? = null,
-	@SerializedName("total_pages")
+    @SerializedName("results")
+	val results: List<ReviewItem?>? = null,
+    @SerializedName("total_pages")
 	val totalPages: Int? = null,
-	@SerializedName("total_results")
+    @SerializedName("total_results")
 	val totalResults: Int? = null
 ) : Parcelable
 

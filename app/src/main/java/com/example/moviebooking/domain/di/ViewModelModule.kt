@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 object ViewModelModule {
     fun init() = module {
-        journeyViewModel { MovieViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
+        journeyViewModel { MovieViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     }
 }

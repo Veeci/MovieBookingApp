@@ -1,10 +1,16 @@
 package com.example.moviebooking.data.remote.services.tmdb
 
+import RecommendationMovie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Credit
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Image
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Keyword
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
+import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieSearchResult
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Review
+import com.example.moviebooking.data.remote.entities.tmdb.movie.SimilarMovie
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Video
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -54,4 +60,42 @@ interface MovieService {
     suspend fun getKeywordList(
         @Path("movie_id") movieId: String
     ): Response<Keyword>
+
+    @GET("movie/{movie_id}/similar")
+    suspend fun getSimilarMovies(
+        @Path("movie_id") movieId: String,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1
+    ): Response<SimilarMovie>
+
+    @GET("movie/{movie_id}/recommendations")
+    suspend fun getRecommendationMovies(
+        @Path("movie_id") movieId: String,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1
+    ): Response<RecommendationMovie>
+
+    @GET("movie/{movie_id}/images")
+    suspend fun getImageList(
+        @Path("movie_id") movieId: String
+    ): Response<Image>
+
+    @GET("movie/{movie_id}/videos")
+    suspend fun getVideoList(
+        @Path("movie_id") movieId: String
+    ): Response<Video>
+
+    @GET("search/movie")
+    suspend fun searchMovies(
+        @Query("query") query: String,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1
+    ): Response<MovieSearchResult>
+
+    @GET("movie/{movie_id}/reviews")
+    suspend fun getReviewList(
+        @Path("movie_id") movieId: String,
+        @Query("language") language: String? = "en-US",
+        @Query("page") page: Int? = 1
+    ): Response<Review>
 }

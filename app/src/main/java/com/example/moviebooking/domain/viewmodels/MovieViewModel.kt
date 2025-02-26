@@ -1,5 +1,6 @@
 package com.example.moviebooking.domain.viewmodels
 
+import RecommendationMovie
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.baseproject.domain.utils.ResponseStatus
@@ -8,17 +9,28 @@ import com.example.moviebooking.data.local.entities.MovieItemEntity
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Credit
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Genre
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Image
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Keyword
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
+import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieSearchResult
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Review
+import com.example.moviebooking.data.remote.entities.tmdb.movie.SimilarMovie
+import com.example.moviebooking.data.remote.entities.tmdb.movie.Video
 import com.example.moviebooking.domain.usecases.movies.castList.FetchCastListUseCase
 import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCase
 import com.example.moviebooking.domain.usecases.movies.getKeywords.FetchKeywordUseCase
+import com.example.moviebooking.domain.usecases.movies.images.FetchImageUseCase
 import com.example.moviebooking.domain.usecases.movies.movieDetail.FetchMovieDetailUseCase
 import com.example.moviebooking.domain.usecases.movies.nowPlayingList.FetchNowPlayingMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.popularList.FetchPopularMoviesUseCase
+import com.example.moviebooking.domain.usecases.movies.recommendedList.FetchRecommendedMoviesUseCase
+import com.example.moviebooking.domain.usecases.movies.reviews.FetchReviewsUseCase
+import com.example.moviebooking.domain.usecases.movies.search.FetchMovieSearchingResultUseCase
+import com.example.moviebooking.domain.usecases.movies.similarList.FetchSimilarMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.topRatedList.FetchTopRatedMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.upcomingList.FetchUpcomingMoviesUseCase
+import com.example.moviebooking.domain.usecases.movies.videos.FetchVideoUseCase
 import kotlinx.coroutines.async
 
 class MovieViewModel(
@@ -29,7 +41,13 @@ class MovieViewModel(
     private val fetchGenreList: FetchGenreListUseCase,
     private val fetchMovieDetail: FetchMovieDetailUseCase,
     private val fetchCastList: FetchCastListUseCase,
-    private val fetchKeywordList: FetchKeywordUseCase
+    private val fetchKeywordList: FetchKeywordUseCase,
+    private val fetchSimilarMovies: FetchSimilarMoviesUseCase,
+    private val fetchRecommendedMovies: FetchRecommendedMoviesUseCase,
+    private val fetchImage: FetchImageUseCase,
+    private val fetchVideo: FetchVideoUseCase,
+    private val fetchMovieSearchingResult: FetchMovieSearchingResultUseCase,
+    private val fetchReviews: FetchReviewsUseCase
 ) : BaseViewModel() {
     var movieId: MutableLiveData<String> = MutableLiveData()
 
@@ -90,6 +108,24 @@ class MovieViewModel(
 
     private val _keywordList: MutableLiveData<ResponseStatus<Keyword>> = MutableLiveData()
     val keywordList: LiveData<ResponseStatus<Keyword>> = _keywordList
+
+    private val _similarMovies: MutableLiveData<ResponseStatus<SimilarMovie>> = MutableLiveData()
+    val similarMovies: LiveData<ResponseStatus<SimilarMovie>> = _similarMovies
+
+    private val _recommendedMovies: MutableLiveData<ResponseStatus<RecommendationMovie>> = MutableLiveData()
+    val recommendedMovies: LiveData<ResponseStatus<RecommendationMovie>> = _recommendedMovies
+
+    private val _imageList: MutableLiveData<ResponseStatus<Image>> = MutableLiveData()
+    val imageList: LiveData<ResponseStatus<Image>> = _imageList
+
+    private val _videoList: MutableLiveData<ResponseStatus<Video>> = MutableLiveData()
+    val videoList: LiveData<ResponseStatus<Video>> = _videoList
+
+    private val _movieSearchingResult: MutableLiveData<ResponseStatus<MovieSearchResult>> = MutableLiveData()
+    val movieSearchingResult: LiveData<ResponseStatus<MovieSearchResult>> = _movieSearchingResult
+
+    private val _reviews: MutableLiveData<ResponseStatus<Review>> = MutableLiveData()
+    val reviews: LiveData<ResponseStatus<Review>> = _reviews
 
     fun fetchAllMovies() {
         launchCoroutine {
@@ -322,6 +358,54 @@ class MovieViewModel(
         launchCoroutine {
             fetchKeywordList.fetchData(movieID).collect { response ->
                 _keywordList.postValue(response)
+            }
+        }
+    }
+
+    fun fetchSimilarMovies(movieID: String) {
+        launchCoroutine {
+            fetchSimilarMovies.fetchData(movieID).collect { response ->
+                _similarMovies.postValue(response)
+            }
+        }
+    }
+
+    fun fetchRecommendedMovies(movieID: String) {
+        launchCoroutine {
+            fetchRecommendedMovies.fetchData(movieID).collect { response ->
+                _recommendedMovies.postValue(response)
+            }
+        }
+    }
+
+    fun fetchImage(movieID: String) {
+        launchCoroutine {
+            fetchImage.fetchData(movieID).collect { response ->
+                _imageList.postValue(response)
+            }
+        }
+    }
+
+    fun fetchVideo(movieID: String) {
+        launchCoroutine {
+            fetchVideo.fetchData(movieID).collect { response ->
+                _videoList.postValue(response)
+            }
+        }
+    }
+
+    fun searchMovie(query: String) {
+        launchCoroutine {
+            fetchMovieSearchingResult.fetchData(query).collect { response ->
+                _movieSearchingResult.postValue(response)
+            }
+        }
+    }
+
+    fun fetchReviews(movieID: String) {
+        launchCoroutine {
+            fetchReviews.fetchData(movieID).collect { response ->
+                _reviews.postValue(response)
             }
         }
     }
