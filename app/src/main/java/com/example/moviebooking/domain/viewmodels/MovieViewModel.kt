@@ -31,6 +31,8 @@ class MovieViewModel(
     private val fetchCastList: FetchCastListUseCase,
     private val fetchKeywordList: FetchKeywordUseCase
 ) : BaseViewModel() {
+    var movieId: MutableLiveData<String> = MutableLiveData()
+
     private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
     val nowPLayingList: LiveData<ResponseStatus<MovieList>> = _nowPLayingList
 

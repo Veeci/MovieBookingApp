@@ -52,6 +52,7 @@ class SeeAllFragment : BaseFragment<FragmentSeeAllBinding, SeeAllRouter, MainNav
                             putString("movieID", data.id?.toString())
                         }
                     )
+                    movieViewModel.movieId.postValue(data.id.toString())
                 }
 
             }

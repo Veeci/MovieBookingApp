@@ -15,7 +15,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import com.example.moviebooking.R
 
-class ShowMoreTextView(
+class ShowMoreTextView @kotlin.jvm.JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -51,6 +51,12 @@ class ShowMoreTextView(
         mainText = text.toString()
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+
+        text = mainText
+    }
+
     private fun showMoreButton() {
         val text = text.toString()
         if (!isAlreadySet) {
@@ -61,20 +67,18 @@ class ShowMoreTextView(
         var start = 0
         var end: Int
         for (i in 0 until showingLine) {
-            end = layout.getLineEnd(i)
+            val textLayout = layout ?: return
+            end = textLayout.getLineEnd(i)
             showingText += text.substring(start, end)
             start = end
         }
         var specialSpace = 0
         var newText: String
         do {
-            newText = showingText.substring(
-                0, showingText.length - (specialSpace)
-            )
-            newText += "$threeDot $showMore"
+            if (showingText.length - specialSpace <= 0) break
+            newText = showingText.substring(0, showingText.length - specialSpace) + "$threeDot $showMore"
             setText(newText)
             specialSpace++
-
         } while (lineCount > showingLine)
         isCollapsed = true
         setShowMoreColoringAndClickable()
@@ -82,6 +86,8 @@ class ShowMoreTextView(
 
     private fun setShowMoreColoringAndClickable() {
         val spannableString = SpannableString(text)
+        val startIndex = text.length - showMore.length
+        if (startIndex < 0) return
         spannableString.setSpan(
             object : ClickableSpan() {
                 override fun updateDrawState(paint: TextPaint) {
@@ -94,7 +100,7 @@ class ShowMoreTextView(
                     isCollapsed = false
                     showLessButton()
                 }
-            }, text.length - showMore.length, text.length, 0
+            }, startIndex, text.length, 0
         )
         spannableString.setSpan(
             ForegroundColorSpan(showMoreTextColor),
