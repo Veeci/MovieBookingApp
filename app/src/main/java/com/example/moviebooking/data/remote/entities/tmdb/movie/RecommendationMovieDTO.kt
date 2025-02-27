@@ -7,7 +7,7 @@ data class RecommendationMovie(
 	@SerializedName("page")
 	val page: Int? = null,
 	@SerializedName("results")
-	val results: List<ResultItem?>? = null,
+	val results: List<RecommendedItem?>? = null,
 	@SerializedName("total_pages")
 	val totalPages: Int? = null,
 	@SerializedName("total_results")
@@ -15,7 +15,7 @@ data class RecommendationMovie(
 ) : Parcelable
 
 @Parcelize
-data class ResultItem(
+data class RecommendedItem(
 	@SerializedName("adult")
 	val adult: Boolean? = null,
 	@SerializedName("backdrop_path")

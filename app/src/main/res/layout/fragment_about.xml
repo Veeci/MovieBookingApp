@@ -4,11 +4,10 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:context=".presentation.main.home.screens.movieDetail.pages.about.AboutFragment"
         android:background="@color/dark_gray"
-        android:padding="@dimen/_5sdp"
-        android:fillViewport="true">
+        android:padding="@dimen/_5sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -124,7 +123,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/castRV"
-                android:layout_marginTop="@dimen/_5sdp" />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:nestedScrollingEnabled="false"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -139,7 +139,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/crewRV"
-                android:layout_marginTop="@dimen/_5sdp" />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:nestedScrollingEnabled="false"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -155,7 +156,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/productionRV"
-                android:layout_marginTop="@dimen/_5sdp" />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:nestedScrollingEnabled="false"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -176,6 +178,7 @@
                     android:layout_weight="4"
                     android:layout_height="match_parent"
                     android:id="@+id/keywordRV"
+                    android:nestedScrollingEnabled="false"
                     android:paddingStart="@dimen/_5sdp"
                     tools:ignore="RtlSymmetry" />
 
