@@ -1,6 +1,5 @@
 package com.example.moviebooking.data.remote.services.tmdb
 
-import RecommendationMovie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Credit
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Image
@@ -8,6 +7,7 @@ import com.example.moviebooking.data.remote.entities.tmdb.movie.Keyword
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieSearchResult
+import com.example.moviebooking.data.remote.entities.tmdb.movie.RecommendationMovie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Review
 import com.example.moviebooking.data.remote.entities.tmdb.movie.SimilarMovie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Video

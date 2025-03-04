@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "434610274928",
+    "project_id": "moviebooking-1eac0",
+    "storage_bucket": "moviebooking-1eac0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434610274928:android:971d3d116fc3bd8ad62ab5",
+        "android_client_info": {
+          "package_name": "com.example.moviebooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "434610274928-idanoroiale7ogqpfekfpa4tg0q14n40.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moviebooking",
+            "certificate_hash": "5683aa7256bfb36607e79b874f7ce73562214bbe"
+          }
+        },
+        {
+          "client_id": "434610274928-in7cs08ufpt7e031kkf87ofkcfo81h8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbo7klZRVJ62fWIDKCWNQcep8IlCjDwVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "434610274928-in7cs08ufpt7e031kkf87ofkcfo81h8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,9 +1,11 @@
 package com.example.moviebooking.presentation.main.home.adapters
 
-import RecommendedItem
+
+
 import com.example.baseproject.presentation.widgets.BaseListAdapter
 import com.example.baseproject.utils.MediaUtil.loadImage
 import com.example.moviebooking.R
+import com.example.moviebooking.data.remote.entities.tmdb.movie.RecommendedItem
 import com.example.moviebooking.databinding.SimilarMovieItemBinding
 import com.example.moviebooking.domain.common.Const
 

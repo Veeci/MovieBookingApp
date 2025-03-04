@@ -1,8 +1,8 @@
 package com.example.moviebooking.domain.usecases.movies.recommendedList
 
-import RecommendationMovie
 import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
+import com.example.moviebooking.data.remote.entities.tmdb.movie.RecommendationMovie
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

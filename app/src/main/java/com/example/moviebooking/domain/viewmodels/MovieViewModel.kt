@@ -1,6 +1,5 @@
 package com.example.moviebooking.domain.viewmodels
 
-import RecommendationMovie
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.baseproject.domain.utils.ResponseStatus
@@ -14,6 +13,7 @@ import com.example.moviebooking.data.remote.entities.tmdb.movie.Keyword
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieSearchResult
+import com.example.moviebooking.data.remote.entities.tmdb.movie.RecommendationMovie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Review
 import com.example.moviebooking.data.remote.entities.tmdb.movie.SimilarMovie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Video

@@ -36,9 +36,9 @@ class SimilarFragment : BaseFragment<FragmentSimilarBinding, SimilarRouter, Main
     private lateinit var videoId: String
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentSimilarBinding) {
-        setup()
         fetchData()
         observe()
+        setup()
     }
 
     private fun setup() {
@@ -82,7 +82,7 @@ class SimilarFragment : BaseFragment<FragmentSimilarBinding, SimilarRouter, Main
 
             reviewRV.apply {
                 adapter = reviewAdapter
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 setItemViewCacheSize(20)
             }
@@ -90,7 +90,9 @@ class SimilarFragment : BaseFragment<FragmentSimilarBinding, SimilarRouter, Main
             lifecycle.addObserver(trailerPlayer)
             trailerPlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
                 override fun onReady(youTubePlayer: YouTubePlayer) {
-                    youTubePlayer.loadVideo(videoId, 0f)
+                    videoId.takeIf { it.isNotBlank() }?.let {
+                        youTubePlayer.loadVideo(it, 0f)
+                    }
                 }
             })
         }
@@ -179,5 +181,17 @@ class SimilarFragment : BaseFragment<FragmentSimilarBinding, SimilarRouter, Main
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        binding.trailerPlayer.release()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        binding.trailerPlayer.release()
     }
 }
