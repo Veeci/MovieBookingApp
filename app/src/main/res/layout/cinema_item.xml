@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:padding="@dimen/_10sdp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_corners_bgr"
+        android:backgroundTint="@color/gray"
+        android:layout_margin="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@id/name"
+                android:text="test"
+                android:textColor="@color/ThemeSecondary"
+                android:textSize="@dimen/_15sdp"
+                android:fontFamily="@font/montserrat_bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/address"
+                android:textColor="@color/ThemeSecondary"
+                android:textSize="@dimen/_13sdp"
+                android:text="test"
+                android:fontFamily="@font/montserrat" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/logo" />
+
+    </LinearLayout>
+</layout>
