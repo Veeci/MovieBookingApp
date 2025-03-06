@@ -1,14 +1,21 @@
 package com.example.moviebooking.presentation.main.home.screens.movieDetail.pages.booking
 
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.os.Bundle
-import android.widget.Toast
-import androidx.fragment.app.Fragment
+import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.baseproject.domain.utils.gone
 import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.navigatorViewModel
+import com.example.baseproject.domain.utils.visible
 import com.example.baseproject.presentation.BaseFragment
+import com.example.baseproject.presentation.widgets.BaseListAdapter
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
+import com.example.moviebooking.data.local.Cinema
 import com.example.moviebooking.data.local.CinemaData
 import com.example.moviebooking.data.local.MultipleSeat
 import com.example.moviebooking.databinding.FragmentBookingBinding
@@ -27,6 +34,9 @@ class BookingFragment : BaseFragment<FragmentBookingBinding, BookingRouter, Main
     override val navigator: MainNavigator by navigatorViewModel()
     private val movieViewmodel: MovieViewModel by journeyViewModel()
 
+    private var isExpanded = false
+    private var selectedCinema: Cinema? = null
+
     override fun initView(savedInstanceState: Bundle?, binding: FragmentBookingBinding) {
         setup()
         fetchData()
@@ -39,17 +49,22 @@ class BookingFragment : BaseFragment<FragmentBookingBinding, BookingRouter, Main
 
         with(binding) {
             cinemaRV.apply {
-                adapter = cinemaAdapter
                 layoutManager = LinearLayoutManager(context)
+                adapter = cinemaAdapter.apply {
+                    action = object : BaseListAdapter.Action<Cinema> {
+                        override fun click(position: Int, data: Cinema, code: Int) {
+                            toggleSeatBookingScene()
+                        }
+
+                    }
+                }
             }
 
             seatView.seatViewListener = object : SeatViewListener<MultipleSeat> {
                 override fun seatReleased(releasedSeat: MultipleSeat, selectedSeats: HashSet<String>) {
-                    showToast("Released -> ${releasedSeat.id()}")
                 }
 
                 override fun seatSelected(selectedSeat: MultipleSeat, selectedSeats: HashSet<String>) {
-                    showToast("Selected -> ${selectedSeat.id()}")
                 }
 
                 override fun canSelectSeat(clickedSeat: MultipleSeat, selectedSeats: HashSet<String>): Boolean {
@@ -62,8 +77,8 @@ class BookingFragment : BaseFragment<FragmentBookingBinding, BookingRouter, Main
     }
 
     private fun initSeatData() {
-        val rowCount = 5
-        val columnCount = 8
+        val rowCount = 15
+        val columnCount = 18
         val seatArray = Array(rowCount) { Array(columnCount) { MultipleSeat() } }
 
         for (row in 0 until rowCount) {
@@ -78,11 +93,7 @@ class BookingFragment : BaseFragment<FragmentBookingBinding, BookingRouter, Main
             }
         }
 
-        binding.seatView.initSeatView(seatArray as Array<Array<Seat>>)
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        binding.seatView.initSeatView(seatArray.map { row -> row.map { it as Seat }.toTypedArray() }.toTypedArray())
     }
 
     private fun fetchData() {
@@ -91,5 +102,14 @@ class BookingFragment : BaseFragment<FragmentBookingBinding, BookingRouter, Main
 
     private fun observe() {
         // Implement observer logic if needed
+    }
+
+    private fun toggleSeatBookingScene() {
+        isExpanded = !isExpanded
+        if (isExpanded) {
+
+        } else {
+
+        }
     }
 }

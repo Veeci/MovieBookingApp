@@ -5,9 +5,8 @@
         android:layout_height="@dimen/_70sdp"
         android:padding="@dimen/_10sdp"
         android:orientation="horizontal"
-        android:background="@drawable/rounded_corners_bgr"
-        android:backgroundTint="@color/gray"
-        android:layout_margin="@dimen/_10sdp">
+        android:background="@drawable/cinema_bg_selector"
+        android:layout_margin="@dimen/_5sdp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -21,7 +20,7 @@
                 android:id="@id/name"
                 android:text="test"
                 android:textColor="@color/ThemeSecondary"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_13sdp"
                 android:fontFamily="@font/montserrat_bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -29,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/address"
                 android:textColor="@color/ThemeSecondary"
-                android:textSize="@dimen/_13sdp"
+                android:textSize="@dimen/_12sdp"
                 android:text="test"
                 android:fontFamily="@font/montserrat" />
 
