@@ -24,7 +24,7 @@ class BookingUseCaseImpl(
                     accountName = "QUY TRO NGHEO VUNG CAO",
                     acqId = "970436",
                     addInfo = payment.paymentInfo(),
-                    amount = payment.paymentAmount()
+                    amount = payment.paymentAmount(),
                 )
             ) })
         }.onStart {

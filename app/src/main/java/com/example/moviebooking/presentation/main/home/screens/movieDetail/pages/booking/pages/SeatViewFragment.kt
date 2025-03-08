@@ -1,10 +1,6 @@
 package com.example.moviebooking.presentation.main.home.screens.movieDetail.pages.booking.pages
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.safeClick
@@ -14,7 +10,6 @@ import com.example.moviebooking.R
 import com.example.moviebooking.data.local.MultipleSeat
 import com.example.moviebooking.databinding.FragmentSeatViewBinding
 import com.example.moviebooking.domain.viewmodels.BookingViewModel
-import com.example.moviebooking.presentation.main.home.screens.movieDetail.pages.booking.BookingFragment
 import com.example.moviebooking.presentation.main.home.screens.movieDetail.pages.booking.BookingRouter
 import com.murgupluoglu.seatview.Seat
 import com.murgupluoglu.seatview.SeatViewListener
@@ -34,15 +29,21 @@ class SeatViewFragment : BaseFragment<FragmentSeatViewBinding, BookingRouter, Ma
     private fun setup() {
         with(binding) {
             seatView.seatViewListener = object : SeatViewListener<MultipleSeat> {
-                override fun seatReleased(releasedSeat: MultipleSeat, selectedSeats: HashSet<String>) {
+                override fun seatReleased(
+                    releasedSeat: MultipleSeat, selectedSeats: HashSet<String>
+                ) {
                     seats.remove(releasedSeat)
                 }
 
-                override fun seatSelected(selectedSeat: MultipleSeat, selectedSeats: HashSet<String>) {
+                override fun seatSelected(
+                    selectedSeat: MultipleSeat, selectedSeats: HashSet<String>
+                ) {
                     seats.add(selectedSeat)
                 }
 
-                override fun canSelectSeat(clickedSeat: MultipleSeat, selectedSeats: HashSet<String>): Boolean {
+                override fun canSelectSeat(
+                    clickedSeat: MultipleSeat, selectedSeats: HashSet<String>
+                ): Boolean {
                     return clickedSeat.canSelect()
                 }
             }
@@ -73,6 +74,7 @@ class SeatViewFragment : BaseFragment<FragmentSeatViewBinding, BookingRouter, Ma
             }
         }
 
-        binding.seatView.initSeatView(seatArray.map { row -> row.map { it as Seat }.toTypedArray() }.toTypedArray())
+        binding.seatView.initSeatView(seatArray.map { row -> row.map { it as Seat }.toTypedArray() }
+            .toTypedArray())
     }
 }

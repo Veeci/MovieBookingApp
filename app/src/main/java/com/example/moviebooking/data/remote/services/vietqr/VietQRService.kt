@@ -6,14 +6,15 @@ import com.example.moviebooking.data.remote.entities.vietqr.QRCodeRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface VietQRService {
 
     @GET("banks/")
-    fun getBanks(): Response<List<Banks>>
+    suspend fun getBanks(): Response<List<Banks>>
 
-    @GET("generate/")
-    fun generateQRCode(
+    @POST("generate/")
+    suspend fun generateQRCode(
         @Body request: QRCodeRequest
     ): Response<QRCode>
 }

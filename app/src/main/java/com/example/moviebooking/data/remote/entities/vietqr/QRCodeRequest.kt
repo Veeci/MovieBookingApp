@@ -8,5 +8,5 @@ data class QRCodeRequest(
     @SerializedName("acqId") val acqId: String,
     @SerializedName("addInfo") val addInfo: String,
     @SerializedName("amount") val amount: String,
-    @SerializedName("template") val template: String = "compact2"
+    @SerializedName("template") val template: String = "compact"
 )

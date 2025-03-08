@@ -115,7 +115,8 @@ class MovieViewModel(
     private val _similarMovies: MutableLiveData<ResponseStatus<SimilarMovie>> = MutableLiveData()
     val similarMovies: LiveData<ResponseStatus<SimilarMovie>> = _similarMovies
 
-    private val _recommendedMovies: MutableLiveData<ResponseStatus<RecommendationMovie>> = MutableLiveData()
+    private val _recommendedMovies: MutableLiveData<ResponseStatus<RecommendationMovie>> =
+        MutableLiveData()
     val recommendedMovies: LiveData<ResponseStatus<RecommendationMovie>> = _recommendedMovies
 
     private val _imageList: MutableLiveData<ResponseStatus<Image>> = MutableLiveData()
@@ -124,7 +125,8 @@ class MovieViewModel(
     private val _videoList: MutableLiveData<ResponseStatus<Video>> = MutableLiveData()
     val videoList: LiveData<ResponseStatus<Video>> = _videoList
 
-    private val _movieSearchingResult: MutableLiveData<ResponseStatus<MovieSearchResult>> = MutableLiveData()
+    private val _movieSearchingResult: MutableLiveData<ResponseStatus<MovieSearchResult>> =
+        MutableLiveData()
     val movieSearchingResult: LiveData<ResponseStatus<MovieSearchResult>> = _movieSearchingResult
 
     private val _reviews: MutableLiveData<ResponseStatus<Review>> = MutableLiveData()

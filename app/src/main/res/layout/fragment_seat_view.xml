@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.main.home.screens.movieDetail.pages.booking.pages.SeatViewFragment"
         android:orientation="vertical"
-        android:padding="@dimen/_10sdp">
+        android:padding="@dimen/_10sdp"
+        tools:context=".presentation.main.home.screens.movieDetail.pages.booking.pages.SeatViewFragment">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/screenTV"
@@ -26,11 +27,10 @@
 
         <com.murgupluoglu.seatview.SeatView
             android:id="@+id/seatView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_350sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/screenTV" />
 
@@ -40,8 +40,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_corners_bgr"
             android:backgroundTint="@color/ThemePrimary"
-            android:text="@string/next"
             android:fontFamily="@font/montserrat"
+            android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

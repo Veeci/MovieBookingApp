@@ -9,6 +9,7 @@ import android.media.ExifInterface
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.widget.ImageView
 import android.widget.VideoView
@@ -26,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
+import java.nio.ByteBuffer
 
 object MediaUtil {
     /**
@@ -206,6 +208,38 @@ object MediaUtil {
                 } ?: this@loadImage.gone()
         }
     }
+
+    fun ImageView.loadBase64Image(
+        base64: String?,
+        defaultImage: Any? = null,
+        onSuccess: (() -> Unit)? = null,
+        onFail: (() -> Unit)? = null
+    ) {
+        if (base64.isNullOrEmpty()) {
+            this.loadImage(defaultImage, onSuccess, onFail, defaultImage)
+            return
+        }
+
+        try {
+            val base64Image = base64.substringAfter("base64,")
+            val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
+            val byteBuffer = ByteBuffer.wrap(decodedBytes)
+
+            this.load(byteBuffer) {
+                crossfade(true)
+                transformations(CircleCropTransformation())
+                listener(
+                    onSuccess = { _, _ -> onSuccess?.invoke() ?: this@loadBase64Image.visible() },
+                    onError = { _, _ ->
+                        onFail?.invoke() ?: defaultImage?.let { this@loadBase64Image.loadImage(defaultImage) } ?: this@loadBase64Image.gone()
+                    }
+                )
+            }
+        } catch (e: Exception) {
+            onFail?.invoke() ?: defaultImage?.let { this.loadImage(defaultImage) } ?: this.gone()
+        }
+    }
+
 }
 
 /**

@@ -1,10 +1,6 @@
 package com.example.moviebooking.presentation.main.home.screens.movieDetail.pages.booking.pages
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.navigatorViewModel
@@ -14,15 +10,11 @@ import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
 import com.example.moviebooking.data.local.Cinema
 import com.example.moviebooking.data.local.CinemaData
-import com.example.moviebooking.data.local.MultipleSeat
 import com.example.moviebooking.databinding.FragmentCinemaBinding
 import com.example.moviebooking.domain.viewmodels.BookingViewModel
 import com.example.moviebooking.domain.viewmodels.MovieViewModel
 import com.example.moviebooking.presentation.main.home.adapters.CinemaAdapter
-import com.example.moviebooking.presentation.main.home.screens.movieDetail.pages.booking.BookingFragment
 import com.example.moviebooking.presentation.main.home.screens.movieDetail.pages.booking.BookingRouter
-import com.murgupluoglu.seatview.Seat
-import com.murgupluoglu.seatview.SeatViewListener
 
 class CinemaFragment : BaseFragment<FragmentCinemaBinding, BookingRouter, MainNavigator>(
     R.layout.fragment_cinema
