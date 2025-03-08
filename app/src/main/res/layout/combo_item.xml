@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/gray"
+        android:padding="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:id="@+id/imageResIdIV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/imageResIdIV"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/nameTV"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/ThemeSecondary"
+            android:textSize="@dimen/textSize_header"
+            android:layout_marginStart="@dimen/_5sdp" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/imageResIdIV"
+            app:layout_constraintTop_toBottomOf="@id/nameTV"
+            android:id="@+id/descriptionTV"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/ThemeSecondary"
+            android:textSize="@dimen/textSize_normal"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnIncrease"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:background="@drawable/quantity_button_bg"
+                android:text="@string/plus"
+                android:textColor="@color/ThemeSecondary" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/quantityTV"
+                android:textColor="@color/ThemeSecondary"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDecrease"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:background="@drawable/quantity_button_bg"
+                android:text="@string/minus"
+                android:textColor="@color/ThemeSecondary" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

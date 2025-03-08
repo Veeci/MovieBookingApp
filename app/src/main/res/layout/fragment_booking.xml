@@ -1,55 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".presentation.main.home.screens.movieDetail.pages.booking.BookingFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/dark_gray"
-        android:padding="@dimen/_5sdp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.viewpager2.widget.ViewPager2
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:id="@+id/bookingViewPager" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cinema"
-                android:textSize="@dimen/textSize_header"
-                android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/ThemeSecondary" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"
-                android:id="@+id/cinemaRV"
-                android:layout_marginTop="@dimen/_5sdp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/_15sdp">
-
-                <com.murgupluoglu.seatview.SeatView
-                    android:id="@+id/seatView"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_300sdp"
-                    android:layout_gravity="center"/>
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/comboRV" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
 </layout>

@@ -1,0 +1,55 @@
+package com.example.moviebooking.domain.viewmodels
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.baseproject.domain.utils.ResponseStatus
+import com.example.baseproject.domain.viewmodel.BaseViewModel
+import com.example.moviebooking.data.local.Cinema
+import com.example.moviebooking.data.local.Combo
+import com.example.moviebooking.data.local.MultipleSeat
+import com.example.moviebooking.data.local.Payment
+import com.example.moviebooking.data.remote.entities.vietqr.QRCode
+import com.example.moviebooking.domain.usecases.booking.BookingUseCase
+
+class BookingViewModel(
+    private val bookingUseCase: BookingUseCase
+) : BaseViewModel() {
+    private val _currentPage = MutableLiveData<Int>()
+    val currentPage: LiveData<Int> = _currentPage
+
+    private val _cinema = MutableLiveData<Cinema>()
+    val cinema: LiveData<Cinema> = _cinema
+
+    private val _seats = MutableLiveData<List<MultipleSeat>>()
+    val seats: LiveData<List<MultipleSeat>> = _seats
+
+    private val _combo = MutableLiveData<List<Combo>>()
+    val combo: LiveData<List<Combo>> = _combo
+
+    private val _qrCode = MutableLiveData<ResponseStatus<QRCode>>()
+    val qrCode: LiveData<ResponseStatus<QRCode>> = _qrCode
+
+    fun setPage(page: Int) {
+        _currentPage.value = page
+    }
+
+    fun setCinema(cinema: Cinema) {
+        _cinema.value = cinema
+    }
+
+    fun setSeats(seats: List<MultipleSeat>) {
+        _seats.value = seats
+    }
+
+    fun setCombo(combo: List<Combo>) {
+        _combo.value = combo
+    }
+
+    fun getQRCode(payment: Payment) {
+        launchCoroutine {
+            bookingUseCase.bookMovie(payment).collect { response ->
+                _qrCode.postValue(response)
+            }
+        }
+    }
+}

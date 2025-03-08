@@ -51,6 +51,9 @@ class MovieViewModel(
 ) : BaseViewModel() {
     var movieId: MutableLiveData<String> = MutableLiveData()
 
+    private val _currentMovie: MutableLiveData<Movie> = MutableLiveData()
+    val currentMovie: LiveData<Movie> = _currentMovie
+
     private val _nowPLayingList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
     val nowPLayingList: LiveData<ResponseStatus<MovieList>> = _nowPLayingList
 
@@ -329,6 +332,7 @@ class MovieViewModel(
             fetchMovieDetail.fetchData(movieID).collect { response ->
                 _movieDetail.postValue(response)
                 if (response is ResponseStatus.Success) {
+                    _currentMovie.postValue(response.data)
                     fetchMovieDetail.saveData(response.data.toEntity())
                 }
             }

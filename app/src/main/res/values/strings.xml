@@ -29,6 +29,13 @@
     <string name="chatbot">Chatbot</string>
     <string name="hi">Hi, %1$s</string>
     <string name="search_hint">Search for movies, shows,...</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="cinema">Cinema</string>
+    <string name="screen">Screen</string>
+    <string name="next">Next</string>
+    <string name="combo_with_big_offers">Combo with big offers</string>
+    <string name="confirm">Confirm</string>
 
     <array name="welcome_messages">
         <item>Welcome back!</item>
