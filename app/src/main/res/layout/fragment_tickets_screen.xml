@@ -3,16 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.main.tickets.TicketsScreen">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/ThemePrimary"
+        android:padding="@dimen/_10sdp"
+        android:orientation="vertical">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="All your tickets here!"
+            android:textColor="@color/ThemeSecondary"
+            android:textSize="@dimen/_18sdp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/ticketsRV" />
 
-    </FrameLayout>
+    </LinearLayout>
 
 </layout>

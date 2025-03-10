@@ -213,7 +213,7 @@ object MediaUtil {
         base64: String?,
         defaultImage: Any? = null,
         onSuccess: (() -> Unit)? = null,
-        onFail: (() -> Unit)? = null
+        onFail: (() -> Unit)? = null,
     ) {
         if (base64.isNullOrEmpty()) {
             this.loadImage(defaultImage, onSuccess, onFail, defaultImage)
@@ -232,14 +232,13 @@ object MediaUtil {
                     onSuccess = { _, _ -> onSuccess?.invoke() ?: this@loadBase64Image.visible() },
                     onError = { _, _ ->
                         onFail?.invoke() ?: defaultImage?.let { this@loadBase64Image.loadImage(defaultImage) } ?: this@loadBase64Image.gone()
-                    }
+                    },
                 )
             }
         } catch (e: Exception) {
             onFail?.invoke() ?: defaultImage?.let { this.loadImage(defaultImage) } ?: this.gone()
         }
     }
-
 }
 
 /**

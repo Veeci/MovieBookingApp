@@ -62,5 +62,9 @@
         android:id="@+id/movieDetailScreen"
         android:name="com.example.moviebooking.presentation.main.home.screens.movieDetail.MovieDetailScreen"
         android:label="fragment_movie_detail_screen"
-        tools:layout="@layout/fragment_movie_detail_screen" />
+        tools:layout="@layout/fragment_movie_detail_screen" >
+        <action
+            android:id="@+id/action_movieDetailScreen_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

@@ -8,6 +8,7 @@ import com.example.moviebooking.data.local.Cinema
 import com.example.moviebooking.data.local.Combo
 import com.example.moviebooking.data.local.MultipleSeat
 import com.example.moviebooking.data.local.Payment
+import com.example.moviebooking.data.local.Ticket
 import com.example.moviebooking.data.remote.entities.vietqr.QRCode
 import com.example.moviebooking.domain.usecases.booking.BookingUseCase
 
@@ -28,6 +29,9 @@ class BookingViewModel(
 
     private val _qrCode = MutableLiveData<ResponseStatus<QRCode>>()
     val qrCode: LiveData<ResponseStatus<QRCode>> = _qrCode
+
+    private val _ticket = MutableLiveData<List<Ticket>>()
+    val ticket: LiveData<List<Ticket>> = _ticket
 
     fun setPage(page: Int) {
         _currentPage.value = page
@@ -51,5 +55,9 @@ class BookingViewModel(
                 _qrCode.postValue(response)
             }
         }
+    }
+
+    fun createTicket(ticket: Ticket) {
+        _ticket.value.orEmpty().toMutableList().add(ticket)
     }
 }

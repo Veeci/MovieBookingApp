@@ -57,4 +57,12 @@ data class Payment(
 
         return totalAmount.roundToInt().toString()
     }
+
+    fun getSeats() : String {
+        val stringBuilder = StringBuilder()
+        seats.forEach { seat ->
+            stringBuilder.append("${seat.seatName}, ")
+        }
+        return stringBuilder.toString()
+    }
 }
