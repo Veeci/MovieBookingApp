@@ -5,8 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.baseproject.domain.utils.LogUtils
+import com.example.baseproject.domain.utils.message
 import com.example.baseproject.domain.utils.navigatorViewModel
+import com.example.baseproject.domain.utils.negativeAction
+import com.example.baseproject.domain.utils.positiveAction
 import com.example.baseproject.domain.utils.safeClick
+import com.example.baseproject.domain.utils.simpleAlert
+import com.example.baseproject.domain.utils.title
 import com.example.baseproject.domain.utils.toastShort
 import com.example.baseproject.presentation.BaseFragment
 import com.example.moviebooking.MainNavigator
@@ -47,18 +52,12 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
             try {
                 val account = GoogleSignIn.getSignedInAccountFromIntent(result.data).getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account.idToken!!)
+                if(account != null) {
+                    router?.goToMainScreen()
+                }
+
             } catch (e: ApiException) {
                 LogUtils.log("Auth", "Google sign in failed: $e")
-            }
-        }
-    }
-
-    private val facebookSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if(result.resultCode == Activity.RESULT_OK) {
-            try {
-                callbackManager.onActivityResult(result.resultCode, result.resultCode, result.data)
-            } catch (e: ApiException) {
-                LogUtils.log("Auth", "Facebook sign in failed: $e")
             }
         }
     }
@@ -78,12 +77,19 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
 
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        if(auth.currentUser != null) {
-            router?.goToMainScreen()
+    override fun onBackPressed(): Boolean {
+        activity.simpleAlert {
+            title("Exit app")
+            message("Are you sure you want to exit?")
+            positiveAction("Yes") {
+                activity.finish()
+            }
+            negativeAction("No") {
+                dismiss()
+            }
         }
+
+        return true
     }
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentAuthBinding) {
@@ -173,13 +179,12 @@ class LoginScreen : BaseFragment<FragmentAuthBinding, LoginRouter, MainNavigator
             }
 
             override fun onCancel() {
-                TODO("Not yet implemented")
+                activity.toastShort("Facebook sign in cancelled. Please try again!")
             }
 
             override fun onError(error: FacebookException?) {
-                TODO("Not yet implemented")
+                activity.toastShort("Facebook sign in failed. Please try again!")
             }
-
         })
     }
 

@@ -74,6 +74,7 @@ class SplashScreen : BaseFragment<FragmentSplashBinding, SplashRouter, MainNavig
                 zoomY.start()
             }
         }
+
     }
 
     private fun observe() {

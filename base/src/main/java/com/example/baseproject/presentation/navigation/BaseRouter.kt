@@ -10,7 +10,6 @@ interface BaseRouter {
     )
 
     fun onPopScreen(
-        action: Int? = null,
         inclusive: Boolean? = null,
         saveState: Boolean? = null,
     )

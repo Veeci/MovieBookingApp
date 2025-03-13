@@ -3,7 +3,7 @@ package com.example.baseproject.presentation.navigation
 import android.os.Bundle
 
 open class NavigationEvent {
-    open val action: Int = 0
+    open val action: Int? = 0
     open val extras: Bundle? = null
     open val enterAnim: Int? = null
     open val exitAnim: Int? = null
@@ -21,7 +21,7 @@ data class NextScreen(
 ) : NavigationEvent()
 
 data class PopScreen(
-    override val action: Int = -1,
+    override val action: Int? = -1,
     val inclusive: Boolean? = null,
     val saveState: Boolean? = null,
     override val extras: Bundle? = null,

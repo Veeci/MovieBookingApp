@@ -3,7 +3,12 @@ package com.example.moviebooking.presentation.main
 import android.os.Bundle
 import android.view.DragEvent
 import android.view.View
+import com.example.baseproject.domain.utils.message
 import com.example.baseproject.domain.utils.navigatorViewModel
+import com.example.baseproject.domain.utils.negativeAction
+import com.example.baseproject.domain.utils.positiveAction
+import com.example.baseproject.domain.utils.simpleAlert
+import com.example.baseproject.domain.utils.title
 import com.example.baseproject.presentation.BaseFragment
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
@@ -23,6 +28,21 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainRouter, MainNavigator
         setupPages()
         setupBottomBar()
         setupMovableFab()
+    }
+
+    override fun onBackPressed(): Boolean {
+        activity.simpleAlert {
+            title("Exit app")
+            message("Are you sure you want to exit?")
+            positiveAction("Yes") {
+                activity.finish()
+            }
+            negativeAction("No") {
+                dismiss()
+            }
+        }
+
+        return true
     }
 
     private fun setupPages() {

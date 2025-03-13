@@ -6,8 +6,13 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.baseproject.domain.utils.EndlessOnScrollListener
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.utils.journeyViewModel
+import com.example.baseproject.domain.utils.message
 import com.example.baseproject.domain.utils.navigatorViewModel
+import com.example.baseproject.domain.utils.negativeAction
+import com.example.baseproject.domain.utils.positiveAction
 import com.example.baseproject.domain.utils.safeClick
+import com.example.baseproject.domain.utils.simpleAlert
+import com.example.baseproject.domain.utils.title
 import com.example.baseproject.presentation.BaseFragment
 import com.example.baseproject.presentation.widgets.BaseListAdapter
 import com.example.baseproject.utils.MediaUtil.loadImage

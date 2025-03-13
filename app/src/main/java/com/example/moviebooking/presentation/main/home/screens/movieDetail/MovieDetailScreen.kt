@@ -83,7 +83,7 @@ class MovieDetailScreen : BaseFragment<FragmentMovieDetailScreenBinding, MovieDe
                     activity.simpleAlert {
                         title("Connection error!")
                         message("Something went wrong when fetching data. Please try again later :<")
-                        positiveAction(name = "Back") { navigator.onPopScreen() }
+                        positiveAction(name = "Back") { router?.onPopScreen() }
                     }
                 }
                 is ResponseStatus.Success -> {
@@ -96,7 +96,7 @@ class MovieDetailScreen : BaseFragment<FragmentMovieDetailScreenBinding, MovieDe
 
     private fun onClickListener() {
         with(binding) {
-            backBtn.safeClick { navigator.onPopScreen() }
+            backBtn.safeClick { router?.onPopScreen() }
         }
     }
 

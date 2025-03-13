@@ -36,13 +36,11 @@ open class BaseNavigator : BaseViewModel(), BaseRouter {
     }
 
     override fun onPopScreen(
-        action: Int?,
         inclusive: Boolean?,
         saveState: Boolean?,
     ) {
         sendEvent(
             PopScreen(
-                action = action ?: -1,
                 inclusive = inclusive,
                 saveState = saveState,
             ),
