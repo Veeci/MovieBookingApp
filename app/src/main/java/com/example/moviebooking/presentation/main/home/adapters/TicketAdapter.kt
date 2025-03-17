@@ -22,6 +22,7 @@ class TicketAdapter : BaseListAdapter<Ticket, ItemTicketBinding>() {
             movieNameTV.text = item.detail.movie.title
             timeTV.text = item.time
             seatsTV.text = item.detail.getSeats()
+            cinemaTV.text = item.detail.cinema.name
         }
     }
 }

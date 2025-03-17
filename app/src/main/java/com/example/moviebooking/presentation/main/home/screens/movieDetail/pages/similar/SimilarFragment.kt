@@ -33,7 +33,7 @@ class SimilarFragment : BaseFragment<FragmentSimilarBinding, SimilarRouter, Main
     private lateinit var similarMovieAdapter: SimilarMovieAdapter
     private lateinit var recommendedMovieAdapter: RecommendedMMovieAdapter
     private lateinit var reviewAdapter: ReviewAdapter
-    private lateinit var videoId: String
+    private var videoId: String = ""
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentSimilarBinding) {
         fetchData()

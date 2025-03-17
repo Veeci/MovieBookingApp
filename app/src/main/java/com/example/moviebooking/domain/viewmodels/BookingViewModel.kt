@@ -58,6 +58,8 @@ class BookingViewModel(
     }
 
     fun createTicket(ticket: Ticket) {
-        _ticket.value.orEmpty().toMutableList().add(ticket)
+        val updatedList = _ticket.value.orEmpty().toMutableList()
+        updatedList.add(ticket)
+        _ticket.value = updatedList
     }
 }

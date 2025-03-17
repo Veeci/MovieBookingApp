@@ -94,7 +94,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
             nowPlayingAdapter = NowPlayingAdapter().apply {
                 action = object : BaseListAdapter.Action<MovieItem> {
                     override fun click(position: Int, data: MovieItem, code: Int) {
-                        navigator.goToMovieDetailFromSeeAll(
+                        router?.goToMovieDetailFromHome(
                             extras = Bundle().apply {
                                 putString("movieID", data.id?.toString())
                             }
@@ -115,7 +115,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
             upcomingAdapter = UpcomingAdapter().apply {
                 action = object : BaseListAdapter.Action<MovieItem> {
                     override fun click(position: Int, data: MovieItem, code: Int) {
-                        navigator.goToMovieDetailFromSeeAll(
+                        router?.goToMovieDetailFromHome(
                             extras = Bundle().apply {
                                 putString("movieID", data.id?.toString())
                             }
@@ -140,7 +140,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
             topRatedAdapter = TopRatedAdapter().apply {
                 action = object : BaseListAdapter.Action<MovieItem> {
                     override fun click(position: Int, data: MovieItem, code: Int) {
-                        navigator.goToMovieDetailFromSeeAll(
+                        router?.goToMovieDetailFromHome(
                             extras = Bundle().apply {
                                 putString("movieID", data.id?.toString())
                             }
