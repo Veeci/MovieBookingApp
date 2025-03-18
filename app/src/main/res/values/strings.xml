@@ -37,6 +37,7 @@
     <string name="combo_with_big_offers">Combo with big offers</string>
     <string name="confirm">Confirm</string>
     <string name="please_give_this_code_to_our_staff">Please give this code to our staff</string>
+    <string name="all_your_tickets_here">All your tickets here!</string>
 
     <array name="welcome_messages">
         <item>Welcome back!</item>

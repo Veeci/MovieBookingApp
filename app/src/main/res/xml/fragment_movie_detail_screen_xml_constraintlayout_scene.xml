@@ -39,7 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:id="@+id/poster"
-            motion:layout_constraintTop_toTopOf="parent" />
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
             android:id="@+id/backBtn"

@@ -83,7 +83,9 @@
                 app:queryBackground="@null"
                 app:queryHint="@string/search_hint"
                 app:searchIcon="@drawable/ic_menu"
-                app:submitBackground="@null" />
+                app:submitBackground="@null"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/nowPlayingTV"

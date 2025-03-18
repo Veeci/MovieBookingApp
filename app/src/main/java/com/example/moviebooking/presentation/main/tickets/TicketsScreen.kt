@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.domain.utils.LogUtils
+import com.example.baseproject.domain.utils.gone
 import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.navigatorViewModel
+import com.example.baseproject.domain.utils.visible
 import com.example.baseproject.presentation.BaseFragment
 import com.example.baseproject.presentation.widgets.BaseListAdapter
 import com.example.moviebooking.MainNavigator
@@ -53,7 +55,10 @@ class TicketsScreen : BaseFragment<FragmentTicketsScreenBinding, TicketsRouter, 
     private fun observe() {
         bookingViewModel.ticket.observe(viewLifecycleOwner) { tickets ->
             ticketAdapter.submitList(tickets.toList())
-            LogUtils.log("TicketsScreen", "observe: ${tickets.size}")
+            if (tickets.isNotEmpty()) {
+                binding.emptyPlaceholder.gone()
+                binding.ticketsRV.visible()
+            }
         }
     }
 }

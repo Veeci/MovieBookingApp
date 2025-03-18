@@ -28,13 +28,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:orientation="vertical">
+                    android:padding="@dimen/_5sdp"
+                    android:orientation="vertical"
+                    android:background="@color/white">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/originalTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:fontFamily="@font/montserrat_bold"
                         android:gravity="center"
                         android:textColor="@color/ThemePrimary"
@@ -42,11 +43,11 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/voteAverage"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@color/white"
                         android:drawableStart="@drawable/ic_vote"
+                        android:drawablePadding="@dimen/_5sdp"
                         android:fontFamily="@font/montserrat"
                         android:gravity="center"
                         android:textAlignment="center"

@@ -5,12 +5,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.baseproject.domain.utils.EndlessOnScrollListener
 import com.example.baseproject.domain.utils.ResponseStatus
+import com.example.baseproject.domain.utils.gone
 import com.example.baseproject.domain.utils.journeyViewModel
 import com.example.baseproject.domain.utils.message
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.negativeAction
 import com.example.baseproject.domain.utils.positiveAction
 import com.example.baseproject.domain.utils.safeClick
+import com.example.baseproject.domain.utils.showKeyboard
+import com.example.baseproject.domain.utils.showKeyboardSearchView
 import com.example.baseproject.domain.utils.simpleAlert
 import com.example.baseproject.domain.utils.title
 import com.example.baseproject.presentation.BaseFragment
@@ -64,11 +67,15 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
 
     private fun setup() {
         with(binding) {
-            hiUser.text = getString(R.string.hi, auth.currentUser?.displayName)
-
             val welcomeMessages: Array<String> = resources.getStringArray(R.array.welcome_messages)
             val randomIndex = (welcomeMessages.indices).random()
-            welcomeText.text = welcomeMessages[randomIndex]
+            if (auth.currentUser?.displayName != "null") {
+                hiUser.text = getString(R.string.hi, auth.currentUser?.displayName)
+                welcomeText.text = welcomeMessages[randomIndex]
+            } else {
+                hiUser.text = welcomeMessages[randomIndex]
+                welcomeText.gone()
+            }
 
             binding.avatar.loadImage(
                 source = auth.currentUser?.photoUrl,
@@ -76,6 +83,13 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
             )
 
             searchView.clearFocus()
+            searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
+                if(hasFocus) {
+                    activity.showKeyboardSearchView(searchView)
+                } else {
+                    activity.closeKeyBoard()
+                }
+            }
 
             val banners = listOf(
                 Banner(R.drawable.banner1),
@@ -99,6 +113,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                                 putString("movieID", data.id?.toString())
                             }
                         )
+                        movieViewModel.movieId.postValue(data.id.toString())
                     }
 
                 }
@@ -120,6 +135,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                                 putString("movieID", data.id?.toString())
                             }
                         )
+                        movieViewModel.movieId.postValue(data.id.toString())
                     }
 
                 }
@@ -145,6 +161,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                                 putString("movieID", data.id?.toString())
                             }
                         )
+                        movieViewModel.movieId.postValue(data.id.toString())
                     }
 
                 }

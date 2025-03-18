@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 
 fun Context.toastShort(msg: String) {
@@ -21,6 +22,14 @@ fun Context.toastLong(msg: String) {
 fun Activity.showKeyboard(view: EditText) {
     val imm = getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+}
+
+fun Activity.showKeyboardSearchView(searchView: SearchView) {
+    val searchEditText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+    searchEditText.requestFocus()
+
+    val imm = getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT)
 }
 
 fun Activity.closeKeyBoard() {

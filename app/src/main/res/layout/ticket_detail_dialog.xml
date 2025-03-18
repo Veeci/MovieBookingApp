@@ -55,6 +55,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:text="@string/please_give_this_code_to_our_staff"
                     android:textColor="@color/ThemeSecondary"
                     android:drawableEnd="@drawable/ic_right_arrow"
