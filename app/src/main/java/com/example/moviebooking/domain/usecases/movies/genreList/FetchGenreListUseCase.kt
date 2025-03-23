@@ -2,7 +2,7 @@ package com.example.moviebooking.domain.usecases.movies.genreList
 
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.moviebooking.data.local.entities.MovieGenreEntity
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
+import com.example.moviebooking.data.remote.entities.tmdb.Genres
 import kotlinx.coroutines.flow.Flow
 
 interface FetchGenreListUseCase {

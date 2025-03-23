@@ -1,16 +1,16 @@
 package com.example.moviebooking.data.remote.services.tmdb
 
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Credit
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Image
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Keyword
+import com.example.moviebooking.data.remote.entities.tmdb.Genres
+import com.example.moviebooking.data.remote.entities.tmdb.Image
+import com.example.moviebooking.data.remote.entities.tmdb.Keyword
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
-import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieSearchResult
+import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieSearchResultDTO
 import com.example.moviebooking.data.remote.entities.tmdb.movie.RecommendationMovie
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Review
+import com.example.moviebooking.data.remote.entities.tmdb.Review
 import com.example.moviebooking.data.remote.entities.tmdb.movie.SimilarMovie
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Video
+import com.example.moviebooking.data.remote.entities.tmdb.Video
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -90,7 +90,7 @@ interface MovieService {
         @Query("query") query: String,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1
-    ): Response<MovieSearchResult>
+    ): Response<MovieSearchResultDTO>
 
     @GET("movie/{movie_id}/reviews")
     suspend fun getReviewList(

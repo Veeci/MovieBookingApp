@@ -1,7 +1,7 @@
 package com.example.moviebooking.domain.usecases.movies.videos
 
 import com.example.baseproject.domain.utils.ResponseStatus
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Video
+import com.example.moviebooking.data.remote.entities.tmdb.Video
 import kotlinx.coroutines.flow.Flow
 
 interface FetchVideoUseCase {

@@ -3,8 +3,8 @@ package com.example.moviebooking.data.remote.entities.tmdb.movie
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
-import com.example.baseproject.data.BaseDTO
 import com.example.moviebooking.data.local.entities.MovieEntity
+import com.example.moviebooking.data.remote.entities.tmdb.Genre
 
 @Parcelize
 data class Movie(

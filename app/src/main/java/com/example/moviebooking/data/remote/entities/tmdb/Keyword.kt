@@ -1,4 +1,4 @@
-package com.example.moviebooking.data.remote.entities.tmdb.movie
+package com.example.moviebooking.data.remote.entities.tmdb
 
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable

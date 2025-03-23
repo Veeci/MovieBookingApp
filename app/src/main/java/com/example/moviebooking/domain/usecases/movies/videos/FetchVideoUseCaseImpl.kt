@@ -2,7 +2,7 @@ package com.example.moviebooking.domain.usecases.movies.videos
 
 import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Video
+import com.example.moviebooking.data.remote.entities.tmdb.Video
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

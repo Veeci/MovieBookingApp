@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class MovieSearchResult(
+data class MovieSearchResultDTO(
 	@SerializedName("page")
 	val page: Int? = null,
 	@SerializedName("total_pages")

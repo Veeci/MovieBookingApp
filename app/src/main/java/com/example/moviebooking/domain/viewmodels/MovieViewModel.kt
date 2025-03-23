@@ -6,17 +6,17 @@ import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.moviebooking.data.local.entities.MovieItemEntity
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Credit
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Genre
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Image
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Keyword
+import com.example.moviebooking.data.remote.entities.tmdb.Genre
+import com.example.moviebooking.data.remote.entities.tmdb.Genres
+import com.example.moviebooking.data.remote.entities.tmdb.Image
+import com.example.moviebooking.data.remote.entities.tmdb.Keyword
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
-import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieSearchResult
+import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieSearchResultDTO
 import com.example.moviebooking.data.remote.entities.tmdb.movie.RecommendationMovie
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Review
+import com.example.moviebooking.data.remote.entities.tmdb.Review
 import com.example.moviebooking.data.remote.entities.tmdb.movie.SimilarMovie
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Video
+import com.example.moviebooking.data.remote.entities.tmdb.Video
 import com.example.moviebooking.domain.usecases.movies.castList.FetchCastListUseCase
 import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCase
 import com.example.moviebooking.domain.usecases.movies.getKeywords.FetchKeywordUseCase
@@ -125,9 +125,9 @@ class MovieViewModel(
     private val _videoList: MutableLiveData<ResponseStatus<Video>> = MutableLiveData()
     val videoList: LiveData<ResponseStatus<Video>> = _videoList
 
-    private val _movieSearchingResult: MutableLiveData<ResponseStatus<MovieSearchResult>> =
+    private val _movieSearchingResult: MutableLiveData<ResponseStatus<MovieSearchResultDTO>> =
         MutableLiveData()
-    val movieSearchingResult: LiveData<ResponseStatus<MovieSearchResult>> = _movieSearchingResult
+    val movieSearchingResult: LiveData<ResponseStatus<MovieSearchResultDTO>> = _movieSearchingResult
 
     private val _reviews: MutableLiveData<ResponseStatus<Review>> = MutableLiveData()
     val reviews: LiveData<ResponseStatus<Review>> = _reviews

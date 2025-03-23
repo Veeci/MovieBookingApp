@@ -1,6 +1,8 @@
-import com.google.gson.annotations.SerializedName
+package com.example.moviebooking.data.remote.entities.tmdb
+
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 @Parcelize
 data class Review(
@@ -8,28 +10,28 @@ data class Review(
 	val id: Int? = null,
 	@SerializedName("page")
 	val page: Int? = null,
-	@SerializedName("results")
-	val results: List<ResultsItem?>? = null,
 	@SerializedName("total_pages")
 	val totalPages: Int? = null,
+	@SerializedName("results")
+	val results: List<ReviewItem?>? = null,
 	@SerializedName("total_results")
 	val totalResults: Int? = null
 ) : Parcelable
 
 @Parcelize
-data class ResultsItem(
-	@SerializedName("author")
-	val author: String? = null,
+data class ReviewItem(
 	@SerializedName("author_details")
 	val authorDetails: AuthorDetails? = null,
-	@SerializedName("content")
-	val content: String? = null,
+	@SerializedName("updated_at")
+	val updatedAt: String? = null,
+	@SerializedName("author")
+	val author: String? = null,
 	@SerializedName("created_at")
 	val createdAt: String? = null,
 	@SerializedName("id")
 	val id: String? = null,
-	@SerializedName("updated_at")
-	val updatedAt: String? = null,
+	@SerializedName("content")
+	val content: String? = null,
 	@SerializedName("url")
 	val url: String? = null
 ) : Parcelable
@@ -41,7 +43,7 @@ data class AuthorDetails(
 	@SerializedName("name")
 	val name: String? = null,
 	@SerializedName("rating")
-	val rating: Double? = null,
+	val rating: Int? = null,
 	@SerializedName("username")
 	val username: String? = null
 ) : Parcelable

@@ -1,13 +1,10 @@
 package com.example.moviebooking.presentation.main.home.adapters
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.baseproject.presentation.widgets.BaseListAdapter
 import com.example.baseproject.utils.MediaUtil.loadImage
 import com.example.moviebooking.R
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Image
-import com.example.moviebooking.data.remote.entities.tmdb.movie.PostersItem
+import com.example.moviebooking.data.remote.entities.tmdb.PostersItem
 import com.example.moviebooking.databinding.ImageItemBinding
 import com.example.moviebooking.domain.common.Const
 

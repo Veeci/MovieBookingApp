@@ -1,4 +1,4 @@
-package com.example.moviebooking.data.remote.entities.tmdb.movie
+package com.example.moviebooking.data.remote.entities.tmdb
 
 import android.os.Parcelable
 import com.example.baseproject.data.BaseDTO

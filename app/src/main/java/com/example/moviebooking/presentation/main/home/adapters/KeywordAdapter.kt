@@ -2,7 +2,7 @@ package com.example.moviebooking.presentation.main.home.adapters
 
 import com.example.baseproject.presentation.widgets.BaseListAdapter
 import com.example.moviebooking.R
-import com.example.moviebooking.data.remote.entities.tmdb.movie.KeywordsItem
+import com.example.moviebooking.data.remote.entities.tmdb.KeywordsItem
 import com.example.moviebooking.databinding.KeywordItemBinding
 
 class KeywordAdapter : BaseListAdapter<KeywordsItem, KeywordItemBinding>() {

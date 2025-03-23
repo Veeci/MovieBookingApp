@@ -4,7 +4,7 @@ import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.moviebooking.data.local.dao.MovieGenreDao
 import com.example.moviebooking.data.local.entities.MovieGenreEntity
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Genres
+import com.example.moviebooking.data.remote.entities.tmdb.Genres
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
