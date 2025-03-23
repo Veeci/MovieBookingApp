@@ -55,5 +55,9 @@ class ComboFragment : BaseFragment<FragmentComboBinding, BookingRouter, MainNavi
                 PaymentDialog::class.java.name
             )
         }
+
+        binding.btnPrevious.safeClick {
+            bookingViewModel.setPage(1)
+        }
     }
 }

@@ -69,7 +69,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
         with(binding) {
             val welcomeMessages: Array<String> = resources.getStringArray(R.array.welcome_messages)
             val randomIndex = (welcomeMessages.indices).random()
-            if (auth.currentUser?.displayName != "null") {
+            if (!auth.currentUser?.displayName.isNullOrBlank()) {
                 hiUser.text = getString(R.string.hi, auth.currentUser?.displayName)
                 welcomeText.text = welcomeMessages[randomIndex]
             } else {

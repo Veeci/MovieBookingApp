@@ -6,9 +6,11 @@ import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.moviebooking.data.local.Cinema
 import com.example.moviebooking.data.local.Combo
+import com.example.moviebooking.data.local.Date
 import com.example.moviebooking.data.local.MultipleSeat
 import com.example.moviebooking.data.local.Payment
 import com.example.moviebooking.data.local.Ticket
+import com.example.moviebooking.data.local.Time
 import com.example.moviebooking.data.remote.entities.vietqr.QRCode
 import com.example.moviebooking.domain.usecases.booking.BookingUseCase
 
@@ -33,6 +35,12 @@ class BookingViewModel(
     private val _ticket = MutableLiveData<List<Ticket>>()
     val ticket: LiveData<List<Ticket>> = _ticket
 
+    private val _date = MutableLiveData<Date>()
+    val date: LiveData<Date> = _date
+
+    private val _time = MutableLiveData<Time>()
+    val time: LiveData<Time> = _time
+
     fun setPage(page: Int) {
         _currentPage.value = page
     }
@@ -55,6 +63,14 @@ class BookingViewModel(
                 _qrCode.postValue(response)
             }
         }
+    }
+
+    fun setDate(date: Date) {
+        _date.value = date
+    }
+
+    fun setTime(time: Time) {
+        _time.value = time
     }
 
     fun createTicket(ticket: Ticket) {

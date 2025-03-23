@@ -141,7 +141,6 @@ class AboutFragment : BaseFragment<FragmentAboutBinding, AboutRouter, MainNaviga
                 is ResponseStatus.Loading -> showLoading(isLoading = true, preventClicking = true)
                 is ResponseStatus.Error -> {
                     showLoading(isLoading = false)
-
                 }
                 is ResponseStatus.Success -> {
                     showLoading(isLoading = false)

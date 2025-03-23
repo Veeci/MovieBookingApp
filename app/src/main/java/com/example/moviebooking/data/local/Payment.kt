@@ -31,7 +31,7 @@ data class Payment(
         }
 
         // Popcorn/Combo Information
-        stringBuilder.append("Combos:\n")
+        stringBuilder.append(" Combos:\n")
         if (popcorn.isNotEmpty()) {
             popcorn.forEach { combo ->
                 stringBuilder.append("- ${combo.name} - Price: ${combo.price}\n")

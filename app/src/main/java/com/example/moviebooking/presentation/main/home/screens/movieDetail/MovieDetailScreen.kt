@@ -20,9 +20,10 @@ import com.example.moviebooking.domain.viewmodels.MovieViewModel
 import com.example.moviebooking.presentation.main.home.adapters.MovieDetailPagerAdapter
 import com.google.android.material.tabs.TabLayout
 
-class MovieDetailScreen : BaseFragment<FragmentMovieDetailScreenBinding, MovieDetailRouter, MainNavigator>(
-    R.layout.fragment_movie_detail_screen
-) {
+class MovieDetailScreen :
+    BaseFragment<FragmentMovieDetailScreenBinding, MovieDetailRouter, MainNavigator>(
+        R.layout.fragment_movie_detail_screen
+    ) {
     override val navigator: MainNavigator by navigatorViewModel()
     private val movieViewmodel: MovieViewModel by journeyViewModel()
 
@@ -47,7 +48,7 @@ class MovieDetailScreen : BaseFragment<FragmentMovieDetailScreenBinding, MovieDe
                 addOnTabSelectedListener(
                     object : TabLayout.OnTabSelectedListener {
                         override fun onTabSelected(tab: TabLayout.Tab?) {
-                            when(tab?.position) {
+                            when (tab?.position) {
                                 0 -> detailViewPager.currentItem = 0
                                 1 -> detailViewPager.currentItem = 1
                                 2 -> detailViewPager.currentItem = 2
@@ -76,7 +77,7 @@ class MovieDetailScreen : BaseFragment<FragmentMovieDetailScreenBinding, MovieDe
 
     private fun observe() {
         movieViewmodel.movieDetail.observe(viewLifecycleOwner) { status ->
-            when(status) {
+            when (status) {
                 is ResponseStatus.Loading -> showLoading(isLoading = true)
                 is ResponseStatus.Error -> {
                     showLoading(isLoading = false)
@@ -86,6 +87,7 @@ class MovieDetailScreen : BaseFragment<FragmentMovieDetailScreenBinding, MovieDe
                         positiveAction(name = "Back") { router?.onPopScreen() }
                     }
                 }
+
                 is ResponseStatus.Success -> {
                     showLoading(isLoading = false)
                     displayMovieDetail(status.data)

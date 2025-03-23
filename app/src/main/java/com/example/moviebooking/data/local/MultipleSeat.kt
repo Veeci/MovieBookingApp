@@ -45,7 +45,7 @@ data class MultipleSeat(
     }
 
     override fun canSelect(): Boolean {
-        return type == TYPE.SELECTABLE || type == TYPE.DISABLED_PERSON
+        return type == TYPE.SELECTABLE
     }
 
     override fun isPreSelected(): Boolean {

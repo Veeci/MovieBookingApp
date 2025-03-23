@@ -1,6 +1,5 @@
 package com.example.baseproject.presentation
 
-import android.app.Activity
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -9,7 +8,6 @@ import android.os.Bundle
 import android.service.chooser.ChooserAction
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.SearchView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -156,7 +154,6 @@ abstract class BaseActivity<V : ViewBinding, Router : BaseRouter, N : BaseNaviga
                                 navController.popBackStack()
                             }
                         } ?: run {
-                            // If no action, just pop the previous screen
                             navController.popBackStack()
                         }
                     }

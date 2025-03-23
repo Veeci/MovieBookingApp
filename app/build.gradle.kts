@@ -60,8 +60,6 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.github.smarteist:Android-Image-Slider:1.4.0")
     implementation("com.intuit.sdp:sdp-android:1.1.1")
-    implementation("com.github.murgupluoglu:seatview-android:3.0.0")
     implementation("com.google.zxing:core:3.2.1")
-    implementation("com.vipulasri:ticketview:1.1.2")
 }
 

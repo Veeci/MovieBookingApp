@@ -23,8 +23,6 @@ class CinemaFragment : BaseFragment<FragmentCinemaBinding, BookingRouter, MainNa
     private val movieViewmodel: MovieViewModel by journeyViewModel()
     private val bookingViewModel: BookingViewModel by journeyViewModel()
 
-    private var isExpanded = false
-    private var selectedCinema: Cinema? = null
 
     override fun initView(savedInstanceState: Bundle?, binding: FragmentCinemaBinding) {
         setup()

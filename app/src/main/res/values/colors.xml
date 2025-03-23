@@ -4,7 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#FF7F7F7F</color>
     <color name="light_gray">#B1B1B1</color>
-    <color name="dark_gray">#575757</color>
+    <color name="dark_gray">#98575757</color>
+    <color name="heavy_gray">#2C2C2C</color>
 
     <color name="ThemePrimary">#8EB486</color>
     <color name="ThemeSecondary">#FDF7F4</color>

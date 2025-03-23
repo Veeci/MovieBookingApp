@@ -105,7 +105,8 @@ class PaymentDialog : BaseDialog<PaymentDialogBinding, MainNavigator>(
     private fun generateTicket() : Ticket {
         return Ticket(
             detail = payment,
-            time = System.currentTimeMillis().toString(),
+            date = bookingViewModel.date.value.toString(),
+            time = bookingViewModel.time.value.toString(),
             barcode = generateQRCode(payment.paymentInfo(), 300, 300)
         )
     }

@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 
 data class Ticket (
     val detail: Payment,
+    val date: String,
     val time: String,
     val barcode : Bitmap
 )

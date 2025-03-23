@@ -38,6 +38,22 @@
     <string name="confirm">Confirm</string>
     <string name="please_give_this_code_to_our_staff">Please give this code to our staff</string>
     <string name="all_your_tickets_here">All your tickets here!</string>
+    <string name="reviews">Reviews</string>
+    <string name="recommended">Recommended</string>
+    <string name="similar">Similar</string>
+    <string name="genre">Genre:</string>
+    <string name="status">Status:</string>
+    <string name="tagline">Tagline:</string>
+    <string name="overview">Overview</string>
+    <string name="cast">Cast</string>
+    <string name="director">Director</string>
+    <string name="production">Production</string>
+    <string name="keywords">Keywords:</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="available">Available</string>
+    <string name="selected">Selected</string>
+    <string name="choose_your_time">Choose your time</string>
+    <string name="previous">Previous</string>
 
     <array name="welcome_messages">
         <item>Welcome back!</item>
