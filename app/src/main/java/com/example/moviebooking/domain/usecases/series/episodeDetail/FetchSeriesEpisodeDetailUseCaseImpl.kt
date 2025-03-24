@@ -1,8 +1,8 @@
-package com.example.moviebooking.domain.usecases.movies.videos
+package com.example.moviebooking.domain.usecases.series.episodeDetail
 
 import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
-import com.example.moviebooking.data.remote.entities.tmdb.Video
+import com.example.moviebooking.data.remote.entities.tmdb.series.SerieEpisodeDTO
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -11,18 +11,23 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 
-class FetchVideoUseCaseImpl(
+class FetchSeriesEpisodeDetailUseCaseImpl(
     private val apiService: TMDBService
-): FetchVideoUseCase, ApiHandler {
-    override fun fetchData(movieId: String): Flow<ResponseStatus<Video>> {
-        return  flow{
-            emit(handleApi { apiService.getMovieVideoList(movieId) })
+) : FetchSeriesEpisodeDetailUseCase, ApiHandler {
+    override fun execute(
+        seriesId: String,
+        seasonNumber: String,
+        episodeNumber: String
+    ): Flow<ResponseStatus<SerieEpisodeDTO>> {
+        return flow {
+            emit(handleApi { apiService.getEpisodeDetail(seriesId, seasonNumber, episodeNumber) })
         }.onStart {
             emit(ResponseStatus.Loading)
         }.catch { e ->
             emit(
                 ResponseStatus.Error(
-                    message = e.message ?: "Unknown Error"
+                    message = e.message ?: "Unknown Error",
+                    errorCode = 500
                 )
             )
         }.flowOn(Dispatchers.IO)

@@ -21,7 +21,7 @@ data class PeopleItem(
     @SerializedName("known_for") val knownFor: List<KnownForItem?>? = null,
     @SerializedName("name") val name: String? = null,
     @SerializedName("profile_path") val profilePath: String? = null,
-    @SerializedName("id") val id: Int? = null,
+    @SerializedName("id") val id: String? = null,
     @SerializedName("adult") val adult: Boolean? = null
 ) : Parcelable
 

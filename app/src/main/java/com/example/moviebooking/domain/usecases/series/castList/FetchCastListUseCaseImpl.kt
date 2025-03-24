@@ -1,4 +1,4 @@
-package com.example.moviebooking.domain.usecases.movies.castList
+package com.example.moviebooking.domain.usecases.series.castList
 
 import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
@@ -12,23 +12,20 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 
 class FetchCastListUseCaseImpl(
-    private val apiService: TMDBService,
+    private val apiService: TMDBService
 ) : FetchCastListUseCase, ApiHandler {
-    override fun fetchData(movieId: String): Flow<ResponseStatus<Credit>> {
+    override fun execute(seriesId: String): Flow<ResponseStatus<Credit>> {
         return flow {
-            try {
-                emit(handleApi { apiService.getMovieCastList(movieId) })
-            } catch (e: Exception) {
-                emit(ResponseStatus.Error(
-                    message = e.message ?: "Unknown Error"
-                ))
-            }
+            emit(handleApi { apiService.getGenreCastList(seriesId) })
         }.onStart {
             emit(ResponseStatus.Loading)
         }.catch { e ->
-            emit(ResponseStatus.Error(
-                message = e.message ?: "Unknown Error"
-            ))
+            emit(
+                ResponseStatus.Error(
+                    message = e.message ?: "Something went wrong",
+                    errorCode = 500
+                )
+            )
         }.flowOn(Dispatchers.IO)
     }
 }

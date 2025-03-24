@@ -1,29 +1,31 @@
-package com.example.moviebooking.domain.usecases.movies.images
+package com.example.moviebooking.domain.usecases.series.recommendedList
 
 import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
-import com.example.moviebooking.data.remote.entities.tmdb.Image
+import com.example.moviebooking.data.remote.entities.tmdb.series.RecommendationSeries
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 
-class FetchImageUseCaseImpl(
+class FetchRecommendationSeriesUseCaseImpl(
     private val apiService: TMDBService
-): FetchImageUseCase, ApiHandler {
-    override fun fetchData(movieId: String): Flow<ResponseStatus<Image>> {
+) : FetchRecommendationSeriesUseCase, ApiHandler {
+    override fun execute(seriesId: String): Flow<ResponseStatus<RecommendationSeries>> {
         return flow {
-            emit(handleApi { apiService.getMovieImageList(movieId) })
+            emit(handleApi { apiService.getRecommendationSeries(seriesId) })
         }.onStart {
             emit(ResponseStatus.Loading)
         }.catch { e ->
             emit(
                 ResponseStatus.Error(
-                    message = e.message ?: "Unknown Error"
+                    message = e.message ?: "Unknown Error",
+                    errorCode = 500
                 )
             )
-        }.onStart { Dispatchers.IO }
+        }.flowOn(Dispatchers.IO)
     }
 }

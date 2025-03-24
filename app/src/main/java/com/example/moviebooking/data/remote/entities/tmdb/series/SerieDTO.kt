@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SerieDTO(
+data class Series(
     @SerializedName("original_language") val originalLanguage: String? = null,
     @SerializedName("number_of_episodes") val numberOfEpisodes: Int? = null,
     @SerializedName("networks") val networks: List<NetworksItem?>? = null,
@@ -14,7 +14,7 @@ data class SerieDTO(
     @SerializedName("genres") val genres: List<GenresItem?>? = null,
     @SerializedName("popularity") val popularity: Double? = null,
     @SerializedName("production_countries") val productionCountries: List<ProductionCountriesItem?>? = null,
-    @SerializedName("id") val id: Int? = null,
+    @SerializedName("id") val id: String? = null,
     @SerializedName("number_of_seasons") val numberOfSeasons: Int? = null,
     @SerializedName("vote_count") val voteCount: Int? = null,
     @SerializedName("first_air_date") val firstAirDate: String? = null,
@@ -55,7 +55,7 @@ data class SeasonsItem(
     @SerializedName("vote_average") val voteAverage: Double? = null,
     @SerializedName("name") val name: String? = null,
     @SerializedName("season_number") val seasonNumber: Int? = null,
-    @SerializedName("id") val id: Int? = null,
+    @SerializedName("id") val id: String? = null,
     @SerializedName("poster_path") val posterPath: String? = null
 ) : Parcelable
 
@@ -88,7 +88,7 @@ data class LastEpisodeToAir(
     @SerializedName("episode_number") val episodeNumber: Int? = null,
     @SerializedName("vote_average") val voteAverage: Int? = null,
     @SerializedName("name") val name: String? = null,
-    @SerializedName("id") val id: Int? = null,
+    @SerializedName("id") val id: String? = null,
     @SerializedName("vote_count") val voteCount: Int? = null
 ) : Parcelable
 
@@ -113,7 +113,7 @@ data class NextEpisodeToAir(
     @SerializedName("episode_number") val episodeNumber: Int? = null,
     @SerializedName("vote_average") val voteAverage: Int? = null,
     @SerializedName("name") val name: String? = null,
-    @SerializedName("id") val id: Int? = null,
+    @SerializedName("id") val id: String? = null,
     @SerializedName("vote_count") val voteCount: Int? = null
 ) : Parcelable
 

@@ -19,7 +19,7 @@ class FetchGenreListUseCaseImpl(
 ): FetchGenreListUseCase, ApiHandler {
     override fun fetchData(): Flow<ResponseStatus<Genres>> {
         return flow {
-            emit(handleApi { apiService.getGenreList() })
+            emit(handleApi { apiService.getMovieGenreList() })
         }.onStart {
             this.emit(ResponseStatus.Loading)
         }.catch {

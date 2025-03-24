@@ -16,7 +16,7 @@ class FetchKeywordUseCaseImpl(
 ): FetchKeywordUseCase, ApiHandler {
     override suspend fun fetchData(movieId: String): Flow<ResponseStatus<Keyword>> {
         return flow {
-            emit(handleApi { apiService.getKeywordList(movieId) })
+            emit(handleApi { apiService.getMovieKeywordList(movieId) })
         }.onStart {
             emit(ResponseStatus.Loading)
         }.catch { e ->

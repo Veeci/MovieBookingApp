@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SerieItemDTO(
+data class SeriesList(
 	@SerializedName("page")
 	val page: Int? = null,
 	@SerializedName("total_pages")
@@ -41,7 +41,7 @@ data class SeriesItem(
 	@SerializedName("name")
 	val name: String? = null,
 	@SerializedName("id")
-	val id: Int? = null,
+	val id: String? = null,
 	@SerializedName("adult")
 	val adult: Boolean? = null,
 	@SerializedName("vote_count")

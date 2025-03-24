@@ -47,17 +47,17 @@ interface MovieService {
     ): Response<Movie>
 
     @GET("genre/movie/list")
-    suspend fun getGenreList(
+    suspend fun getMovieGenreList(
         @Query("language") language: String? = "en"
     ): Response<Genres>
 
     @GET("movie/{movie_id}/credits")
-    suspend fun getCastList(
+    suspend fun getMovieCastList(
         @Path("movie_id") movieId: String
     ): Response<Credit>
 
     @GET("movie/{movie_id}/keywords")
-    suspend fun getKeywordList(
+    suspend fun getMovieKeywordList(
         @Path("movie_id") movieId: String
     ): Response<Keyword>
 
@@ -76,12 +76,12 @@ interface MovieService {
     ): Response<RecommendationMovie>
 
     @GET("movie/{movie_id}/images")
-    suspend fun getImageList(
+    suspend fun getMovieImageList(
         @Path("movie_id") movieId: String
     ): Response<Image>
 
     @GET("movie/{movie_id}/videos")
-    suspend fun getVideoList(
+    suspend fun getMovieVideoList(
         @Path("movie_id") movieId: String
     ): Response<Video>
 
@@ -93,7 +93,7 @@ interface MovieService {
     ): Response<MovieSearchResultDTO>
 
     @GET("movie/{movie_id}/reviews")
-    suspend fun getReviewList(
+    suspend fun getMovieReviewList(
         @Path("movie_id") movieId: String,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1

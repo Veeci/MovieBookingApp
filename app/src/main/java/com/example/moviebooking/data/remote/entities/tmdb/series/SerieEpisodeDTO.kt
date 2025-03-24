@@ -17,7 +17,7 @@ data class SerieEpisodeDTO(
 	@SerializedName("episode_number") val episodeNumber: Int? = null,
 	@SerializedName("vote_average") val voteAverage: Double? = null,
 	@SerializedName("name") val name: String? = null,
-	@SerializedName("id") val id: Int? = null,
+	@SerializedName("id") val id: String? = null,
 	@SerializedName("vote_count") val voteCount: Int? = null
 ) : Parcelable
 

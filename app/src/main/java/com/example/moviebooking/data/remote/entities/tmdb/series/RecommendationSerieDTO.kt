@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class RecommendationSerieDTO(
+data class RecommendationSeries(
     @SerializedName("page") val page: Int? = null,
     @SerializedName("total_pages") val totalPages: Int? = null,
     @SerializedName("results") val results: List<RecommendationSerieItem?>? = null,

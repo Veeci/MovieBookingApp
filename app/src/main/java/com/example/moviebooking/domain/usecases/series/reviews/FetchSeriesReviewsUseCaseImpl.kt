@@ -1,4 +1,4 @@
-package com.example.moviebooking.domain.usecases.movies.reviews
+package com.example.moviebooking.domain.usecases.series.reviews
 
 import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
@@ -11,18 +11,21 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 
-class FetchReviewsUseCaseImpl(
+class FetchSeriesReviewsUseCaseImpl(
     private val apiService: TMDBService
-): FetchReviewsUseCase, ApiHandler {
-    override fun fetchData(movieId: String): Flow<ResponseStatus<Review>> {
+) : FetchSeriesReviewsUseCase, ApiHandler {
+    override fun execute(seriesId: String): Flow<ResponseStatus<Review>> {
         return flow {
-            emit(handleApi { apiService.getMovieReviewList(movieId = movieId) })
+            emit(handleApi { apiService.getSeriesReviewList(seriesId) })
         }.onStart {
             emit(ResponseStatus.Loading)
         }.catch { e ->
-            emit(ResponseStatus.Error(
-                message = e.message ?: "Something went wrong"
-            ))
+            emit(
+                ResponseStatus.Error(
+                    message = e.message ?: "Unknown Error",
+                    errorCode = 500
+                )
+            )
         }.flowOn(Dispatchers.IO)
     }
 }

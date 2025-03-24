@@ -17,7 +17,7 @@ data class PeopleDTO(
     @SerializedName("place_of_birth") val placeOfBirth: String? = null,
     @SerializedName("popularity") val popularity: Double? = null,
     @SerializedName("name") val name: String? = null,
-    @SerializedName("id") val id: Int? = null,
+    @SerializedName("id") val id: String? = null,
     @SerializedName("adult") val adult: Boolean? = null,
     @SerializedName("homepage") val homepage: String? = null
 ) : Parcelable
