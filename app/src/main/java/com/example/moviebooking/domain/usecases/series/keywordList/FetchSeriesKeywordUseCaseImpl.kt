@@ -1,8 +1,8 @@
-package com.example.moviebooking.domain.usecases.series.genreList
+package com.example.moviebooking.domain.usecases.series.keywordList
 
 import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
-import com.example.moviebooking.data.remote.entities.tmdb.Genres
+import com.example.moviebooking.data.remote.entities.tmdb.Keyword
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -11,12 +11,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 
-class FetchGenreListUseCaseImpl(
+class FetchSeriesKeywordUseCaseImpl(
     private val apiService: TMDBService
-) : FetchGenreListUseCase, ApiHandler {
-    override fun execute(): Flow<ResponseStatus<Genres>> {
+) : FetchSeriesKeywordUseCase, ApiHandler {
+    override fun execute(seriesId: String): Flow<ResponseStatus<Keyword>> {
         return flow {
-            emit(handleApi { apiService.getSeriesGenreList() })
+            emit(handleApi { apiService.getSeriesKeywordList(seriesId) })
         }.onStart {
             emit(ResponseStatus.Loading)
         }.catch { e ->

@@ -1,8 +1,8 @@
-package com.example.moviebooking.domain.usecases.series.keywordList
+package com.example.moviebooking.domain.usecases.people.getMovieCredits
 
 import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
-import com.example.moviebooking.data.remote.entities.tmdb.Keyword
+import com.example.moviebooking.data.remote.entities.tmdb.people.PeopleDTO
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -11,18 +11,18 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 
-class FetchKeywordUseCaseImpl(
+class FetchMovieCreditsUseCaseImpl(
     private val apiService: TMDBService
-) : FetchKeywordUseCase, ApiHandler {
-    override fun execute(seriesId: String): Flow<ResponseStatus<Keyword>> {
+) : FetchMovieCreditsUseCase, ApiHandler {
+    override fun execute(personId: String): Flow<ResponseStatus<PeopleDTO>> {
         return flow {
-            emit(handleApi { apiService.getSeriesKeywordList(seriesId) })
+            emit(handleApi { apiService.getMovieCredits(personId = personId) })
         }.onStart {
             emit(ResponseStatus.Loading)
         }.catch { e ->
             emit(
                 ResponseStatus.Error(
-                    message = e.message ?: "Something went wrong",
+                    message = e.message ?: "Unknown Error",
                     errorCode = 500
                 )
             )

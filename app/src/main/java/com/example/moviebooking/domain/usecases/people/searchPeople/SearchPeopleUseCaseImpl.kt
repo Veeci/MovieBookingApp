@@ -1,8 +1,8 @@
-package com.example.moviebooking.domain.usecases.series.castList
+package com.example.moviebooking.domain.usecases.people.searchPeople
 
 import com.example.baseproject.domain.utils.ApiHandler
 import com.example.baseproject.domain.utils.ResponseStatus
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Credit
+import com.example.moviebooking.data.remote.entities.tmdb.people.PeopleSearchingResultDTO
 import com.example.moviebooking.data.remote.services.tmdb.TMDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -11,18 +11,18 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 
-class FetchCastListUseCaseImpl(
+class SearchPeopleUseCaseImpl(
     private val apiService: TMDBService
-) : FetchCastListUseCase, ApiHandler {
-    override fun execute(seriesId: String): Flow<ResponseStatus<Credit>> {
+) : SearchPeopleUseCase, ApiHandler {
+    override fun execute(query: String, page: Int): Flow<ResponseStatus<PeopleSearchingResultDTO>> {
         return flow {
-            emit(handleApi { apiService.getGenreCastList(seriesId) })
+            emit(handleApi { apiService.searchPeople(query = query, page = page) })
         }.onStart {
             emit(ResponseStatus.Loading)
         }.catch { e ->
             emit(
                 ResponseStatus.Error(
-                    message = e.message ?: "Something went wrong",
+                    message = e.message ?: "Unknown Error",
                     errorCode = 500
                 )
             )
