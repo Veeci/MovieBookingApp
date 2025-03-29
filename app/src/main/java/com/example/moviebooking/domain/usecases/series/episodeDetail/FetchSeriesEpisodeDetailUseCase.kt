@@ -5,5 +5,5 @@ import com.example.moviebooking.data.remote.entities.tmdb.series.SerieEpisodeDTO
 import kotlinx.coroutines.flow.Flow
 
 interface FetchSeriesEpisodeDetailUseCase {
-    fun execute(seriesId: String, seasonNumber: String, episodeNumber: String): Flow<ResponseStatus<SerieEpisodeDTO>>
+    fun execute(seriesId: String, seasonNumber: Int, episodeNumber: Int): Flow<ResponseStatus<SerieEpisodeDTO>>
 }

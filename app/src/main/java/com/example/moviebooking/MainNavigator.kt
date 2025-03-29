@@ -5,12 +5,23 @@ import com.example.baseproject.presentation.navigation.BaseNavigator
 import com.example.moviebooking.presentation.auth.SplashRouter
 import com.example.moviebooking.presentation.auth.login.LoginRouter
 import com.example.moviebooking.presentation.auth.signup.SignUpRouter
+import com.example.moviebooking.presentation.main.explore.ExploreRouter
+import com.example.moviebooking.presentation.main.explore.pages.series.seriesDetail.SeriesDetailRouter
 import com.example.moviebooking.presentation.main.home.HomeRouter
 import com.example.moviebooking.presentation.main.home.screens.movieDetail.MovieDetailRouter
 import com.example.moviebooking.presentation.main.home.screens.seeAll.SeeAllRouter
 
-class MainNavigator : BaseNavigator(), MainRouter, SplashRouter, LoginRouter, SignUpRouter,
-    HomeRouter, SeeAllRouter, MovieDetailRouter {
+class MainNavigator :
+    BaseNavigator(),
+    MainRouter,
+    SplashRouter,
+    LoginRouter,
+    SignUpRouter,
+    HomeRouter,
+    ExploreRouter,
+    SeeAllRouter,
+    MovieDetailRouter ,
+    SeriesDetailRouter{
     override fun goToLoginScreen() {
         onNextScreen(
             action = R.id.action_splashFragment_to_loginScreen, extras = null, isFinished = null
@@ -65,6 +76,38 @@ class MainNavigator : BaseNavigator(), MainRouter, SplashRouter, LoginRouter, Si
         onNextScreen(
             action = R.id.action_movieDetailScreen_to_mainFragment,
             extras = null,
+            isFinished = null
+        )
+    }
+
+    override fun goToMovieDetailFromExplore(extras: Bundle) {
+        onNextScreen(
+            action = R.id.action_mainFragment_to_movieDetailScreen,
+            extras = extras,
+            isFinished = null
+        )
+    }
+
+    override fun goToSeriesDetailScreen(extras: Bundle) {
+        onNextScreen(
+            action = R.id.action_mainFragment_to_seriesDetailScreen,
+            extras = extras,
+            isFinished = null
+        )
+    }
+
+    override fun goToCelebrityDetailScreen(extras: Bundle) {
+        onNextScreen(
+            action = R.id.action_mainFragment_to_celebrityDetailScreen,
+            extras = extras,
+            isFinished = null
+        )
+    }
+
+    override fun goToSeasonDetailScreen(extras: Bundle) {
+        onNextScreen(
+            action = R.id.action_seriesDetailScreen_to_seasonDetailScreen,
+            extras = extras,
             isFinished = null
         )
     }

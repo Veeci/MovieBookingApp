@@ -16,7 +16,7 @@ class FetchSeriesSeasonDetailUseCaseImpl(
 ) : FetchSeriesSeasonDetailUseCase, ApiHandler {
     override fun execute(
         seriesId: String,
-        seasonNumber: String
+        seasonNumber: Int
     ): Flow<ResponseStatus<SerieSeasonDTO>> {
         return flow {
             emit(handleApi { apiService.getSeasonDetail(seriesId, seasonNumber) })

@@ -3,8 +3,7 @@ package com.example.moviebooking.presentation.main.home.adapters
 import com.example.baseproject.presentation.widgets.BaseListAdapter
 import com.example.baseproject.utils.MediaUtil.loadImage
 import com.example.moviebooking.R
-import com.example.moviebooking.data.remote.entities.tmdb.movie.CrewItem
-import com.example.moviebooking.databinding.CastItemBinding
+import com.example.moviebooking.data.remote.entities.tmdb.CrewItem
 import com.example.moviebooking.databinding.CrewItemBinding
 import com.example.moviebooking.domain.common.Const
 

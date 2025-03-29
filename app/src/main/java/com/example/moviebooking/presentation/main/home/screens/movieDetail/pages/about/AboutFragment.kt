@@ -1,7 +1,6 @@
 package com.example.moviebooking.presentation.main.home.screens.movieDetail.pages.about
 
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.utils.journeyViewModel
@@ -11,13 +10,10 @@ import com.example.baseproject.domain.utils.positiveAction
 import com.example.baseproject.domain.utils.simpleAlert
 import com.example.baseproject.domain.utils.title
 import com.example.baseproject.presentation.BaseFragment
-import com.example.baseproject.utils.MediaUtil.loadImage
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
-import com.example.moviebooking.data.remote.entities.tmdb.movie.CastItem
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.databinding.FragmentAboutBinding
-import com.example.moviebooking.domain.common.Const
 import com.example.moviebooking.domain.viewmodels.MovieViewModel
 import com.example.moviebooking.presentation.main.home.adapters.CastAdapter
 import com.example.moviebooking.presentation.main.home.adapters.CrewAdapter

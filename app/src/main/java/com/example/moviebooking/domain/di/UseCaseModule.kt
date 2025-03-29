@@ -4,6 +4,8 @@ import com.example.moviebooking.domain.usecases.booking.BookingUseCase
 import com.example.moviebooking.domain.usecases.booking.BookingUseCaseImpl
 import com.example.moviebooking.domain.usecases.movies.castList.FetchCastListUseCase
 import com.example.moviebooking.domain.usecases.movies.castList.FetchCastListUseCaseImpl
+import com.example.moviebooking.domain.usecases.movies.discover.DiscoverMoviesUseCase
+import com.example.moviebooking.domain.usecases.movies.discover.DiscoverMoviesUseCaseImpl
 import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCase
 import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCaseImpl
 import com.example.moviebooking.domain.usecases.movies.getKeywords.FetchKeywordUseCase
@@ -46,6 +48,8 @@ import com.example.moviebooking.domain.usecases.series.airingTodayList.FetchAiri
 import com.example.moviebooking.domain.usecases.series.airingTodayList.FetchAiringTodayUseCaseImpl
 import com.example.moviebooking.domain.usecases.series.castList.FetchSeriesCastListUseCase
 import com.example.moviebooking.domain.usecases.series.castList.FetchSeriesCastListUseCaseImpl
+import com.example.moviebooking.domain.usecases.series.disccoverSeries.DiscoverSeriesUseCase
+import com.example.moviebooking.domain.usecases.series.disccoverSeries.DiscoverSeriesUseCaseImpl
 import com.example.moviebooking.domain.usecases.series.episodeDetail.FetchSeriesEpisodeDetailUseCase
 import com.example.moviebooking.domain.usecases.series.episodeDetail.FetchSeriesEpisodeDetailUseCaseImpl
 import com.example.moviebooking.domain.usecases.series.genreList.FetchSeriesGenreListUseCase
@@ -93,6 +97,7 @@ object UseCaseModule {
         factory<FetchMovieSearchingResultUseCase> { FetchMovieSearchingResultUseCaseImpl(get()) }
         factory<FetchReviewsUseCase> { FetchReviewsUseCaseImpl(get()) }
         factory<BookingUseCase> { BookingUseCaseImpl(get()) }
+        factory<DiscoverMoviesUseCase> { DiscoverMoviesUseCaseImpl(get()) }
 
         factory<FetchAiringTodayUseCase> { FetchAiringTodayUseCaseImpl(get()) }
         factory<FetchOnTheAirUseCase> { FetchOnTheAirUseCaseImpl(get()) }
@@ -110,6 +115,7 @@ object UseCaseModule {
         factory<SearchSeriesUseCase> { SearchSeriesUseCaseImpl(get()) }
         factory<FetchSeriesDetailUseCase> { FetchSeriesDetailUseCaseImpl(get()) }
         factory<FetchSimilarSeriesUseCase> { FetchSimilarSeriesUseCaseImpl(get()) }
+        factory<DiscoverSeriesUseCase> { DiscoverSeriesUseCaseImpl(get()) }
 
         factory<FetchPopularPeopleUseCase> { FetchPopularPeopleUseCaseImpl(get()) }
         factory<FetchPersonDetailUseCase> { FetchPersonDetailUseCaseImpl(get()) }

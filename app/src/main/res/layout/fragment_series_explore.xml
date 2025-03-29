@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.main.explore.pages.series.SeriesExploreScreen"
+        android:background="@color/ThemePrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/airingTodayTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/airing_today"
+                android:textSize="@dimen/textSize_header"
+                android:fontFamily="@font/montserrat_bold"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                android:background="?attr/selectableItemBackground"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/airingTodayRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/series_item" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/onTheAirTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/on_the_air"
+                android:textSize="@dimen/textSize_header"
+                android:fontFamily="@font/montserrat_bold"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                android:background="?attr/selectableItemBackground"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/onTheAirRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                tools:itemCount="5"
+                android:layout_marginBottom="@dimen/_10sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/popularTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/popular"
+                android:textSize="@dimen/textSize_header"
+                android:fontFamily="@font/montserrat_bold"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                android:background="?attr/selectableItemBackground"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/popularRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                tools:itemCount="5"
+                android:layout_marginBottom="@dimen/_10sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@id/topRatedTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/top_rated"
+                android:textSize="@dimen/textSize_header"
+                android:fontFamily="@font/montserrat_bold"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                android:background="?attr/selectableItemBackground"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topRatedRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                tools:itemCount="5"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

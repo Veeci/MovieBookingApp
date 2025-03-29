@@ -20,7 +20,6 @@ class CinemaFragment : BaseFragment<FragmentCinemaBinding, BookingRouter, MainNa
     R.layout.fragment_cinema
 ) {
     override val navigator: MainNavigator by navigatorViewModel()
-    private val movieViewmodel: MovieViewModel by journeyViewModel()
     private val bookingViewModel: BookingViewModel by journeyViewModel()
 
 

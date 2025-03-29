@@ -1,4 +1,4 @@
-package com.example.moviebooking.data.remote.entities.tmdb.movie
+package com.example.moviebooking.data.remote.entities.tmdb
 
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize

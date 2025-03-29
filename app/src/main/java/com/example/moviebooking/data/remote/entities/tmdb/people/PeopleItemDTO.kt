@@ -38,7 +38,7 @@ data class KnownForItem(
     @SerializedName("media_type") val mediaType: String? = null,
     @SerializedName("release_date") val releaseDate: String? = null,
     @SerializedName("popularity") val popularity: Double? = null,
-    @SerializedName("vote_average") val voteAverage: Int? = null,
+    @SerializedName("vote_average") val voteAverage: Double? = null,
     @SerializedName("id") val id: Int? = null,
     @SerializedName("adult") val adult: Boolean? = null,
     @SerializedName("vote_count") val voteCount: Int? = null,

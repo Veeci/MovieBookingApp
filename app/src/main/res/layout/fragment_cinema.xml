@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".presentation.main.home.screens.movieDetail.pages.booking.pages.CinemaFragment"
         android:layout_width="match_parent"
@@ -16,15 +16,22 @@
                 android:text="@string/cinema"
                 android:textSize="@dimen/textSize_header"
                 android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/ThemeSecondary" />
+                android:textColor="@color/ThemeSecondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@id/cinemaTV"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:id="@+id/cinemaRV"
-                android:layout_marginTop="@dimen/_5sdp"/>
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cinemaTV"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

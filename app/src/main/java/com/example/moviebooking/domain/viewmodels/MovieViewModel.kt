@@ -5,19 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.viewmodel.BaseViewModel
 import com.example.moviebooking.data.local.entities.MovieItemEntity
-import com.example.moviebooking.data.remote.entities.tmdb.movie.Credit
+import com.example.moviebooking.data.remote.entities.tmdb.Credit
 import com.example.moviebooking.data.remote.entities.tmdb.Genre
 import com.example.moviebooking.data.remote.entities.tmdb.Genres
 import com.example.moviebooking.data.remote.entities.tmdb.Image
 import com.example.moviebooking.data.remote.entities.tmdb.Keyword
+import com.example.moviebooking.data.remote.entities.tmdb.Review
+import com.example.moviebooking.data.remote.entities.tmdb.Video
 import com.example.moviebooking.data.remote.entities.tmdb.movie.Movie
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieList
 import com.example.moviebooking.data.remote.entities.tmdb.movie.MovieSearchResultDTO
 import com.example.moviebooking.data.remote.entities.tmdb.movie.RecommendationMovie
-import com.example.moviebooking.data.remote.entities.tmdb.Review
 import com.example.moviebooking.data.remote.entities.tmdb.movie.SimilarMovie
-import com.example.moviebooking.data.remote.entities.tmdb.Video
 import com.example.moviebooking.domain.usecases.movies.castList.FetchCastListUseCase
+import com.example.moviebooking.domain.usecases.movies.discover.DiscoverMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.genreList.FetchGenreListUseCase
 import com.example.moviebooking.domain.usecases.movies.getKeywords.FetchKeywordUseCase
 import com.example.moviebooking.domain.usecases.movies.images.FetchImageUseCase
@@ -32,6 +33,7 @@ import com.example.moviebooking.domain.usecases.movies.topRatedList.FetchTopRate
 import com.example.moviebooking.domain.usecases.movies.upcomingList.FetchUpcomingMoviesUseCase
 import com.example.moviebooking.domain.usecases.movies.videos.FetchVideoUseCase
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.collect
 
 class MovieViewModel(
     private val fetchNowPLayingMovies: FetchNowPlayingMoviesUseCase,
@@ -47,7 +49,8 @@ class MovieViewModel(
     private val fetchImage: FetchImageUseCase,
     private val fetchVideo: FetchVideoUseCase,
     private val fetchMovieSearchingResult: FetchMovieSearchingResultUseCase,
-    private val fetchReviews: FetchReviewsUseCase
+    private val fetchReviews: FetchReviewsUseCase,
+    private val discoverMovies: DiscoverMoviesUseCase
 ) : BaseViewModel() {
     var movieId: MutableLiveData<String> = MutableLiveData()
 
@@ -131,6 +134,9 @@ class MovieViewModel(
 
     private val _reviews: MutableLiveData<ResponseStatus<Review>> = MutableLiveData()
     val reviews: LiveData<ResponseStatus<Review>> = _reviews
+
+    private val _discoverList: MutableLiveData<ResponseStatus<MovieList>> = MutableLiveData()
+    val discoverList: LiveData<ResponseStatus<MovieList>> = _discoverList
 
     fun fetchAllMovies() {
         launchCoroutine {
@@ -429,6 +435,78 @@ class MovieViewModel(
             }
             fetchTopRatedMovies.getFromLocal().collect {
                 _localTopRatedList.postValue(it)
+            }
+        }
+    }
+
+    fun discoverMovies(
+        certification: String? = null,
+        certificationGte: String? = null,
+        certificationLte: String? = null,
+        certificationCountry: String? = null,
+        includeAdult: Boolean? = false,
+        includeVideo: Boolean? = false,
+        language: String? = "en-US",
+        page: Int? = 1,
+        primaryReleaseYear: Int? = null,
+        region: String? = null,
+        primaryReleaseDateGte: String? = null,
+        primaryReleaseDateLte: String? = null,
+        releaseDateGte: String? = null,
+        releaseDateLte: String? = null,
+        sortBy: String? = "popularity.desc",
+        voteAverageGte: Float? = null,
+        voteAverageLte: Float? = null,
+        voteCountGte: Float? = null,
+        voteCountLte: Float? = null,
+        withCast: String? = null,
+        withCompanies: String? = null,
+        withCrew: String? = null,
+        withGenres: String? = null,
+        withKeywords: String? = null,
+        withOriginCountry: String? = null,
+        withOriginalLanguage: String? = null,
+        withPeople: String? = null,
+        withReleaseType: Int? = null,
+        withRuntimeGte: Int? = null,
+        withRuntimeLte: Int? = null,
+        year: Int? = null
+    ) {
+        launchCoroutine {
+            discoverMovies.execute(
+                certification,
+                certificationGte,
+                certificationLte,
+                certificationCountry,
+                includeAdult,
+                includeVideo,
+                language,
+                page,
+                primaryReleaseYear,
+                primaryReleaseDateGte,
+                primaryReleaseDateLte,
+                region,
+                releaseDateGte,
+                releaseDateLte,
+                sortBy,
+                voteAverageGte,
+                voteAverageLte,
+                voteCountGte,
+                voteCountLte,
+                withCast,
+                withCompanies,
+                withCrew,
+                withGenres,
+                withKeywords,
+                withOriginCountry,
+                withOriginalLanguage,
+                withPeople,
+                withReleaseType,
+                withRuntimeGte,
+                withRuntimeLte,
+                year
+            ).collect { response ->
+                _discoverList.postValue(response)
             }
         }
     }

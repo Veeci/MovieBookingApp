@@ -54,6 +54,15 @@
     <string name="selected">Selected</string>
     <string name="choose_your_time">Choose your time</string>
     <string name="previous">Previous</string>
+    <string name="about">About</string>
+    <string name="booking">Booking</string>
+    <string name="movies">Movies</string>
+    <string name="series">Series</string>
+    <string name="celebrities">Celebrities</string>
+    <string name="airing_today">Airing Today</string>
+    <string name="on_the_air">On The Air</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
 
     <array name="welcome_messages">
         <item>Welcome back!</item>

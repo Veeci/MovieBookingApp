@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/genreItem"
+        android:background="@drawable/selector_genre_bg"
+        android:textColor="@color/selector_genre_text"
+        android:textAllCaps="false"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_margin="@dimen/_2sdp"/>
+</layout>

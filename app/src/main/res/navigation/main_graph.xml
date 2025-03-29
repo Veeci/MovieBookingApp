@@ -47,6 +47,16 @@
             app:destination="@id/movieDetailScreen"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_seriesDetailScreen"
+            app:destination="@id/seriesDetailScreen"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_celebrityDetailScreen"
+            app:destination="@id/celebrityDetailScreen"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/seeAllFragment"
@@ -67,4 +77,25 @@
             android:id="@+id/action_movieDetailScreen_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/seriesDetailScreen"
+        android:name="com.example.moviebooking.presentation.main.explore.pages.series.seriesDetail.SeriesDetailScreen"
+        android:label="fragment_series_detail"
+        tools:layout="@layout/fragment_series_detail" >
+        <action
+            android:id="@+id/action_seriesDetailScreen_to_seasonDetailScreen"
+            app:destination="@id/seasonDetailScreen"
+            app:popUpTo="@id/seriesDetailScreen"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/seasonDetailScreen"
+        android:name="com.example.moviebooking.presentation.main.explore.pages.series.seasonDetail.SeasonDetailScreen"
+        android:label="fragment_season_detail_screen"
+        tools:layout="@layout/fragment_season_detail_screen" />
+    <fragment
+        android:id="@+id/celebrityDetailScreen"
+        android:name="com.example.moviebooking.presentation.main.explore.pages.celebrities.celebDetail.CelebrityDetailScreen"
+        android:label="fragment_celebrity_detail"
+        tools:layout="@layout/fragment_celebrity_detail" />
 </navigation>
