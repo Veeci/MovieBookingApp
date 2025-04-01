@@ -38,7 +38,11 @@ class SeriesExploreScreen : BaseFragment<FragmentSeriesExploreBinding, ExploreRo
                 setGenre(item)
             },
             onItemClick = {
-
+                navigator.goToSeriesDetailScreen(
+                    extras = Bundle().apply {
+                        putString("seriesID", it.id.toString())
+                    }
+                )
             }
         )
 
@@ -47,7 +51,11 @@ class SeriesExploreScreen : BaseFragment<FragmentSeriesExploreBinding, ExploreRo
                 setGenre(item)
             },
             onItemClick = {
-
+                navigator.goToSeriesDetailScreen(
+                    extras = Bundle().apply {
+                        putString("seriesID", it.id.toString())
+                    }
+                )
             }
         )
 
@@ -56,7 +64,11 @@ class SeriesExploreScreen : BaseFragment<FragmentSeriesExploreBinding, ExploreRo
                 setGenre(item)
             },
             onItemClick = {
-
+                navigator.goToSeriesDetailScreen(
+                    extras = Bundle().apply {
+                        putString("seriesID", it.id.toString())
+                    }
+                )
             }
         )
 
@@ -65,7 +77,11 @@ class SeriesExploreScreen : BaseFragment<FragmentSeriesExploreBinding, ExploreRo
                 setGenre(item)
             },
             onItemClick = {
-
+                navigator.goToSeriesDetailScreen(
+                    extras = Bundle().apply {
+                        putString("seriesID", it.id.toString())
+                    }
+                )
             }
         )
 

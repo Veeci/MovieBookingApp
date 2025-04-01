@@ -1,28 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bottom_sheet_bg"
-    android:padding="@dimen/_10sdp">
+    android:padding="@dimen/_10sdp"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_5sdp"
-        android:src="@drawable/bottom_sheet_dragging"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:src="@drawable/bottom_sheet_dragging"/>
 
     <com.example.moviebooking.domain.common.ShowMoreTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/_15sdp"
         android:id="@+id/overviewTV" />
+    
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/network"
+        android:textSize="@dimen/textSize_header"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/ThemeSecondary"
+        android:layout_marginTop="@dimen/_10sdp"/>
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/networkRV" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/production_companies"
+        android:textAlignment="center"
+        android:textSize="@dimen/textSize_header"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/ThemeSecondary"
+        android:layout_marginTop="@dimen/_10sdp"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/productionCompaniesRV" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

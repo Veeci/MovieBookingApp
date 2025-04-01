@@ -63,6 +63,8 @@
     <string name="on_the_air">On The Air</string>
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
+    <string name="network">Network</string>
+    <string name="production_companies">Production Companies</string>
 
     <array name="welcome_messages">
         <item>Welcome back!</item>
