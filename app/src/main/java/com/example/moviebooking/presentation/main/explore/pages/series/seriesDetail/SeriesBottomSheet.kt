@@ -9,14 +9,21 @@ import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
 import com.example.moviebooking.data.remote.entities.tmdb.series.Series
 import com.example.moviebooking.databinding.SeriesInfoBottomSheetBinding
+import com.example.moviebooking.domain.viewmodels.SeriesViewModel
+import com.example.moviebooking.presentation.main.home.adapters.NetworkItemAdapter
+import com.example.moviebooking.presentation.main.home.adapters.ProductionCompanyAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class SeriesBottomSheet(
-    private val series: Series
+    private val series: Series? = null
 ) : BaseBottomSheetDialog<SeriesInfoBottomSheetBinding, MainNavigator>(
     R.layout.series_info_bottom_sheet
 ) {
     override val navigator: MainNavigator by journeyViewModel()
+    private val viewModel by journeyViewModel<SeriesViewModel>()
+
+    private var networkAdapter = NetworkItemAdapter()
+    private var productionCompanyAdapter = ProductionCompanyAdapter()
 
     override fun onStart() {
         super.onStart()
@@ -40,6 +47,9 @@ class SeriesBottomSheet(
     }
 
     private fun display() {
+        networkAdapter.submitList(series?.networks)
+        productionCompanyAdapter.submitList(series?.productionCompanies)
+
         with(binding) {
             overviewTV.apply {
                 setShowingLine(5)
@@ -47,12 +57,24 @@ class SeriesBottomSheet(
                 addShowLessText("Show less")
                 setShowMoreTextColor(R.color.ThemePrimary)
                 setShowLessTextColor(R.color.ThemeTertiary)
-                text = series.overview
+                text = series?.overview
             }
 
             networkRV.apply {
+                adapter = networkAdapter
+                setItemViewCacheSize(20)
+            }
 
+            productionCompaniesRV.apply {
+                adapter = productionCompanyAdapter
+                setItemViewCacheSize(20)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        this.dismiss()
     }
 }

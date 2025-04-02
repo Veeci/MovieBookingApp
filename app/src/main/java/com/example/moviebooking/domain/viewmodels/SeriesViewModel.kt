@@ -84,6 +84,8 @@ class SeriesViewModel(
     private val _seriesDetail: MutableLiveData<ResponseStatus<Series>> = MutableLiveData()
     val seriesDetail: LiveData<ResponseStatus<Series>> = _seriesDetail
 
+    val currentSeries: MutableLiveData<Series> = MutableLiveData()
+
     private val _similarSeries: MutableLiveData<ResponseStatus<SimilarSeries>> = MutableLiveData()
     val similarSeries: LiveData<ResponseStatus<SimilarSeries>> = _similarSeries
 
@@ -269,6 +271,9 @@ class SeriesViewModel(
         launchCoroutine {
             fetchSeriesDetailUseCase.execute(serieId).collect { response ->
                 _seriesDetail.postValue(response)
+                if(response is ResponseStatus.Success) {
+                    currentSeries.postValue(response.data)
+                }
             }
         }
     }

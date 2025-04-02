@@ -86,7 +86,7 @@ data class LastEpisodeToAir(
     @SerializedName("still_path") val stillPath: String? = null,
     @SerializedName("air_date") val airDate: String? = null,
     @SerializedName("episode_number") val episodeNumber: Int? = null,
-    @SerializedName("vote_average") val voteAverage: Int? = null,
+    @SerializedName("vote_average") val voteAverage: Double? = null,
     @SerializedName("name") val name: String? = null,
     @SerializedName("id") val id: String? = null,
     @SerializedName("vote_count") val voteCount: Int? = null
@@ -111,7 +111,7 @@ data class NextEpisodeToAir(
     @SerializedName("still_path") val stillPath: String? = null,
     @SerializedName("air_date") val airDate: String? = null,
     @SerializedName("episode_number") val episodeNumber: Int? = null,
-    @SerializedName("vote_average") val voteAverage: Int? = null,
+    @SerializedName("vote_average") val voteAverage: Double? = null,
     @SerializedName("name") val name: String? = null,
     @SerializedName("id") val id: String? = null,
     @SerializedName("vote_count") val voteCount: Int? = null

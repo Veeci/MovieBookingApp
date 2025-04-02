@@ -42,7 +42,7 @@ interface SeriesService {
         @Query("page") page: Int? = 1
     ): Response<SeriesList>
 
-    @GET("tv/{series_id")
+    @GET("tv/{series_id}")
     suspend fun getSeriesDetail(
         @Path("series_id") seriesId: String
     ): Response<Series>
