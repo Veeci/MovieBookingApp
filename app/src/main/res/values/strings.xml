@@ -65,6 +65,13 @@
     <string name="top_rated">Top Rated</string>
     <string name="network">Network</string>
     <string name="production_companies">Production Companies</string>
+    <string name="number_of_seasons">Number of seasons: %1$d</string>
+    <string name="number_of_episodes">Number of episodes: %1$d</string>
+    <string name="type">Type: %1$s</string>
+    <string name="rating">Rating: %1$.1f (%2$d votes)</string>
+    <string name="seasons">Seasons:</string>
+    <string name="season">Season: %1$d</string>
+    <string name="media">Media</string>
 
     <array name="welcome_messages">
         <item>Welcome back!</item>

@@ -9,10 +9,10 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Genres(
     @field:SerializedName("genres")
-    val genres: List<Genre?>? = null
+    val genres: List<Genre>? = null
 ): Parcelable, BaseDTO() {
     fun toGenreEntities(): List<MovieGenreEntity> {
-        return genres?.mapNotNull { it?.toEntity() } ?: emptyList()
+        return genres?.map { it.toEntity() }  ?: emptyList()
     }
 }
 

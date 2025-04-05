@@ -13,7 +13,7 @@ data class SerieSeasonDTO(
     @SerializedName("season_number") val seasonNumber: Int? = null,
     @SerializedName("_id") val _id: String? = null,
     @SerializedName("id") val id: String? = null,
-    @SerializedName("episodes") val episodes: List<EpisodesItem?>? = null,
+    @SerializedName("episodes") val episodes: List<EpisodesItem>? = null,
     @SerializedName("poster_path") val posterPath: String? = null
 ) : Parcelable
 
