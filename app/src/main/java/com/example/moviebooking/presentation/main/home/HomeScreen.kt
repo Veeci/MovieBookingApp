@@ -77,10 +77,14 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                 welcomeText.gone()
             }
 
-            binding.avatar.loadImage(
-                source = auth.currentUser?.photoUrl,
-                defaultImage = R.drawable.img_default_placeholder
-            )
+            if(auth.currentUser?.photoUrl != null) {
+                binding.avatar.loadImage(
+                    source = auth.currentUser?.photoUrl,
+                    defaultImage = R.drawable.img_default_placeholder
+                )
+            } else {
+                binding.avatar.loadImage(source = enumValues<Const.DefaultAvatar>().random().resId)
+            }
 
             searchView.clearFocus()
             searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->

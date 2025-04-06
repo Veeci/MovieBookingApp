@@ -3,16 +3,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.main.profile.ProfileScreen">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp"
+        android:background="@color/dark_gray">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/profileAvatar"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:scaleType="centerCrop" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/ThemeSecondary"
+            android:textSize="@dimen/textSize_title"
+            android:textAlignment="center"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableStart="@drawable/ic_edit_profile"
+            android:drawableEnd="@drawable/ic_goto"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/edit_profile"
+            android:textColor="@color/ThemeSecondary"
+            android:textSize="@dimen/textSize_header" />
 
-    </FrameLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnChangePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableStart="@drawable/ic_change_password"
+            android:drawableEnd="@drawable/ic_goto"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/change_password"
+            android:textColor="@color/ThemeSecondary"
+            android:textSize="@dimen/textSize_header" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnWatchList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableStart="@drawable/ic_watchlist"
+            android:drawableEnd="@drawable/ic_goto"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/your_watchlist"
+            android:textColor="@color/ThemeSecondary"
+            android:textSize="@dimen/textSize_header" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnSignOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableStart="@drawable/ic_signout"
+            android:drawableEnd="@drawable/ic_goto"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/sign_out"
+            android:textColor="@color/ThemeSecondary"
+            android:textSize="@dimen/textSize_header" />
+
+    </LinearLayout>
 
 </layout>

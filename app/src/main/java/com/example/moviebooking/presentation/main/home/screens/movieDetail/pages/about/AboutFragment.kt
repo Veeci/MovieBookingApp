@@ -125,7 +125,7 @@ class AboutFragment : BaseFragment<FragmentAboutBinding, AboutRouter, MainNaviga
                     showLoading(isLoading = false, preventClicking = true)
                 }
                 is ResponseStatus.Success -> {
-                    showLoading(isLoading = false)
+                    showLoading(isLoading = false, preventClicking = false)
                     castAdapter.submitList(status.data.cast)
                     crewAdapter.submitList(status.data.crew)
                 }
@@ -136,10 +136,10 @@ class AboutFragment : BaseFragment<FragmentAboutBinding, AboutRouter, MainNaviga
             when(status) {
                 is ResponseStatus.Loading -> showLoading(isLoading = true, preventClicking = true)
                 is ResponseStatus.Error -> {
-                    showLoading(isLoading = false)
+                    showLoading(isLoading = false, preventClicking = true)
                 }
                 is ResponseStatus.Success -> {
-                    showLoading(isLoading = false)
+                    showLoading(isLoading = false, preventClicking = false)
                     keywordAdapter.submitList(status.data.keywords)
                 }
             }
