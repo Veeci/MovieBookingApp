@@ -9,4 +9,6 @@ interface HomeRouter: BaseRouter {
     fun goToSeeAll()
 
     fun goToSearchingResult()
+
+    fun backToLogin()
 }

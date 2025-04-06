@@ -64,6 +64,14 @@ class MainNavigator :
         TODO("Not yet implemented")
     }
 
+    override fun backToLogin() {
+        onNextScreen(
+            action = R.id.action_mainFragment_to_loginScreen,
+            extras = null,
+            isFinished = true
+        )
+    }
+
     override fun goToMovieDetailFromSeeAll(extras: Bundle) {
         onNextScreen(
             action = R.id.action_seeAllFragment_to_movieDetailScreen,

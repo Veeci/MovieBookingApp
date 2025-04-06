@@ -20,6 +20,7 @@ import com.example.moviebooking.databinding.FragmentSignUpScreenBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.firestore.firestore
 
 class SignUpScreen : BaseFragment<FragmentSignUpScreenBinding, SignUpRouter, MainNavigator>(
@@ -66,15 +67,25 @@ class SignUpScreen : BaseFragment<FragmentSignUpScreenBinding, SignUpRouter, Mai
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity) { task ->
                     if (task.isSuccessful) {
-                        saveUserCache(name, email, password)
-                        activity.simpleAlert {
-                            title("Sign Up Successfully")
-                            message("You are successfully signed up. Log in to have some fun!")
-                            positiveAction(name = "Ok") {
-                                router?.goToAuthScreen()
-                            }
-                            negativeAction(name = "Cancel") {
-                                dismiss()
+                        val profileUpdate = userProfileChangeRequest {
+                            displayName = name
+                        }
+
+                        auth.currentUser?.updateProfile(profileUpdate)?.addOnCompleteListener { profileTask ->
+                            if (profileTask.isSuccessful) {
+                                saveUserCache(name, email, password)
+                                activity.simpleAlert {
+                                    title("Sign Up Successfully")
+                                    message("You are successfully signed up. Log in to have some fun!")
+                                    positiveAction(name = "Ok") {
+                                        router?.goToAuthScreen()
+                                    }
+                                    negativeAction(name = "Cancel") {
+                                        dismiss()
+                                    }
+                                }
+                            } else {
+                                activity.toastShort("Sign up failed. Please try again!")
                             }
                         }
                     } else {

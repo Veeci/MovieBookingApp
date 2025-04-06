@@ -76,6 +76,13 @@
     <string name="your_watchlist">Your watchlist</string>
     <string name="sign_out">Sign out</string>
     <string name="edit_profile">Edit profile</string>
+    <string name="edit_your_name">Edit Your name</string>
+    <string name="change_email_address">Change email address</string>
+    <string name="edit_your_profile_information_here">Edit your profile information here</string>
+    <string name="enter_your_old_password">Enter your old password</string>
+    <string name="new_password">New password</string>
+    <string name="incorrect_password">Incorrect password!</string>
+    <string name="password_not_match">Password not match</string>
 
     <array name="welcome_messages">
         <item>Welcome back!</item>

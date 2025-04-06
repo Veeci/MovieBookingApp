@@ -6,9 +6,10 @@
     <color name="light_gray">#B1B1B1</color>
     <color name="dark_gray">#98575757</color>
     <color name="heavy_gray">#2C2C2C</color>
+    <color name="dangerous_text">#F44336</color>
 
     <color name="ThemePrimary">#8EB486</color>
     <color name="ThemeSecondary">#FDF7F4</color>
-    <color name="ThemeTertiary">#E4F1AC</color>"
+    <color name="ThemeTertiary">#E4F1AC</color>
 
 </resources>
