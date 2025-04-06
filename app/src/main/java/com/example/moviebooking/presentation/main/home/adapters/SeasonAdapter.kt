@@ -31,15 +31,16 @@ class SeasonAdapter(
             episodeCountTV.text = binding.root.context.getString(R.string.number_of_episodes, item.episodeCount)
 
             val episodeAdapter = EpisodeAdapter()
-            episodeAdapter.submitList(onMoreSlicked(item))
-            binding.episodeRV.apply {
+            episodeRV.apply {
                 adapter = episodeAdapter
+                setItemViewCacheSize(20)
             }
 
             btnMore.safeClick {
                 btnMore.gone()
                 episodeList.visible()
-                onMoreSlicked(item)
+                val episodes = onMoreSlicked(item)
+                episodeAdapter.submitList(episodes)
             }
 
             btnMinimize.safeClick {

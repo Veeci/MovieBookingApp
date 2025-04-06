@@ -10,6 +10,7 @@ import com.example.moviebooking.data.remote.entities.tmdb.Image
 import com.example.moviebooking.data.remote.entities.tmdb.Keyword
 import com.example.moviebooking.data.remote.entities.tmdb.Review
 import com.example.moviebooking.data.remote.entities.tmdb.Video
+import com.example.moviebooking.data.remote.entities.tmdb.series.EpisodesItem
 import com.example.moviebooking.data.remote.entities.tmdb.series.RecommendationSeries
 import com.example.moviebooking.data.remote.entities.tmdb.series.SerieEpisodeDTO
 import com.example.moviebooking.data.remote.entities.tmdb.series.SerieSeasonDTO
@@ -124,6 +125,9 @@ class SeriesViewModel(
 
     private val _discoverList: MutableLiveData<ResponseStatus<SeriesList>> = MutableLiveData()
     val discoverList: LiveData<ResponseStatus<SeriesList>> = _discoverList
+
+    val seasonEpisodeMap = MutableLiveData<Map<String, List<EpisodesItem>>>()
+    private val tempSeasonEpisodeMap = mutableMapOf<String, List<EpisodesItem>>()
 
     fun fetchAllSeries() {
         launchCoroutine {
@@ -271,7 +275,7 @@ class SeriesViewModel(
         launchCoroutine {
             fetchSeriesDetailUseCase.execute(serieId).collect { response ->
                 _seriesDetail.postValue(response)
-                if(response is ResponseStatus.Success) {
+                if (response is ResponseStatus.Success) {
                     currentSeries.postValue(response.data)
                 }
             }
@@ -347,6 +351,11 @@ class SeriesViewModel(
             fetchSeriesSeasonDetailUseCase.execute(serieId, seasonNumber.toInt())
                 .collect { response ->
                     _seriesSeasonDetail.postValue(response)
+                    if (response is ResponseStatus.Success) {
+                        val seasonNum = response.data.seasonNumber.toString()
+                        tempSeasonEpisodeMap[seasonNum] = response.data.episodes ?: emptyList()
+                        seasonEpisodeMap.postValue(tempSeasonEpisodeMap.toMap())
+                    }
                 }
         }
     }

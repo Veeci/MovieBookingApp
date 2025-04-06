@@ -1,6 +1,7 @@
 package com.example.moviebooking.presentation.main.explore.pages.series.seriesDetail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.baseproject.domain.utils.ResponseStatus
@@ -35,6 +36,9 @@ class SeriesDetailScreen :
 
     private var seriesID: String = ""
     private var bottomSheet = SeriesBottomSheet()
+
+    private val pagerSnapHelper = PagerSnapHelper()
+    private var isSnapHelperAttached = false
 
     private var genreList = listOf<Genre>()
     private var genreTagAdapter = GenreTagAdapter()
@@ -93,7 +97,7 @@ class SeriesDetailScreen :
                     bottomSheet = SeriesBottomSheet(status.data)
                     bottomSheet.show(parentFragmentManager, SeriesBottomSheet::class.java.name)
 
-                    for (season in status.data.seasons ?: emptyList()) {
+                    status.data.seasons?.forEach { season ->
                         viewModel.fetchSeriesSeasonDetail(
                             serieId = status.data.id ?: "",
                             seasonNumber = season?.seasonNumber?.toString() ?: ""
@@ -139,7 +143,9 @@ class SeriesDetailScreen :
 
                 is ResponseStatus.Success -> {
                     showLoading(isLoading = false)
-                    videoId = status.data.results?.random()?.key.toString()
+                    status.data.results.takeIf { !it.isNullOrEmpty() }?.let {
+                        videoId = it.random()?.key.toString()
+                    }
                 }
             }
         }
@@ -178,95 +184,83 @@ class SeriesDetailScreen :
             }
         }
 
-        viewModel.seriesSeasonDetail.observe(viewLifecycleOwner) { status ->
-            when (status) {
-                is ResponseStatus.Loading -> {
-                    showLoading(isLoading = true, preventClicking = true)
-                }
-                is ResponseStatus.Error -> {
-                    showLoading(isLoading = false)
-                }
-                is ResponseStatus.Success -> {
-                    showLoading(isLoading = false)
-                    for (episode in status.data.episodes ?: emptyList()) {
-                        seasonEpisodesMap[status.data.seasonNumber.toString()] =
-                            status.data.episodes ?: emptyList()
-                    }
-                }
-            }
+        viewModel.seasonEpisodeMap.observe(viewLifecycleOwner) { map ->
+            seasonEpisodesMap.clear()
+            seasonEpisodesMap.putAll(map)
+            Log.d("SeasonEpisodeMap", seasonEpisodesMap.toString())
+            seasonAdapter.notifyDataSetChanged()
         }
     }
 
     private fun displaySeriesInfo(series: Series) {
         with(binding) {
-            backdropPathIV.apply {
-                loadImage(
+            backdropPathIV.loadImage(
                     source = Const.tmdbImageUrlOriginal + series.backdropPath,
                     defaultImage = R.drawable.img_default_placeholder
-                )
+            )
 
-                val list = genreList.filter { genre ->
-                    series.genres?.any { it?.id.toString() == genre.id } == true
-                }
-
-                genreListRV.apply {
-                    adapter = genreTagAdapter
-                    genreTagAdapter.submitList(list)
-                }
-
-                nameTV.text = series.name
-                numberOfSeasonTV.text =
-                    context.getString(R.string.number_of_seasons, series.numberOfSeasons)
-                numberOfEpisodesTV.text =
-                    context.getString(R.string.number_of_episodes, series.numberOfEpisodes)
-                typeTV.text = context.getString(R.string.type, series.type)
-                rating.text =
-                    context.getString(R.string.rating, series.voteAverage, series.voteCount)
-
-                seasonAdapter = SeasonAdapter(
-                    onMoreSlicked = { item ->
-                        seasonEpisodesMap[item.seasonNumber.toString()] ?: emptyList()
-                    }
-                )
-
-                binding.seasonRV.apply {
-                    adapter = seasonAdapter
-                    seasonAdapter.submitList(series.seasons)
-                }
-
-                imageRV.apply {
-                    adapter = imageAdapter
-                    layoutManager =
-                        ProminentLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    PagerSnapHelper().attachToRecyclerView(this)
-                    addItemDecoration(BoundsOffsetDecoration())
-                }
-
-                similarRV.apply {
-                    adapter = similarSeriesAdapter
-                    layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    setHasFixedSize(true)
-                    setItemViewCacheSize(20)
-                }
-
-                recommendedRV.apply {
-                    adapter = recommendedSeriesAdapter
-                    layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    setHasFixedSize(true)
-                    setItemViewCacheSize(20)
-                }
-
-                lifecycle.addObserver(trailerPlayer)
-                trailerPlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                    override fun onReady(youTubePlayer: YouTubePlayer) {
-                        videoId.takeIf { it.isNotBlank() }?.let {
-                            youTubePlayer.loadVideo(it, 0f)
-                        }
-                    }
-                })
+            val list = genreList.filter { genre ->
+                series.genres?.any { it?.id.toString() == genre.id } == true
             }
+
+            genreListRV.apply {
+                adapter = genreTagAdapter
+                genreTagAdapter.submitList(list)
+            }
+
+            nameTV.text = series.name
+            numberOfSeasonTV.text = context?.getString(R.string.number_of_seasons, series.numberOfSeasons)
+            numberOfEpisodesTV.text = context?.getString(R.string.number_of_episodes, series.numberOfEpisodes)
+            typeTV.text = context?.getString(R.string.type, series.type)
+            rating.text = context?.getString(R.string.rating, series.voteAverage, series.voteCount)
+
+            seasonAdapter = SeasonAdapter(
+                onMoreSlicked = { item ->
+                    seasonEpisodesMap[item.seasonNumber.toString()] ?: emptyList()
+                }
+            )
+
+            binding.seasonRV.apply {
+                adapter = seasonAdapter
+                seasonAdapter.submitList(series.seasons)
+            }
+
+            imageRV.apply {
+                adapter = imageAdapter
+                layoutManager =
+                    ProminentLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+                if (!isSnapHelperAttached) {
+                    pagerSnapHelper.attachToRecyclerView(this)
+                    isSnapHelperAttached = true
+                }
+                addItemDecoration(BoundsOffsetDecoration())
+            }
+
+            similarRV.apply {
+                adapter = similarSeriesAdapter
+                layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                setHasFixedSize(true)
+                setItemViewCacheSize(20)
+            }
+
+            recommendedRV.apply {
+                adapter = recommendedSeriesAdapter
+                layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                setHasFixedSize(true)
+                setItemViewCacheSize(20)
+            }
+
+            lifecycle.addObserver(trailerPlayer)
+            trailerPlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    videoId.takeIf { it.isNotBlank() }?.let {
+                        youTubePlayer.loadVideo(it, 0f)
+                    }
+                }
+            })
         }
     }
 
@@ -286,5 +280,7 @@ class SeriesDetailScreen :
         super.onDestroyView()
 
         binding.trailerPlayer.release()
+        pagerSnapHelper.attachToRecyclerView(null)
+        isSnapHelperAttached = false
     }
 }
