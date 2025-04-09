@@ -8,7 +8,7 @@ interface HomeRouter: BaseRouter {
 
     fun goToSeeAll()
 
-    fun goToSearchingResult()
+    fun goToSearchingResult(extras: Bundle)
 
     fun backToLogin()
 }

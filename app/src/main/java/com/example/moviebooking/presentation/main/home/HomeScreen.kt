@@ -1,21 +1,15 @@
 package com.example.moviebooking.presentation.main.home
 
 import android.os.Bundle
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.baseproject.domain.utils.EndlessOnScrollListener
 import com.example.baseproject.domain.utils.ResponseStatus
 import com.example.baseproject.domain.utils.gone
 import com.example.baseproject.domain.utils.journeyViewModel
-import com.example.baseproject.domain.utils.message
 import com.example.baseproject.domain.utils.navigatorViewModel
-import com.example.baseproject.domain.utils.negativeAction
-import com.example.baseproject.domain.utils.positiveAction
 import com.example.baseproject.domain.utils.safeClick
-import com.example.baseproject.domain.utils.showKeyboard
 import com.example.baseproject.domain.utils.showKeyboardSearchView
-import com.example.baseproject.domain.utils.simpleAlert
-import com.example.baseproject.domain.utils.title
 import com.example.baseproject.presentation.BaseFragment
 import com.example.baseproject.presentation.widgets.BaseListAdapter
 import com.example.baseproject.utils.MediaUtil.loadImage
@@ -77,7 +71,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                 welcomeText.gone()
             }
 
-            if(auth.currentUser?.photoUrl != null) {
+            if (auth.currentUser?.photoUrl != null) {
                 binding.avatar.loadImage(
                     source = auth.currentUser?.photoUrl,
                     defaultImage = R.drawable.img_default_placeholder
@@ -88,12 +82,29 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
 
             searchView.clearFocus()
             searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
-                if(hasFocus) {
+                if (hasFocus) {
                     activity.showKeyboardSearchView(searchView)
                 } else {
                     activity.closeKeyBoard()
                 }
             }
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if(!query.isNullOrBlank()) {
+                        navigator.goToSearchingResult(
+                            extras = Bundle().apply {
+                                putString("searching_query", query)
+                            }
+                        )
+                    }
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
+
+            })
 
             val banners = listOf(
                 Banner(R.drawable.banner1),
@@ -150,7 +161,8 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                 setItemViewCacheSize(20)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = upcomingAdapter
-                addOnScrollListener(object: EndlessOnScrollListener(layoutManager as LinearLayoutManager) {
+                addOnScrollListener(object :
+                    EndlessOnScrollListener(layoutManager as LinearLayoutManager) {
                     override fun loadMoreItems(page: Int, totalItemsCount: Int) {
                         movieViewModel.fetchUpcomingMovies(page)
                     }
@@ -176,7 +188,8 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
                 setItemViewCacheSize(20)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = topRatedAdapter
-                addOnScrollListener(object: EndlessOnScrollListener(layoutManager as LinearLayoutManager) {
+                addOnScrollListener(object :
+                    EndlessOnScrollListener(layoutManager as LinearLayoutManager) {
                     override fun loadMoreItems(page: Int, totalItemsCount: Int) {
                         movieViewModel.fetchTopRatedMovies(page)
                     }
@@ -205,11 +218,12 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
 
     private fun observe() {
         movieViewModel.nowPLayingList.observe(viewLifecycleOwner) { status ->
-            when(status) {
+            when (status) {
                 is ResponseStatus.Loading -> showLoading(isLoading = true)
                 is ResponseStatus.Error -> {
                     //TODO
                 }
+
                 is ResponseStatus.Success -> {
                     nowPlayingAdapter.submitList(status.data.results)
                 }
@@ -217,7 +231,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
         }
 
         movieViewModel.upcomingList.observe(viewLifecycleOwner) { status ->
-            when(status) {
+            when (status) {
                 is ResponseStatus.Loading -> {
 
                 }
@@ -233,11 +247,12 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
         }
 
         movieViewModel.topRatedList.observe(viewLifecycleOwner) { status ->
-            when(status) {
+            when (status) {
                 is ResponseStatus.Loading -> showLoading(isLoading = true)
                 is ResponseStatus.Error -> {
                     //TODO
                 }
+
                 is ResponseStatus.Success -> {
                     topRatedAdapter.submitList(status.data.results)
                     showLoading(isLoading = false)
@@ -246,7 +261,7 @@ class HomeScreen : BaseFragment<FragmentHomeScreenBinding, HomeRouter, MainNavig
         }
 
         movieViewModel.isLoadingNowPLaying.observe(viewLifecycleOwner) { status ->
-            when(status) {
+            when (status) {
                 true -> showLoading(isLoading = true)
                 false -> showLoading(isLoading = false)
             }

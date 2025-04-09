@@ -9,6 +9,7 @@ import com.example.moviebooking.presentation.main.explore.ExploreRouter
 import com.example.moviebooking.presentation.main.explore.pages.series.seriesDetail.SeriesDetailRouter
 import com.example.moviebooking.presentation.main.home.HomeRouter
 import com.example.moviebooking.presentation.main.home.screens.movieDetail.MovieDetailRouter
+import com.example.moviebooking.presentation.main.home.screens.searching.SearchingRouter
 import com.example.moviebooking.presentation.main.home.screens.seeAll.SeeAllRouter
 
 class MainNavigator :
@@ -20,8 +21,9 @@ class MainNavigator :
     HomeRouter,
     ExploreRouter,
     SeeAllRouter,
-    MovieDetailRouter ,
-    SeriesDetailRouter{
+    MovieDetailRouter,
+    SeriesDetailRouter,
+    SearchingRouter {
     override fun goToLoginScreen() {
         onNextScreen(
             action = R.id.action_splashFragment_to_loginScreen, extras = null, isFinished = null
@@ -60,8 +62,12 @@ class MainNavigator :
         )
     }
 
-    override fun goToSearchingResult() {
-        TODO("Not yet implemented")
+    override fun goToSearchingResult(extras: Bundle) {
+        onNextScreen(
+            action = R.id.action_mainFragment_to_searchingFragment,
+            extras = extras,
+            isFinished = null
+        )
     }
 
     override fun backToLogin() {
@@ -115,6 +121,22 @@ class MainNavigator :
     override fun goToSeasonDetailScreen(extras: Bundle) {
         onNextScreen(
             action = R.id.action_seriesDetailScreen_to_seasonDetailScreen,
+            extras = extras,
+            isFinished = null
+        )
+    }
+
+    override fun goToMovieDetailScreen(extras: Bundle) {
+        onNextScreen(
+            action = R.id.action_searchingFragment_to_movieDetailScreen,
+            extras = extras,
+            isFinished = null
+        )
+    }
+
+    override fun goToSerieDetailScreen(extras: Bundle) {
+        onNextScreen(
+            action = R.id.action_searchingFragment_to_seriesDetailScreen,
             extras = extras,
             isFinished = null
         )

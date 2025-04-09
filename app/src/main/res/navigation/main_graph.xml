@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_mainFragment_to_loginScreen"
             app:destination="@id/loginScreen" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchingFragment"
+            app:destination="@id/searchingFragment" />
     </fragment>
     <fragment
         android:id="@+id/seeAllFragment"
@@ -101,4 +104,15 @@
         android:name="com.example.moviebooking.presentation.main.explore.pages.celebrities.celebDetail.CelebrityDetailScreen"
         android:label="fragment_celebrity_detail"
         tools:layout="@layout/fragment_celebrity_detail" />
+    <fragment
+        android:id="@+id/searchingFragment"
+        android:name="com.example.moviebooking.presentation.main.home.screens.searching.SearchingFragment"
+        android:label="SearchingFragment" >
+        <action
+            android:id="@+id/action_searchingFragment_to_movieDetailScreen"
+            app:destination="@id/movieDetailScreen" />
+        <action
+            android:id="@+id/action_searchingFragment_to_seriesDetailScreen"
+            app:destination="@id/seriesDetailScreen" />
+    </fragment>
 </navigation>

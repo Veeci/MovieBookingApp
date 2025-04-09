@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.main.home.screens.searching.SearchingFragment"
+        android:padding="@dimen/_10sdp"
+        android:background="@color/ThemePrimary">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@id/backBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_back"
+            android:padding="@dimen/_5sdp"
+            android:background="?attr/selectableItemBackground" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rounded_corners_bgr"
+            android:theme="@style/SearchViewTheme"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backBtn"
+            app:queryBackground="@null"
+            app:queryHint="@string/search_hint"
+            app:searchIcon="@drawable/ic_search"
+            app:submitBackground="@null"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/season_item_bg"
+            android:backgroundTint="@color/ThemeSecondary"
+            app:layout_constraintStart_toStartOf="@id/searchView"
+            app:layout_constraintTop_toBottomOf="@id/searchView"
+            android:text="Filter"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="@color/ThemePrimary"
+            android:padding="@dimen/_5sdp"
+            android:drawableEnd="@drawable/ic_filter"
+            android:layout_marginTop="@dimen/_5sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/movieResultTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Movie searching result: "
+            android:textSize="@dimen/textSize_title"
+            android:fontFamily="@font/montserrat_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnFilter"
+            android:layout_marginTop="@dimen/_10sdp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/movieResultRV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieResultTV"
+            android:layout_marginTop="@dimen/_5sdp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/seriesResultTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Series searching result: "
+            android:textSize="@dimen/textSize_title"
+            android:fontFamily="@font/montserrat_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieResultRV"
+            android:layout_marginTop="@dimen/_10sdp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seriesResultRV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/seriesResultTV"
+            android:layout_marginTop="@dimen/_5sdp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
