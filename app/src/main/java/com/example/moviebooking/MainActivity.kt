@@ -7,6 +7,7 @@ import android.view.View
 import android.view.WindowInsets
 import com.example.baseproject.presentation.BaseActivity
 import com.example.moviebooking.databinding.ActivityMainBinding
+import com.example.moviebooking.presentation.widget.WidgetUpdateWorker
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,5 +34,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainRouter, MainNavigator
 
     override fun initView(savedInstanceState: Bundle?, binding: ActivityMainBinding) {
         enableNavigationDrawable(false)
+        WidgetUpdateWorker.enqueue(applicationContext)
     }
 }

@@ -81,26 +81,30 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainRouter, MainNavigator
     }
 
     private fun setupMovableFab() {
-        binding.root.setOnDragListener { v, event ->
-            when(event.action) {
-                DragEvent.ACTION_DRAG_LOCATION -> {
-                    dX = event.x
-                    dY = event.y
+        with(binding) {
+            root.setOnDragListener { v, event ->
+                when(event.action) {
+                    DragEvent.ACTION_DRAG_LOCATION -> {
+                        dX = event.x
+                        dY = event.y
+                    }
+
+                    DragEvent.ACTION_DRAG_ENDED -> {
+                        chatbotBtn.x = dX - chatbotBtn.width / 2
+                        chatbotBtn.y = dY - chatbotBtn.height / 2
+                    }
                 }
 
-                DragEvent.ACTION_DRAG_ENDED -> {
-                    binding.chatbotBtn.x = dX - binding.chatbotBtn.width / 2
-                    binding.chatbotBtn.y = dY - binding.chatbotBtn.height / 2
-                }
+                true
             }
 
-            true
+            chatbotBtn.setOnLongClickListener { v ->
+                val shadow = View.DragShadowBuilder(chatbotBtn)
+                v.startDragAndDrop(null, shadow, null, View.DRAG_FLAG_GLOBAL)
+                true
+            }
         }
 
-        binding.chatbotBtn.setOnLongClickListener { v ->
-            val shadow = View.DragShadowBuilder(binding.chatbotBtn)
-            v.startDragAndDrop(null, shadow, null, View.DRAG_FLAG_GLOBAL)
-            true
-        }
+
     }
 }

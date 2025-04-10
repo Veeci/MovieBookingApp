@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.MovieBooking.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/Base.Theme.MovieBooking.AppWidgetContainer"
+    android:background="@drawable/widget_bg"
+    android:padding="@dimen/_10sdp"
+    android:orientation="vertical"
+    android:id="@+id/widget_container">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/now_in_theater"
+        android:textColor="@color/ThemeSecondary"
+        android:textSize="@dimen/textSize_title"
+        android:fontFamily="@font/montserrat_bold"
+        android:textAlignment="center"
+        app:drawableEndCompat="@drawable/ic_nowplaying" />
+
+    <TextView
+        android:id="@+id/widget_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/now_in_theater"
+        android:textColor="@color/ThemeSecondary"
+        android:textSize="@dimen/textSize_title"
+        android:fontFamily="@font/montserrat_bold"
+        android:textAlignment="center"
+        app:drawableEndCompat="@drawable/ic_nowplaying"
+        android:visibility="gone"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/widgetList"
+        android:divider="@color/dark_gray"
+        android:dividerHeight="1dp" />
+
+</LinearLayout>

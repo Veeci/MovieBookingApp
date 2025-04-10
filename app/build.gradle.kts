@@ -50,6 +50,7 @@ dependencies {
 
     // Room Local Database
     api("androidx.room:room-runtime:2.6.1")
+    implementation(libs.androidx.work.runtime.ktx)
     kapt("androidx.room:room-compiler:2.6.1")
     api("androidx.room:room-ktx:2.6.1")
 

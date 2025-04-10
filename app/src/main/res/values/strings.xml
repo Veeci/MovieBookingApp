@@ -96,5 +96,11 @@
         <item>Welcome aboard!</item>
         <item>Howdy!</item>
     </array>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="now_in_theater">Now in theater</string>
+    <string name="click_to_see_detail">Click to see detail</string>
+    <string name="what_are_you_waiting_for">What are you waiting for?</string>
 
 </resources>
