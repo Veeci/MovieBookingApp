@@ -15,7 +15,7 @@ object Const {
     const val vietqrClientId = "854f5a08-0e83-488d-9b79-c9428ba1cf46"
     const val vietqrApiKey = "7828b6c9-db33-4387-bd46-81139dc2b3f6"
 
-    const val deepseekApiKey = "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"
+    const val deepseekApiKey = "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"
 
     enum class DefaultAvatar(val resId: Int){
         AVATAR_1(R.drawable.default_avatar_1),

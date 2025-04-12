@@ -36,6 +36,7 @@ class ChatbotBottomSheet : BaseBottomSheetDialog<ChatbotDialogBinding, MainNavig
         binding.messagesRV.apply {
             adapter = chatAdapter
             layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
         }
     }
 
@@ -53,6 +54,16 @@ class ChatbotBottomSheet : BaseBottomSheetDialog<ChatbotDialogBinding, MainNavig
         val userMessage = ChatMessage(content = text, role = "user", isSent = true)
         chatMessages.add(userMessage)
         chatAdapter.notifyItemInserted(chatMessages.size - 1)
+
+        val typingMessage = ChatMessage(
+            role = "assistant",
+            isSent = false,
+            isTyping = true,
+            content = ""
+        )
+        chatMessages.add(typingMessage)
+        chatAdapter.notifyItemInserted(chatMessages.size - 1)
+
         binding.messagesRV.scrollToPosition(chatMessages.size - 1)
 
         val request = ChatRequest(messages = listOf(userMessage))
@@ -63,6 +74,12 @@ class ChatbotBottomSheet : BaseBottomSheetDialog<ChatbotDialogBinding, MainNavig
         viewModel.chatMessages.observe(viewLifecycleOwner) { response ->
             if (response is ResponseStatus.Success) {
                 response.data.choices?.firstOrNull()?.message?.let { aiMessage ->
+                    val typingIndex = chatMessages.indexOfFirst { it.isTyping }
+                    if (typingIndex != -1) {
+                        chatMessages.removeAt(typingIndex)
+                        chatAdapter.notifyItemRemoved(typingIndex)
+                    }
+
                     val message = ChatMessage(
                         content = aiMessage.content ?: "",
                         role = aiMessage.role ?: "assistant",

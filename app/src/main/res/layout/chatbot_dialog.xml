@@ -6,62 +6,64 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-
-
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/chat_dialog_bg"
             android:orientation="vertical"
-            android:padding="@dimen/_10sdp"
-            android:background="@color/ThemePrimary">
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_250sdp"
+                android:src="@drawable/img_chatbot_welcome"
+                android:id="@+id/chatbotIV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="centerCrop"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/messagesRV"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:overScrollMode="never"
                 android:clipToPadding="false"
-                app:layout_constraintStart_toStartOf="parent"
+                android:overScrollMode="never"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/_5sdp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chatbotIV" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/messagesRV">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etMessage"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:background="@null">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/etMessage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints=""
-                        android:padding="@dimen/_10sdp"
-                        android:maxLines="10"
-                        android:background="@drawable/chat_bg"
-                        android:hint="@string/tell_me_what_you_want_to_know"
-                        android:textSize="@dimen/textSize_normal"
-                        android:textColor="@color/ThemeSecondary"
-                        android:fontFamily="@font/montserrat"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:autofillHints=""
+                    android:background="@drawable/chat_bg"
+                    android:fontFamily="@font/montserrat"
+                    android:hint="@string/tell_me_what_you_want_to_know"
+                    android:maxLines="10"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/ThemeSecondary"
+                    android:textSize="@dimen/textSize_normal" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnSend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_send"
-                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/_5sdp"
-                    android:layout_gravity="center"/>
+                    android:background="@drawable/ic_send"
+                    android:foreground="?attr/selectableItemBackground" />
 
             </LinearLayout>
 

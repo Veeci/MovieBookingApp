@@ -10,5 +10,6 @@ data class ChatMessage(
     val role: String = "user",
     @field:SerializedName("content")
     val content: String,
-    var isSent: Boolean = false
+    var isSent: Boolean = false,
+    var isTyping: Boolean = false
 ) : Parcelable

@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.baseproject.domain.utils.gone
+import com.example.baseproject.domain.utils.visible
 import com.example.moviebooking.R
 import com.example.moviebooking.data.remote.entities.deepseek.ChatMessage
 
@@ -33,9 +35,17 @@ class ChatAdapter(private val messages: List<ChatMessage>) : RecyclerView.Adapte
     override fun getItemCount() = messages.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val message = messages[position].content
-        if (holder is SentViewHolder) holder.bind(message)
-        else if (holder is ReceivedViewHolder) holder.bind(message)
+        if (position !in messages.indices) return
+
+        val message = messages[position]
+        if (holder is SentViewHolder) holder.bind(message.content)
+        else if (holder is ReceivedViewHolder) {
+            if (message.isTyping) {
+                holder.showTyping()
+            } else {
+                holder.bind(message.content)
+            }
+        }
     }
 
     inner class SentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -47,6 +57,11 @@ class ChatAdapter(private val messages: List<ChatMessage>) : RecyclerView.Adapte
     inner class ReceivedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(text: String) {
             itemView.findViewById<AppCompatTextView>(R.id.messageReceivedTV).text = text
+        }
+
+        fun showTyping() {
+            itemView.findViewById<AppCompatTextView>(R.id.messageReceivedTV).gone()
+            itemView.findViewById<com.airbnb.lottie.LottieAnimationView>(R.id.typingAnimation).visible()
         }
     }
 }
