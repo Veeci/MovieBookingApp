@@ -7,12 +7,14 @@ import com.example.baseproject.domain.utils.message
 import com.example.baseproject.domain.utils.navigatorViewModel
 import com.example.baseproject.domain.utils.negativeAction
 import com.example.baseproject.domain.utils.positiveAction
+import com.example.baseproject.domain.utils.safeClick
 import com.example.baseproject.domain.utils.simpleAlert
 import com.example.baseproject.domain.utils.title
 import com.example.baseproject.presentation.BaseFragment
 import com.example.moviebooking.MainNavigator
 import com.example.moviebooking.R
 import com.example.moviebooking.databinding.FragmentMainBinding
+import com.example.moviebooking.presentation.main.home.chatbot.ChatbotBottomSheet
 
 class MainFragment : BaseFragment<FragmentMainBinding, MainRouter, MainNavigator>(
     R.layout.fragment_main
@@ -102,6 +104,10 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainRouter, MainNavigator
                 val shadow = View.DragShadowBuilder(chatbotBtn)
                 v.startDragAndDrop(null, shadow, null, View.DRAG_FLAG_GLOBAL)
                 true
+            }
+
+            chatbotBtn.safeClick {
+                ChatbotBottomSheet().show(parentFragmentManager, ChatbotBottomSheet::class.java.name)
             }
         }
 

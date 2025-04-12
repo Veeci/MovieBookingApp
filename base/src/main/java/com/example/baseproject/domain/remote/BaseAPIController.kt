@@ -5,7 +5,8 @@ import com.example.baseproject.domain.remote.interceptors.ApiKeyInterceptor
 import com.example.baseproject.domain.remote.interceptors.AuthInterceptor
 import com.example.baseproject.domain.remote.interceptors.HeadersInterceptor
 import com.example.baseproject.domain.remote.interceptors.NetworkConnectionInterceptor
-import okhttp3.*
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,6 +23,7 @@ abstract class BaseApiController<T : Any> {
         accessToken: String? = null,
         apiKey: String? = null,
         clientId: String? = null,
+        isBearerToken: Boolean = false,
         additionalHeaders: Map<String, String> = emptyMap(),
     ): T {
         val builder =

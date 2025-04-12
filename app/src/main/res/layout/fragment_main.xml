@@ -39,6 +39,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:contentDescription="@string/chatbot"
             android:src="@drawable/ic_chatbot"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintBottom_toTopOf="@id/bottomNavigationBar"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -2,6 +2,8 @@ package com.example.moviebooking.domain.di
 
 import com.example.moviebooking.domain.usecases.booking.BookingUseCase
 import com.example.moviebooking.domain.usecases.booking.BookingUseCaseImpl
+import com.example.moviebooking.domain.usecases.chat.ChatbotUseCase
+import com.example.moviebooking.domain.usecases.chat.ChatbotUseCaseImpl
 import com.example.moviebooking.domain.usecases.movies.castList.FetchCastListUseCase
 import com.example.moviebooking.domain.usecases.movies.castList.FetchCastListUseCaseImpl
 import com.example.moviebooking.domain.usecases.movies.discover.DiscoverMoviesUseCase
@@ -124,5 +126,6 @@ object UseCaseModule {
         factory<SearchPeopleUseCase> { SearchPeopleUseCaseImpl(get()) }
         factory<FetchPersonImagesUseCase> { FetchPersonImagesUseCaseImpl(get()) }
 
+        factory<ChatbotUseCase> { ChatbotUseCaseImpl(get()) }
     }
 }
