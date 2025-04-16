@@ -37,21 +37,6 @@
             android:focusableInTouchMode="true"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/btnFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/season_item_bg"
-            android:backgroundTint="@color/ThemeSecondary"
-            app:layout_constraintStart_toStartOf="@id/searchView"
-            app:layout_constraintTop_toBottomOf="@id/searchView"
-            android:text="Filter"
-            android:textSize="@dimen/_13sdp"
-            android:textColor="@color/ThemePrimary"
-            android:padding="@dimen/_5sdp"
-            android:drawableEnd="@drawable/ic_filter"
-            android:layout_marginTop="@dimen/_5sdp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/movieResultTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +44,7 @@
             android:textSize="@dimen/textSize_title"
             android:fontFamily="@font/montserrat_bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnFilter"
+            app:layout_constraintTop_toBottomOf="@id/searchView"
             android:layout_marginTop="@dimen/_10sdp" />
 
         <androidx.recyclerview.widget.RecyclerView

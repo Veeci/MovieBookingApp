@@ -29,6 +29,7 @@ class ChatbotBottomSheet : BaseBottomSheetDialog<ChatbotDialogBinding, MainNavig
         setupRecyclerView()
         setupListeners()
         observeMessages()
+        showWelcomeMessage()
     }
 
     private fun setupRecyclerView() {
@@ -90,6 +91,20 @@ class ChatbotBottomSheet : BaseBottomSheetDialog<ChatbotDialogBinding, MainNavig
                     binding.messagesRV.scrollToPosition(chatMessages.size - 1)
                 }
             }
+        }
+    }
+
+    private fun showWelcomeMessage() {
+        if (chatMessages.isEmpty()) {
+            val welcomeMessage = ChatMessage(
+                content = "Hi there! I'm your movie booking assistant. " +
+                        "I can help you find movies, showtimes, and more. " +
+                        "What would you like to know?",
+                role = "assistant",
+                isSent = false
+            )
+            chatMessages.add(welcomeMessage)
+            chatAdapter.notifyItemInserted(chatMessages.size - 1)
         }
     }
 }
